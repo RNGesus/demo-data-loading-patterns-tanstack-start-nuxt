@@ -8,7 +8,7 @@
     "start": "vinxi start"
   },
   "devDependencies": {
-    "@tanstack/router-devtools": "^1.91.3",
+    "@tanstack/router-devtools": "^1.92.3",
     "@types/bun": "latest",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
@@ -19,8 +19,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.91.3",
-    "@tanstack/start": "^1.91.3",
+    "@tanstack/react-router": "^1.92.3",
+    "@tanstack/start": "^1.92.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vinxi": "^0.5.1"
