@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "create-api-client": "openapi-zod-client './api/openapi.yaml' -o './api/client.ts'"
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.92.3",
