@@ -1,35 +1,91 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createApiClient, schemas } from "@api/client";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
-import * as fs from "node:fs";
-const filePath = "count.txt";
+import type { z } from "vinxi";
 
-async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf8").catch(() => "0")
+type ProviderApp = z.infer<typeof schemas.ProviderApp>;
+function ProviderApp({ app }: { app: ProviderApp }) {
+  return (
+    <>
+      <AppType type={app.type} />{" "}
+      <Link to={`/app/${app.type}/${app.name}`}>{app.name}</Link>
+    </>
   );
 }
 
-const getCount = createServerFn({ method: "GET" }).handler(readCount);
-const updateCount = createServerFn({ method: "POST" })
-  .validator((d: number) => d)
-  .handler(async ({ data }) => {
-    const count = await readCount();
-    await fs.promises.writeFile(filePath, (count + data).toString());
-  });
+type AppType = ProviderApp["type"];
+function AppType({ type }: { type: AppType }) {
+  if (type === "web") {
+    return "🌐";
+  }
+  if (type === "android") {
+    return "🤖";
+  }
+  if (type === "ios") {
+    return "🍏";
+  }
+  return "🤷";
+}
+
+type Country = z.infer<typeof schemas.Country>;
+function Country({ country }: { country: Country }) {
+  const timeTableEntry = !!country.timetableUrlTemplate ? (
+    <code
+      style={{
+        display: "block",
+        lineHeight: 1.5,
+        wordWrap: "break-word",
+        userSelect: "all",
+      }}
+    >
+      {country.timetableUrlTemplate}
+    </code>
+  ) : (
+    "–"
+  );
+
+  return (
+    <section>
+      <h2>
+        {country.name} <small>({country.code})</small>
+      </h2>
+      <p>Time Table Template: {timeTableEntry}</p>
+      <p>
+        Apps <small>({country.providerApps?.length ?? 0})</small>:
+      </p>
+      <ul>
+        {country.providerApps?.map((app) => (
+          <li key={app.name + app.type}>
+            <ProviderApp app={app} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+const getCountries = createServerFn({ method: "GET" }).handler(async () => {
+  const apiClient = createApiClient("https://api.railway-stations.org/");
+  const countries = await apiClient.getCountries();
+  return countries.filter((entry) => entry.providerApps?.length);
+});
 
 export const Route = createFileRoute("/")({
   component: Home,
-  loader: async () => await getCount(),
+  loader: async () => await getCountries(),
 });
+
 function Home() {
   const router = useRouter();
-  const state = Route.useLoaderData();
+  const countries = Route.useLoaderData();
+
   return (
-    <button
-      type="button"
-      onClick={() => updateCount({ data: 1 }).then(() => router.invalidate())}
-    >
-      Add 1 to {state}?
-    </button>
+    <ul>
+      {countries.map((country) => (
+        <li key={country.code}>
+          <Country country={country} />
+        </li>
+      ))}
+    </ul>
   );
 }
