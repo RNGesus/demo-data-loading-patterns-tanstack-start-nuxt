@@ -26,7 +26,8 @@
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
       "@routes/*": ["./app/routes/*"],
-      "@api/*":["./api/*"]
+      "@api/*": ["./api/*"],
+      "@app/*": ["./app/*"]
     }
   }
 }
