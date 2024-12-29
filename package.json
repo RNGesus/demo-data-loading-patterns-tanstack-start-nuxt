@@ -14,8 +14,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.92.9",
-    "@tanstack/start": "^1.92.9",
+    "@tanstack/react-router": "^1.92.11",
+    "@tanstack/start": "^1.92.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vinxi": "^0.5.1"
@@ -26,7 +26,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "^4.0.0-beta.8",
     "@tanstack/eslint-plugin-router": "^1.92.7",
-    "@tanstack/router-devtools": "^1.92.9",
+    "@tanstack/router-devtools": "^1.92.11",
     "@types/bun": "latest",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
