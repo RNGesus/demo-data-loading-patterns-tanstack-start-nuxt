@@ -1,6 +1,6 @@
 import type * as types from '@api/types'
 import type { PropsWithChildren } from 'react'
-import { createApiClient } from '@api/client'
+import { apiClient } from '@api/client'
 import { AppLink } from '@app/components/AppLink'
 import { createFileRoute } from '@tanstack/react-router'
 
@@ -62,7 +62,6 @@ function CountrySection({ country, children }: { country: types.Country } & Prop
 export const Route = createFileRoute('/')({
   component: Home,
   loader: async () => {
-    const apiClient = createApiClient('https://api.railway-stations.org/')
     const countries = await apiClient.getCountries()
     return countries
   },

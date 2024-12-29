@@ -6,7 +6,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "create-api-client": "openapi-zod-client -- './api/openapi.yaml' -o './api/client.ts'",
+    "create-api-client": "openapi-zod-client -- './api/openapi.yaml' -o './api/generated.ts'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
