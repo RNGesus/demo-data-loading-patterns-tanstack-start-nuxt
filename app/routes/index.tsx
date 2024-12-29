@@ -1,91 +1,92 @@
-import { createApiClient, schemas } from "@api/client";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/start";
-import type { z } from "vinxi";
+import type * as types from '@api/types'
+import type { PropsWithChildren } from 'react'
+import { createApiClient } from '@api/client'
+import { AppLink } from '@app/components/AppLink'
+import { createFileRoute } from '@tanstack/react-router'
 
-type ProviderApp = z.infer<typeof schemas.ProviderApp>;
-function ProviderApp({ app }: { app: ProviderApp }) {
+function TimeTableTemplate({ template: timetableUrlTemplate }: { template?: string }) {
+  return (
+    <p>
+      Time Table Template:
+      <code
+        style={{
+          display: 'block',
+          lineHeight: 1.5,
+          wordWrap: 'break-word',
+          userSelect: 'all',
+        }}
+      >
+        {timetableUrlTemplate ?? '–'}
+      </code>
+    </p>
+  )
+}
+
+function ProviderApps({ apps: providerApps }: { apps?: types.ProviderApp[] }) {
   return (
     <>
-      <AppType type={app.type} />{" "}
-      <Link to={`/app/${app.type}/${app.name}`}>{app.name}</Link>
+      <p>
+        {providerApps?.length ?? 0}
+        {' '}
+        Apps
+        {(providerApps != null && providerApps.length > 0) && ':'}
+      </p>
+      {!!providerApps && (
+        <ul>
+          {providerApps?.map(app => (
+            <li key={app.name + app.type}>
+              <AppLink app={app} />
+            </li>
+          ))}
+        </ul>
+      )}
     </>
-  );
+  )
 }
 
-type AppType = ProviderApp["type"];
-function AppType({ type }: { type: AppType }) {
-  if (type === "web") {
-    return "🌐";
-  }
-  if (type === "android") {
-    return "🤖";
-  }
-  if (type === "ios") {
-    return "🍏";
-  }
-  return "🤷";
-}
-
-type Country = z.infer<typeof schemas.Country>;
-function Country({ country }: { country: Country }) {
-  const timeTableEntry = !!country.timetableUrlTemplate ? (
-    <code
-      style={{
-        display: "block",
-        lineHeight: 1.5,
-        wordWrap: "break-word",
-        userSelect: "all",
-      }}
-    >
-      {country.timetableUrlTemplate}
-    </code>
-  ) : (
-    "–"
-  );
-
+function CountrySection({ country, children }: { country: types.Country } & PropsWithChildren) {
   return (
     <section>
       <h2>
-        {country.name} <small>({country.code})</small>
+        {country.name}
+        {' '}
+        <small>
+          (
+          {country.code}
+          )
+        </small>
       </h2>
-      <p>Time Table Template: {timeTableEntry}</p>
-      <p>
-        Apps <small>({country.providerApps?.length ?? 0})</small>:
-      </p>
+      {children}
+
+    </section>
+  )
+}
+
+export const Route = createFileRoute('/')({
+  component: Home,
+  loader: async () => {
+    const apiClient = createApiClient('https://api.railway-stations.org/')
+    const countries = await apiClient.getCountries()
+    return countries
+  },
+})
+
+function Home() {
+  const countries = Route.useLoaderData()
+
+  return (
+    <>
+      <h1>Countries with apps</h1>
       <ul>
-        {country.providerApps?.map((app) => (
-          <li key={app.name + app.type}>
-            <ProviderApp app={app} />
+        {countries.map(country => (
+          <li key={country.code}>
+            <CountrySection country={country}>
+              <TimeTableTemplate template={country.timetableUrlTemplate} />
+              <ProviderApps apps={country.providerApps} />
+            </CountrySection>
           </li>
         ))}
       </ul>
-    </section>
-  );
-}
-
-const getCountries = createServerFn({ method: "GET" }).handler(async () => {
-  const apiClient = createApiClient("https://api.railway-stations.org/");
-  const countries = await apiClient.getCountries();
-  return countries.filter((entry) => entry.providerApps?.length);
-});
-
-export const Route = createFileRoute("/")({
-  component: Home,
-  loader: async () => await getCountries(),
-});
-
-function Home() {
-  const router = useRouter();
-  const countries = Route.useLoaderData();
-
-  return (
-    <ul>
-      {countries.map((country) => (
-        <li key={country.code}>
-          <Country country={country} />
-        </li>
-      ))}
-    </ul>
-  );
+    </>
+  )
 }
