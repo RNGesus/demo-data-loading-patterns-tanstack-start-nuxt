@@ -19,7 +19,7 @@ export const Route = createRootRoute({
       },
       { title: 'TanStack Start Starter' },
     ],
-    // TODO: fix hydration error
+    // FIXME: this one leads to a hydration error
     // links: [{ rel: 'stylesheet', href: appCss }],
   }),
   component: RootComponent,
