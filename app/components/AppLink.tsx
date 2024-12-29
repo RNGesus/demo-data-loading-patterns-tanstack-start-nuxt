@@ -19,7 +19,7 @@ export function AppLink({ app }: { app: types.ProviderApp }) {
     <>
       {getAppTypeIcon(app.type)}
       {' '}
-      <a href={app.url} target="_blank" rel="noreferrer" title={`${app.name} (${capitalizedAppType})`}>
+      <a href={app.url} target="_blank" rel="noreferrer" title={`${app.name} (${capitalizedAppType})`} className="link">
         {app.name}
       </a>
     </>

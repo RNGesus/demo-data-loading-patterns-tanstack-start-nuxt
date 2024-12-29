@@ -40,7 +40,9 @@ function RootDocument({ children }: React.PropsWithChildren) {
         <Meta />
       </head>
       <body>
-        {children}
+        <div className="p-4">
+          {children}
+        </div>
         <ScrollRestoration />
         <React.Suspense>
           <TanStackRouterDevtools position="bottom-right" />

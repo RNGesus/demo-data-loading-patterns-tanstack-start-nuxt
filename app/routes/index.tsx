@@ -9,12 +9,7 @@ function TimeTableTemplate({ template: timetableUrlTemplate }: { template?: stri
     <p>
       Time Table Template:
       <code
-        style={{
-          display: 'block',
-          lineHeight: 1.5,
-          wordWrap: 'break-word',
-          userSelect: 'all',
-        }}
+        className="select-all block break-words leading-normal"
       >
         {timetableUrlTemplate ?? '–'}
       </code>
@@ -24,7 +19,7 @@ function TimeTableTemplate({ template: timetableUrlTemplate }: { template?: stri
 
 function ProviderApps({ apps: providerApps }: { apps?: types.ProviderApp[] }) {
   return (
-    <>
+    <div className="flex flex-col gap-1">
       <p>
         {providerApps?.length ?? 0}
         {' '}
@@ -34,29 +29,31 @@ function ProviderApps({ apps: providerApps }: { apps?: types.ProviderApp[] }) {
       {!!providerApps && (
         <ul>
           {providerApps?.map(app => (
-            <li key={app.name + app.type}>
+            <li key={app.name + app.type} className="ps-4">
               <AppLink app={app} />
             </li>
           ))}
         </ul>
       )}
-    </>
+    </div>
   )
 }
 
 function CountrySection({ country, children }: { country: types.Country } & PropsWithChildren) {
   return (
-    <section>
-      <h2>
-        {country.name}
-        {' '}
-        <small>
-          (
-          {country.code}
-          )
-        </small>
-      </h2>
-      {children}
+    <section className="flex flex-col gap-2 card bg-base-300 shadow-sm">
+      <div className="card-body">
+        <h2 className="card-title">
+          {country.name}
+          {' '}
+          <small className="leading-relaxed">
+            (
+            {country.code}
+            )
+          </small>
+        </h2>
+        {children}
+      </div>
 
     </section>
   )
@@ -76,8 +73,8 @@ function Home() {
 
   return (
     <>
-      <h1>Countries with apps</h1>
-      <ul>
+      <h1 className="text-5xl font-bold mb-2 leading-relaxed">Countries with apps</h1>
+      <ul className="flex flex-col gap-4">
         {countries.map(country => (
           <li key={country.code}>
             <CountrySection country={country}>
