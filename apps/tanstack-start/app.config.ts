@@ -13,5 +13,8 @@ export default defineConfig({
         projects: ['./tsconfig.json'],
       }),
     ],
+    resolve: {
+      conditions: ['@project/railway-station-service'],
+    },
   },
 })

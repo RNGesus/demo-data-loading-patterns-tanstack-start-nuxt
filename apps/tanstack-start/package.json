@@ -1,0 +1,36 @@
+{
+  "name": "@project/tanstack-start",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "dependencies": {
+    "@project/railway-station-service": "workspace:*",
+    "@tanstack/react-router": "^1.92.11",
+    "@tanstack/start": "^1.92.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vinxi": "^0.5.1"
+  },
+  "devDependencies": {
+    "@eslint-react/eslint-plugin": "^1.22.1",
+    "@project/eslint-config": "workspace:*",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/vite": "^4.0.0-beta.8",
+    "@tanstack/eslint-plugin-router": "^1.92.7",
+    "@tanstack/router-devtools": "^1.92.11",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react-swc": "^3.7.2",
+    "daisyui": "^5.0.0-alpha.58",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "tailwindcss": "^4.0.0-beta.8",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

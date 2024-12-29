@@ -1,8 +1,8 @@
-import type * as types from '@api/types'
+import type * as types from '@project/railway-station-service/types'
 import type { PropsWithChildren } from 'react'
-import { apiClient } from '@api/client'
-import { AppLink } from '@app/components/AppLink'
+import { apiClient } from '@project/railway-station-service/client'
 import { createFileRoute } from '@tanstack/react-router'
+import { AppLink } from '../components/AppLink'
 
 function TimeTableTemplate({ template: timetableUrlTemplate }: { template?: string }) {
   return (

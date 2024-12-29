@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     // Enable latest features
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext"],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
-    "jsx": "react-jsx",
+
     "allowJs": true,
 
     // Bundler mode
@@ -24,10 +24,11 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
-    "paths": {
-      "@routes/*": ["./app/routes/*"],
-      "@api/*": ["./api/*"],
-      "@app/*": ["./app/*"]
-    }
+
+    "customConditions": [
+      "@project/railway-station-service/client",
+      "@project/railway-station-service/generated",
+      "@project/railway-station-service/types"
+    ]
   }
 }

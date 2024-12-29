@@ -27,10 +27,11 @@ Well, it is still a playground but I got the hang of it and will try to do more.
   - I guess DaisyUI 5 will be fine
 - [ ] init a monorepo
   - [ ] apps:
-    - [ ] tanstack start
+    - [x] tanstack start
     - [ ] nuxt
-  - [ ] packages:
-    - [ ] the railway station api
+  - [x] packages:
+    - [x] the railway station api
+    - [x] eslint config
     - [ ] &hellip;
 - [ ] create more (nested) routes
 - [ ] use different loader patterns

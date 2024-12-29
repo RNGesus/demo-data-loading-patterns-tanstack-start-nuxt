@@ -1,4 +1,4 @@
-import type * as types from '@api/types'
+import type * as types from '../../../../packages/railway-station-service/types'
 
 function getAppTypeIcon(type: types.AppType) {
   if (type === 'web') {

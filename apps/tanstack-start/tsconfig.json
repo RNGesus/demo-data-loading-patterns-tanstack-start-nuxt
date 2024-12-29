@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx",
+    "paths": {
+      "@routes/*": ["apps/tanstack-start/app/routes/*"],
+      "@app/*": ["apps/tanstack-start/app/*"]
+    }
+  }
+}
