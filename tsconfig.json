@@ -23,12 +23,6 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
-
-    "customConditions": [
-      "@project/railway-station-service/client",
-      "@project/railway-station-service/generated",
-      "@project/railway-station-service/types"
-    ]
+    "noPropertyAccessFromIndexSignature": false
   }
 }
