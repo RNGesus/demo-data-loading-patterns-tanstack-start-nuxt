@@ -8,23 +8,29 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
-export default antfu({
-  react: true,
-  formatters: true,
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
+export default antfu(
+  {
+    react: true,
+    formatters: true,
+    typescript: {
+      tsconfigPath: 'tsconfig.json',
+    },
   },
-}, {
-  ignores: [
-    // auto-generated
-    'api/client.ts',
-    'api/openapi.yaml',
-    // auto-generated
-    'app/routeTree.gen.ts',
-  ],
-}, includeIgnoreFile(gitignorePath), {
-  files: ['tsconfig.json'],
-  rules: {
-    'jsonc/sort-keys': 'off',
+  {
+    ignores: [
+      // auto-generated
+      'api/client.ts',
+      'api/openapi.yaml',
+      // auto-generated
+      'app/routeTree.gen.ts',
+    ],
   },
-}, ...pluginRouter.configs['flat/recommended'])
+  includeIgnoreFile(gitignorePath),
+  {
+    files: ['tsconfig.json'],
+    rules: {
+      'jsonc/sort-keys': 'off',
+    },
+  },
+  ...pluginRouter.configs['flat/recommended'],
+)
