@@ -6,7 +6,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "create-api-client": "openapi-zod-client './api/openapi.yaml' -o './api/client.ts'",
+    "create-api-client": "openapi-zod-client -- './api/openapi.yaml' -o './api/client.ts'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
@@ -31,6 +31,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react-swc": "^3.7.2",
+    "ajv": "^8.17.1",
     "daisyui": "^5.0.0-alpha.58",
     "eslint": "^9.17.0",
     "eslint-plugin-format": "^0.1.3",
