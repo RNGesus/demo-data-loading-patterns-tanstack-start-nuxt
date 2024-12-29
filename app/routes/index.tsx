@@ -23,7 +23,7 @@ function ProviderApps({ apps: providerApps }: { apps?: types.ProviderApp[] }) {
       <p>
         {providerApps?.length ?? 0}
         {' '}
-        Apps
+        App(s)
         {(providerApps != null && providerApps.length > 0) && ':'}
       </p>
       {!!providerApps && (
