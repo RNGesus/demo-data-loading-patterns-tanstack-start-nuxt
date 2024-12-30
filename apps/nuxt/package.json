@@ -19,6 +19,5 @@
     "vue": "latest",
     "vue-router": "latest"
   },
-  "devDependencies": {
-    "@project/eslint-config": "workspace:*"}
+  "devDependencies": { "@project/eslint-config": "workspace:*" }
 }
