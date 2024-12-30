@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
   devtools: {
     enabled: true,
+    timeline: {
+      enabled: true,
+    },
   },
   devServer: {
     port: 5000,
