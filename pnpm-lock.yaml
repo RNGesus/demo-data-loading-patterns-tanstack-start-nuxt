@@ -36,6 +36,10 @@ importers:
       vue-router:
         specifier: latest
         version: 4.5.0(vue@3.5.13(typescript@5.7.2))
+    devDependencies:
+      '@project/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
 
   apps/tanstack-start:
     dependencies:

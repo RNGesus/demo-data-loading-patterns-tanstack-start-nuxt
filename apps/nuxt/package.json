@@ -18,5 +18,7 @@
     "nuxt": "^3.15.0",
     "vue": "latest",
     "vue-router": "latest"
-  }
+  },
+  "devDependencies": {
+    "@project/eslint-config": "workspace:*"}
 }
