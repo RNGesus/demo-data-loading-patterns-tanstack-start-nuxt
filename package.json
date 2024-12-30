@@ -8,7 +8,10 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+
   "devDependencies": {
-    "@types/node": "22"
+    "@project/eslint-config": "workspace:*",
+    "@types/node": "22",
+    "eslint": "^9.17.0"
   }
 }

@@ -12,9 +12,15 @@ importers:
         specifier: ^5.0.0
         version: 5.7.2
     devDependencies:
+      '@project/eslint-config':
+        specifier: workspace:*
+        version: link:packages/eslint-config
       '@types/node':
         specifier: '22'
         version: 22.10.2
+      eslint:
+        specifier: ^9.17.0
+        version: 9.17.0(jiti@2.4.2)
 
   apps/nuxt:
     dependencies:
@@ -24,9 +30,6 @@ importers:
       '@project/railway-station-service':
         specifier: workspace:*
         version: link:../../packages/railway-station-service
-      eslint:
-        specifier: ^9.17.0
-        version: 9.17.0(jiti@2.4.2)
       nuxt:
         specifier: ^3.15.0
         version: 3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(lightningcss@1.28.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.28.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(yaml@2.6.1)
@@ -36,10 +39,6 @@ importers:
       vue-router:
         specifier: latest
         version: 4.5.0(vue@3.5.13(typescript@5.7.2))
-    devDependencies:
-      '@project/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
 
   apps/tanstack-start:
     dependencies:
@@ -65,9 +64,6 @@ importers:
       '@eslint-react/eslint-plugin':
         specifier: ^1.22.2
         version: 1.22.2(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
-      '@project/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
       '@tailwindcss/typography':
         specifier: ^0.5.15
         version: 0.5.15(tailwindcss@4.0.0-beta.8)
@@ -92,9 +88,6 @@ importers:
       daisyui:
         specifier: ^5.0.0-alpha.59
         version: 5.0.0-alpha.59
-      eslint:
-        specifier: ^9.17.0
-        version: 9.17.0(jiti@2.4.2)
       eslint-plugin-react-hooks:
         specifier: ^5.1.0
         version: 5.1.0(eslint@9.17.0(jiti@2.4.2))
@@ -129,12 +122,6 @@ importers:
         specifier: ^3.24.1
         version: 3.24.1
     devDependencies:
-      '@project/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      eslint:
-        specifier: ^9.17.0
-        version: 9.17.0(jiti@2.4.2)
       openapi-zod-client:
         specifier: ^1.18.2
         version: 1.18.2(react@19.0.0)
