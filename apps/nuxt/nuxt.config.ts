@@ -1,7 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+  },
+  devServer: {
+    port: 5000,
+  },
   future: {
     compatibilityVersion: 4,
   },
