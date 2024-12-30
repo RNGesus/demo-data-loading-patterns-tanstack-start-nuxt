@@ -19,7 +19,7 @@ Well, it is still a playground but I got the hang of it and will try to do more.
 - use antfu's ESLint config as a base
   - 💬 awesome 🫳🎤
   - 💬 flat config in general is great, it is way too easy to extend and I have a lot of ideas
-  - 💬 do yourself a favour and try the ESLint config inspector `bunx @eslint/config-inspector`
+  - 💬 do yourself a favour and try the ESLint config inspector `pnpm dlx @eslint/config-inspector`
 
 ### Next steps
 
@@ -43,19 +43,3 @@ Well, it is still a playground but I got the hang of it and will try to do more.
 ### Shower thoughts
 
 - [ ] local-first functionality: store user individual data like favorites, previous selections/combinations
-
-## start
-
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run dev
-```
-
-This project was created using `bun init` in bun v1.1.33. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
