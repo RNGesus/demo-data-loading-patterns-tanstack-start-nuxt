@@ -1,4 +1,4 @@
-import type { z } from 'vinxi'
+import type { z } from 'zod'
 import type { schemas } from './generated/client'
 
 export type AppType = ProviderApp['type']
