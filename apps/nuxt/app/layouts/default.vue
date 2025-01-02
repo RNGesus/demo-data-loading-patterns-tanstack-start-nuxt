@@ -4,12 +4,12 @@ import { useCountries } from '~/countries/useCountries'
 const { data: countries } = useCountries()
 const route = useRoute('country')
 
-function handleCountryChange(event: Event) {
+async function handleCountryChange(event: Event) {
   if (!event.target || !(event.target instanceof HTMLSelectElement)) {
     return
   }
   const country = event.target.value
-  navigateTo({ name: 'country', params: { country } })
+  await navigateTo({ name: 'country', params: { country } })
 }
 </script>
 
