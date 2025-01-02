@@ -9,3 +9,9 @@ const { data: countries } = useCountries()
     <pre>{{ countries && JSON.stringify(countries, null, 2) }}</pre>
   </div>
 </template>
+
+<style>
+* {
+  min-width: 0;
+}
+</style>
