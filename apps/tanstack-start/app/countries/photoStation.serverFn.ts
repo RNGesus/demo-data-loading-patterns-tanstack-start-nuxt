@@ -10,5 +10,5 @@ export const photoStationServerFn = createServerFn({ method: 'GET' })
     const { stations, photographers, licenses, photoBaseUrl } = photoStations
     const stationsCount = stations.length
     const photos = stations.flatMap(station => station.photos)
-    return { photoBaseUrl, photographers, licenses, photos, stationsCount }
+    return { photoBaseUrl, stationsCount, photographers, licenses, photos }
   })
