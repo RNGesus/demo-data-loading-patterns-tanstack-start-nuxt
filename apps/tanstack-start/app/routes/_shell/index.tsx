@@ -1,4 +1,4 @@
-import { countriesServerFn } from '@app/countries/countryList.serverFn'
+import { countriesServerFn } from '@app/countries/countries.serverFn'
 import { CountrySection, ProviderApps, TimeTableTemplate } from '@app/countries/CountrySection'
 import { createFileRoute } from '@tanstack/react-router'
 

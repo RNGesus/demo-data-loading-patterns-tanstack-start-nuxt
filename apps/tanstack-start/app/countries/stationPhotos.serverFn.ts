@@ -2,7 +2,7 @@ import { apiClient } from '@project/railway-station-service/client'
 import { createServerFn } from '@tanstack/start'
 import { z } from 'vinxi'
 
-export const photoStationServerFn = createServerFn({ method: 'GET' })
+export const stationPhotosServerFn = createServerFn({ method: 'GET' })
   .validator(z.object({ country: z.string() }))
   // @ts-expect-error -- FIXME: there is a type error with the inferred types of the 'getPhotoStationByCountry' method
   .handler(async ({ data }) => {

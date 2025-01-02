@@ -1,9 +1,9 @@
-import { photoStationServerFn } from '@app/countries/photoStation.serverFn'
+import { stationPhotosServerFn } from '@app/countries/stationPhotos.serverFn'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_shell/$country')({
   component: RouteComponent,
-  loader: async ({ params }) => photoStationServerFn({ data: { country: params.country } }),
+  loader: async ({ params }) => stationPhotosServerFn({ data: { country: params.country } }),
 })
 
 function RouteComponent() {
