@@ -11,60 +11,104 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
+import { Route as ShellImport } from './routes/_shell'
+import { Route as ShellIndexImport } from './routes/_shell/index'
+import { Route as ShellCountryImport } from './routes/_shell/$country'
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
+const ShellRoute = ShellImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ShellIndexRoute = ShellIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => ShellRoute,
+} as any)
+
+const ShellCountryRoute = ShellCountryImport.update({
+  id: '/$country',
+  path: '/$country',
+  getParentRoute: () => ShellRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ShellImport
+      parentRoute: typeof rootRoute
+    }
+    '/_shell/$country': {
+      id: '/_shell/$country'
+      path: '/$country'
+      fullPath: '/$country'
+      preLoaderRoute: typeof ShellCountryImport
+      parentRoute: typeof ShellImport
+    }
+    '/_shell/': {
+      id: '/_shell/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof ShellIndexImport
+      parentRoute: typeof ShellImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface ShellRouteChildren {
+  ShellCountryRoute: typeof ShellCountryRoute
+  ShellIndexRoute: typeof ShellIndexRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellCountryRoute: ShellCountryRoute,
+  ShellIndexRoute: ShellIndexRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '': typeof ShellRouteWithChildren
+  '/$country': typeof ShellCountryRoute
+  '/': typeof ShellIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/$country': typeof ShellCountryRoute
+  '/': typeof ShellIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/$country': typeof ShellCountryRoute
+  '/_shell/': typeof ShellIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '' | '/$country' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/$country' | '/'
+  id: '__root__' | '/_shell' | '/_shell/$country' | '/_shell/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +121,23 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/_shell"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_shell": {
+      "filePath": "_shell.tsx",
+      "children": [
+        "/_shell/$country",
+        "/_shell/"
+      ]
+    },
+    "/_shell/$country": {
+      "filePath": "_shell/$country.tsx",
+      "parent": "/_shell"
+    },
+    "/_shell/": {
+      "filePath": "_shell/index.tsx",
+      "parent": "/_shell"
     }
   }
 }
