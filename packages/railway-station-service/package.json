@@ -5,6 +5,7 @@
   "exports": {
     "./client": "./client.ts",
     "./generated": "./generated.ts",
+    "./transforms": "./transforms.ts",
     "./types": "./types.ts"
   },
   "scripts": {
