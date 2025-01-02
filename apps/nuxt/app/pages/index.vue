@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { apiClient } from '@project/railway-station-service/client'
+import { useCountries } from '~/countries/useCountries'
 
-const { data: countries } = useAsyncData(() => apiClient.getCountries())
+const { data: countries } = useCountries()
 </script>
 
 <template>
