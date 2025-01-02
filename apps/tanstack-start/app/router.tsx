@@ -5,27 +5,15 @@ export function createRouter() {
   const router = createTanStackRouter({
     routeTree,
     defaultPendingComponent: () => (
-      <div style={{ padding: '1rem' }}>
-        <style>
-          {`
-            @keyframes rotate {
-              from {
-                transform: rotate(0deg);
-              }
-              to {
-                transform: rotate(360deg);
-              }
-            }
-          `}
-        </style>
-        <div style={{ animation: 'infinite rotate 1s' }}>🌀</div>
+      <div className="grid place-content-center place-items-center h-dvh"style={{ padding: '1rem' }}>
+        <div className="animate-spin text-5xl">😵‍💫</div>
       </div>
     ),
     defaultErrorComponent: ({ error }) => (<ErrorComponent error={error} />),
     defaultNotFoundComponent: () => (
-      <div>
+      <div className="grid place-items-center place-content-center h-dvh">
         <h1>Not found 🙁</h1>
-        <Link to="/">Home</Link>
+        <Link to="/" className="link">Home ➡️</Link>
       </div>
     ),
   })
