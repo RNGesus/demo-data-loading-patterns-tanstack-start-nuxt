@@ -1,5 +1,5 @@
 {
-  "name": "@project/tanstack-start",
+  "name": "tanstack-start",
   "type": "module",
   "private": true,
   "scripts": {
