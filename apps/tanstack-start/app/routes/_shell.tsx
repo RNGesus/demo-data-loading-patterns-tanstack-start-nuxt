@@ -4,7 +4,6 @@ import {
   Link,
   notFound,
   Outlet,
-  useMatches,
 } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_shell')({

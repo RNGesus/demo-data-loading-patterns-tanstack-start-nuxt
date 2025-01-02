@@ -1,5 +1,4 @@
 import { apiClient } from '@project/railway-station-service/client'
-import { notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/start'
 
 export const countriesServerFn = createServerFn({ method: 'GET' })
