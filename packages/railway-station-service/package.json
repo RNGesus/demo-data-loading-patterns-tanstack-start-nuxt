@@ -9,7 +9,7 @@
     "./types": "./types.ts"
   },
   "scripts": {
-    "create-api-client": "openapi-zod-client './vendor/openapi.yaml' -o './generated/client.ts'",
+    "create-api-client": "openapi-zod-client './vendor/openapi.yaml' -o './generated/client.ts' --additional-props-default-value=false",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },

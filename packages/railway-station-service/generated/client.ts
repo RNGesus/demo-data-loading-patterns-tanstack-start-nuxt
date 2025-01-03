@@ -1,125 +1,106 @@
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import { z } from "zod";
 
-const GeneralErrorMessage = z
-  .object({
-    timestamp: z.number().int().optional(),
-    status: z.number().int(),
-    error: z.string().optional(),
-    message: z.string(),
-    path: z.string().optional(),
-  })
-  .passthrough();
-const OAuthTokenRequest = z
-  .object({
-    grant_type: z.enum(["authorization_code", "refresh_token"]),
-    refresh_token: z.string().optional(),
-    code: z.string().optional(),
-    client_id: z.string(),
-    redirect_uri: z.string().url(),
-    code_verifier: z.string().optional(),
-  })
-  .passthrough();
-const OAuthTokenResponse = z
-  .object({
-    access_token: z.string(),
-    refresh_token: z.string().optional(),
-    scope: z.string(),
-    token_type: z.literal("Bearer"),
-    expires_in: z.number().int().optional(),
-  })
-  .passthrough();
-const OAuthRevokeTokenRequest = z
-  .object({
-    token: z.string(),
-    token_type_hint: z.enum(["access_token", "refresh_token"]).optional(),
-  })
-  .passthrough();
-const PhotoLicense = z
-  .object({ id: z.string(), name: z.string(), url: z.string().url() })
-  .passthrough();
-const Photographer = z
-  .object({ name: z.string(), url: z.string().url().optional() })
-  .passthrough();
+const GeneralErrorMessage = z.object({
+  timestamp: z.number().int().optional(),
+  status: z.number().int(),
+  error: z.string().optional(),
+  message: z.string(),
+  path: z.string().optional(),
+});
+const OAuthTokenRequest = z.object({
+  grant_type: z.enum(["authorization_code", "refresh_token"]),
+  refresh_token: z.string().optional(),
+  code: z.string().optional(),
+  client_id: z.string(),
+  redirect_uri: z.string().url(),
+  code_verifier: z.string().optional(),
+});
+const OAuthTokenResponse = z.object({
+  access_token: z.string(),
+  refresh_token: z.string().optional(),
+  scope: z.string(),
+  token_type: z.literal("Bearer"),
+  expires_in: z.number().int().optional(),
+});
+const OAuthRevokeTokenRequest = z.object({
+  token: z.string(),
+  token_type_hint: z.enum(["access_token", "refresh_token"]).optional(),
+});
+const PhotoLicense = z.object({
+  id: z.string(),
+  name: z.string(),
+  url: z.string().url(),
+});
+const Photographer = z.object({
+  name: z.string(),
+  url: z.string().url().optional(),
+});
 const CountryCode = z.string();
-const Photo = z
-  .object({
-    id: z.number().int(),
-    photographer: z.string(),
-    path: z.string(),
-    createdAt: z.number().int(),
-    license: z.string(),
-    outdated: z.boolean().optional().default(false),
-  })
-  .passthrough();
-const PhotoStation = z
-  .object({
-    country: CountryCode.min(2).max(2),
-    id: z.string(),
-    title: z.string(),
-    lat: z.number(),
-    lon: z.number(),
-    shortCode: z.string().optional(),
-    inactive: z.boolean().optional().default(false),
-    photos: z.array(Photo),
-  })
-  .passthrough();
-const PhotoStations = z
-  .object({
-    photoBaseUrl: z.string(),
-    licenses: z.array(PhotoLicense),
-    photographers: z.array(Photographer),
-    stations: z.array(PhotoStation),
-  })
-  .passthrough();
-const Photographers = z.object({}).partial().passthrough();
+const Photo = z.object({
+  id: z.number().int(),
+  photographer: z.string(),
+  path: z.string(),
+  createdAt: z.number().int(),
+  license: z.string(),
+  outdated: z.boolean().optional().default(false),
+});
+const PhotoStation = z.object({
+  country: CountryCode.min(2).max(2),
+  id: z.string(),
+  title: z.string(),
+  lat: z.number(),
+  lon: z.number(),
+  shortCode: z.string().optional(),
+  inactive: z.boolean().optional().default(false),
+  photos: z.array(Photo),
+});
+const PhotoStations = z.object({
+  photoBaseUrl: z.string(),
+  licenses: z.array(PhotoLicense),
+  photographers: z.array(Photographer),
+  stations: z.array(PhotoStation),
+});
+const Photographers = z.object({}).partial();
 const CountryCodeOptional = z.string();
-const Statistic = z
-  .object({
-    total: z.number().int(),
-    withPhoto: z.number().int(),
-    withoutPhoto: z.number().int(),
-    photographers: z.number().int(),
-    countryCode: CountryCodeOptional.min(2).max(2).nullish(),
-  })
-  .passthrough();
-const ProviderApp = z
-  .object({
-    type: z.enum(["android", "ios", "web"]),
-    name: z.string(),
-    url: z.string(),
-  })
-  .passthrough();
-const Country = z
-  .object({
-    code: CountryCode.min(2).max(2),
-    name: z.string(),
-    email: z.string().optional(),
-    timetableUrlTemplate: z.string().optional(),
-    overrideLicense: z.string().optional(),
-    active: z.boolean(),
-    providerApps: z.array(ProviderApp).optional(),
-  })
-  .passthrough();
-const InboxResponse = z
-  .object({
-    state: z.enum([
-      "REVIEW",
-      "LAT_LON_OUT_OF_RANGE",
-      "NOT_ENOUGH_DATA",
-      "UNSUPPORTED_CONTENT_TYPE",
-      "PHOTO_TOO_LARGE",
-      "CONFLICT",
-      "UNAUTHORIZED",
-      "ERROR",
-    ]),
-    message: z.string().optional(),
-    id: z.number().int().optional(),
-    filename: z.string().optional(),
-    inboxUrl: z.string().optional(),
-    crc32: z.number().int().optional(),
-  })
-  .passthrough();
+const Statistic = z.object({
+  total: z.number().int(),
+  withPhoto: z.number().int(),
+  withoutPhoto: z.number().int(),
+  photographers: z.number().int(),
+  countryCode: CountryCodeOptional.min(2).max(2).nullish(),
+});
+const ProviderApp = z.object({
+  type: z.enum(["android", "ios", "web"]),
+  name: z.string(),
+  url: z.string(),
+});
+const Country = z.object({
+  code: CountryCode.min(2).max(2),
+  name: z.string(),
+  email: z.string().optional(),
+  timetableUrlTemplate: z.string().optional(),
+  overrideLicense: z.string().optional(),
+  active: z.boolean(),
+  providerApps: z.array(ProviderApp).optional(),
+});
+const InboxResponse = z.object({
+  state: z.enum([
+    "REVIEW",
+    "LAT_LON_OUT_OF_RANGE",
+    "NOT_ENOUGH_DATA",
+    "UNSUPPORTED_CONTENT_TYPE",
+    "PHOTO_TOO_LARGE",
+    "CONFLICT",
+    "UNAUTHORIZED",
+    "ERROR",
+  ]),
+  message: z.string().optional(),
+  id: z.number().int().optional(),
+  filename: z.string().optional(),
+  inboxUrl: z.string().optional(),
+  crc32: z.number().int().optional(),
+});
 const ProblemReportType = z.enum([
   "WRONG_LOCATION",
   "STATION_INACTIVE",
@@ -131,117 +112,106 @@ const ProblemReportType = z.enum([
   "OTHER",
   "DUPLICATE",
 ]);
-const ProblemReport = z
-  .object({
-    countryCode: CountryCode.min(2).max(2),
-    stationId: z.string(),
-    title: z.string().optional(),
-    photoId: z.number().int().optional(),
-    comment: z.string(),
-    type: ProblemReportType,
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-  })
-  .passthrough();
-const InboxStateQueryResponse = z
-  .object({
-    id: z.number().int(),
-    countryCode: CountryCode.min(2).max(2).optional(),
-    stationId: z.string().optional(),
-    title: z.string().optional(),
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-    newTitle: z.string().optional(),
-    newLat: z.number().optional(),
-    newLon: z.number().optional(),
-    comment: z.string().optional(),
-    problemReportType: ProblemReportType.optional(),
-    rejectedReason: z.string().optional(),
-    filename: z.string().optional(),
-    inboxUrl: z.string().optional(),
-    crc32: z.number().int().optional(),
-    state: z.enum(["UNKNOWN", "REVIEW", "CONFLICT", "ACCEPTED", "REJECTED"]),
-    createdAt: z.number().int().optional(),
-  })
-  .passthrough();
-const InboxStateQueryRequest = z.object({ id: z.number().int() }).passthrough();
-const PublicInboxEntry = z
-  .object({
-    countryCode: CountryCode.min(2).max(2).optional(),
-    stationId: z.string().optional(),
-    title: z.string(),
-    lat: z.number(),
-    lon: z.number(),
-  })
-  .passthrough();
-const InboxCountResponse = z
-  .object({ pendingInboxEntries: z.number().int() })
-  .passthrough();
-const InboxEntry = z
-  .object({
-    id: z.number().int(),
-    countryCode: CountryCode.min(2).max(2).optional(),
-    stationId: z.string().optional(),
-    title: z.string().optional(),
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-    newTitle: z.string().optional(),
-    newLat: z.number().optional(),
-    newLon: z.number().optional(),
-    photographerNickname: z.string(),
-    photographerEmail: z.string().optional(),
-    photoId: z.number().int().optional(),
-    comment: z.string(),
-    createdAt: z.number().int(),
-    done: z.boolean(),
-    filename: z.string().optional(),
-    inboxUrl: z.string().optional(),
-    hasPhoto: z.boolean(),
-    hasConflict: z.boolean().optional(),
-    problemReportType: ProblemReportType.optional(),
-    isProcessed: z.boolean().optional(),
-    active: z.boolean().optional(),
-  })
-  .passthrough();
-const InboxCommand = z
-  .object({
-    id: z.number().int(),
-    countryCode: CountryCode.min(2).max(2).optional(),
-    stationId: z.string().optional(),
-    title: z.string().optional(),
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-    rejectReason: z.string().optional(),
-    DS100: z.string().optional(),
-    active: z.boolean().optional(),
-    conflictResolution: z
-      .enum([
-        "DO_NOTHING",
-        "OVERWRITE_EXISTING_PHOTO",
-        "IMPORT_AS_NEW_PRIMARY_PHOTO",
-        "IMPORT_AS_NEW_SECONDARY_PHOTO",
-        "IGNORE_NEARBY_STATION",
-      ])
-      .optional(),
-    command: z.enum([
-      "IMPORT_PHOTO",
-      "IMPORT_MISSING_STATION",
-      "ACTIVATE_STATION",
-      "DEACTIVATE_STATION",
-      "DELETE_STATION",
-      "DELETE_PHOTO",
-      "MARK_SOLVED",
-      "REJECT",
-      "CHANGE_NAME",
-      "UPDATE_LOCATION",
-      "PHOTO_OUTDATED",
-    ]),
-  })
-  .passthrough();
-const AdminInboxCommandResponse = z
-  .object({ status: z.number().int(), message: z.string() })
-  .passthrough();
-const ChangePassword = z.object({ newPassword: z.string() }).passthrough();
+const ProblemReport = z.object({
+  countryCode: CountryCode.min(2).max(2),
+  stationId: z.string(),
+  title: z.string().optional(),
+  photoId: z.number().int().optional(),
+  comment: z.string(),
+  type: ProblemReportType,
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+});
+const InboxStateQueryResponse = z.object({
+  id: z.number().int(),
+  countryCode: CountryCode.min(2).max(2).optional(),
+  stationId: z.string().optional(),
+  title: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+  newTitle: z.string().optional(),
+  newLat: z.number().optional(),
+  newLon: z.number().optional(),
+  comment: z.string().optional(),
+  problemReportType: ProblemReportType.optional(),
+  rejectedReason: z.string().optional(),
+  filename: z.string().optional(),
+  inboxUrl: z.string().optional(),
+  crc32: z.number().int().optional(),
+  state: z.enum(["UNKNOWN", "REVIEW", "CONFLICT", "ACCEPTED", "REJECTED"]),
+  createdAt: z.number().int().optional(),
+});
+const InboxStateQueryRequest = z.object({ id: z.number().int() });
+const PublicInboxEntry = z.object({
+  countryCode: CountryCode.min(2).max(2).optional(),
+  stationId: z.string().optional(),
+  title: z.string(),
+  lat: z.number(),
+  lon: z.number(),
+});
+const InboxCountResponse = z.object({ pendingInboxEntries: z.number().int() });
+const InboxEntry = z.object({
+  id: z.number().int(),
+  countryCode: CountryCode.min(2).max(2).optional(),
+  stationId: z.string().optional(),
+  title: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+  newTitle: z.string().optional(),
+  newLat: z.number().optional(),
+  newLon: z.number().optional(),
+  photographerNickname: z.string(),
+  photographerEmail: z.string().optional(),
+  photoId: z.number().int().optional(),
+  comment: z.string(),
+  createdAt: z.number().int(),
+  done: z.boolean(),
+  filename: z.string().optional(),
+  inboxUrl: z.string().optional(),
+  hasPhoto: z.boolean(),
+  hasConflict: z.boolean().optional(),
+  problemReportType: ProblemReportType.optional(),
+  isProcessed: z.boolean().optional(),
+  active: z.boolean().optional(),
+});
+const InboxCommand = z.object({
+  id: z.number().int(),
+  countryCode: CountryCode.min(2).max(2).optional(),
+  stationId: z.string().optional(),
+  title: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+  rejectReason: z.string().optional(),
+  DS100: z.string().optional(),
+  active: z.boolean().optional(),
+  conflictResolution: z
+    .enum([
+      "DO_NOTHING",
+      "OVERWRITE_EXISTING_PHOTO",
+      "IMPORT_AS_NEW_PRIMARY_PHOTO",
+      "IMPORT_AS_NEW_SECONDARY_PHOTO",
+      "IGNORE_NEARBY_STATION",
+    ])
+    .optional(),
+  command: z.enum([
+    "IMPORT_PHOTO",
+    "IMPORT_MISSING_STATION",
+    "ACTIVATE_STATION",
+    "DEACTIVATE_STATION",
+    "DELETE_STATION",
+    "DELETE_PHOTO",
+    "MARK_SOLVED",
+    "REJECT",
+    "CHANGE_NAME",
+    "UPDATE_LOCATION",
+    "PHOTO_OUTDATED",
+  ]),
+});
+const AdminInboxCommandResponse = z.object({
+  status: z.number().int(),
+  message: z.string(),
+});
+const ChangePassword = z.object({ newPassword: z.string() });
 const License = z.enum([
   "CC0",
   "CC0 1.0 Universell (CC0 1.0)",
@@ -249,30 +219,26 @@ const License = z.enum([
   "CC BY-SA 4.0",
   "UNKNOWN",
 ]);
-const Profile = z
-  .object({
-    nickname: z.string(),
-    email: z.string().email().optional(),
-    license: License,
-    photoOwner: z.boolean(),
-    link: z.string().url().optional(),
-    anonymous: z.boolean().optional(),
-    admin: z.boolean().optional(),
-    emailVerified: z.boolean().optional(),
-    sendNotifications: z.boolean().optional(),
-  })
-  .passthrough();
-const UpdateProfile = z
-  .object({
-    nickname: z.string().min(3).max(50),
-    email: z.string().min(3).max(100).email(),
-    license: License.optional(),
-    photoOwner: z.boolean().optional(),
-    link: z.string().url().optional(),
-    anonymous: z.boolean().optional(),
-    sendNotifications: z.boolean().optional(),
-  })
-  .passthrough();
+const Profile = z.object({
+  nickname: z.string(),
+  email: z.string().email().optional(),
+  license: License,
+  photoOwner: z.boolean(),
+  link: z.string().url().optional(),
+  anonymous: z.boolean().optional(),
+  admin: z.boolean().optional(),
+  emailVerified: z.boolean().optional(),
+  sendNotifications: z.boolean().optional(),
+});
+const UpdateProfile = z.object({
+  nickname: z.string().min(3).max(50),
+  email: z.string().min(3).max(100).email(),
+  license: License.optional(),
+  photoOwner: z.boolean().optional(),
+  link: z.string().url().optional(),
+  anonymous: z.boolean().optional(),
+  sendNotifications: z.boolean().optional(),
+});
 
 export const schemas = {
   GeneralErrorMessage,
@@ -374,7 +340,7 @@ const endpoints = makeApi([
     path: "/adminInboxCount",
     alias: "getAdminInboxCount",
     requestFormat: "json",
-    response: z.object({ pendingInboxEntries: z.number().int() }).passthrough(),
+    response: z.object({ pendingInboxEntries: z.number().int() }),
   },
   {
     method: "post",
@@ -386,7 +352,7 @@ const endpoints = makeApi([
         name: "body",
         description: `ChangePassword`,
         type: "Body",
-        schema: z.object({ newPassword: z.string() }).passthrough(),
+        schema: z.object({ newPassword: z.string() }),
       },
       {
         name: "Authorization",
@@ -756,12 +722,12 @@ PKCE: https://tools.ietf.org/html/rfc7636
         schema: z.string().min(2).max(2).optional(),
       },
     ],
-    response: z.object({}).partial().passthrough(),
+    response: z.object({}).partial(),
     errors: [
       {
         status: 400,
         description: `Bad Request`,
-        schema: z.object({}).partial().passthrough(),
+        schema: z.object({}).partial(),
       },
     ],
   },
