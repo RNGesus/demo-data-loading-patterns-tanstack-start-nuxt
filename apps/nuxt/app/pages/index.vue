@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { useCountries } from '~/countries/useCountries'
-
-const { data: countries } = useCountries()
+const { data: countries } = useFetch('/api/countries')
 </script>
 
 <template>

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import Photographers from '~/countries/Photographers.vue'
 import Photos from '~/countries/Photos.vue'
-import { useStationPhotos } from '~/countries/useStationPhotos'
 
 definePageMeta({
   validate: (route) => {
@@ -12,7 +11,7 @@ definePageMeta({
 // TODO: look up experimental 'typedRoutes' feature
 const route = useRoute('country')
 
-const { data: stationPhotos } = useStationPhotos(route.params.country?.toString() ?? '')
+const { data: stationPhotos } = useFetch(`/api/stationPhotos/${route.params.country?.toString() ?? ''}`)
 </script>
 
 <template>
