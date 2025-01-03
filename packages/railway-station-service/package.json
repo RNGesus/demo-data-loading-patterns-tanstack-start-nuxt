@@ -1,5 +1,5 @@
 {
-  "name": "railway-station-service",
+  "name": "@project/railway-station-service",
   "type": "module",
   "private": true,
   "exports": {

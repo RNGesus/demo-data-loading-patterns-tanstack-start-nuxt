@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config",
+  "name": "@project/eslint-config",
   "type": "module",
   "private": true,
   "exports": {
