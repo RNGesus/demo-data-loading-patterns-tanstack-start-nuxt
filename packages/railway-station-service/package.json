@@ -11,7 +11,8 @@
   "scripts": {
     "create-api-client": "openapi-zod-client './vendor/openapi.yaml' -o './generated/client.ts' --additional-props-default-value=false",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "postinstall": "pnpm create-api-client"
   },
   "dependencies": {
     "@zodios/core": "^10.9.6",
