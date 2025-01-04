@@ -4,7 +4,9 @@ import { createApiClient } from './generated/client'
 const userAgent = [
   import.meta.env.OPEN_LIBRARY_APP_NAME,
   import.meta.env.OPEN_LIBRARY_EMAIL,
-].join(' - ')
+]
+  .filter(Boolean)
+  .join(' - ')
 
 export const apiClient = createApiClient('https://openlibrary.org', {
   axiosConfig: {
