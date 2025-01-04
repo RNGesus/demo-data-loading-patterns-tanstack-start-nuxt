@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import Photographers from '~/components/Photographers.vue'
-import Photos from '~/components/Photos.vue'
-
 definePageMeta({
   validate: (route) => {
     return typeof route.params.country === 'string'
