@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
     "@tanstack/react-router": "^1.95.0",
     "@tanstack/start": "^1.95.0",

@@ -30,6 +30,9 @@ importers:
       '@nuxt/image':
         specifier: 1.8.1
         version: 1.8.1(db0@0.2.1)(ioredis@5.4.2)(magicast@0.3.5)(rollup@4.29.1)
+      '@project/open-library-service':
+        specifier: workspace:*
+        version: link:../../packages/open-library-service
       '@project/railway-station-service':
         specifier: workspace:*
         version: link:../../packages/railway-station-service
@@ -48,6 +51,9 @@ importers:
 
   apps/tanstack-start:
     dependencies:
+      '@project/open-library-service':
+        specifier: workspace:*
+        version: link:../../packages/open-library-service
       '@project/railway-station-service':
         specifier: workspace:*
         version: link:../../packages/railway-station-service
