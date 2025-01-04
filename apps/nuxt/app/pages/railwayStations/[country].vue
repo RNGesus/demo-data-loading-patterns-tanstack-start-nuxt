@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import Photographers from '~/countries/Photographers.vue'
-import Photos from '~/countries/Photos.vue'
+import Photographers from '~/components/Photographers.vue'
+import Photos from '~/components/Photos.vue'
 
 definePageMeta({
   validate: (route) => {
@@ -9,9 +9,9 @@ definePageMeta({
 })
 
 // TODO: look up experimental 'typedRoutes' feature
-const route = useRoute('country')
+const route = useRoute('railwayStations/country')
 
-const { data: stationPhotos } = useFetch(`/api/stationPhotos/${route.params.country?.toString() ?? ''}`)
+const { data: stationPhotos } = useFetch(`/api/railwayStations/stationPhotos/${route.params.country?.toString() ?? ''}`)
 </script>
 
 <template>
