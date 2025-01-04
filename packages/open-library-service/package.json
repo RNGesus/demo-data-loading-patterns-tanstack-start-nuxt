@@ -1,0 +1,24 @@
+{
+  "name": "@project/open-library-service",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./client": "./client.ts",
+    "./generated": "./generated.ts",
+    "./transforms": "./transforms.ts",
+    "./types": "./types.ts"
+  },
+  "scripts": {
+    "create-api-client": "openapi-zod-client './vendor/openapi.json' -o './generated/client.ts' --additional-props-default-value=false",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "postinstall": "pnpm create-api-client"
+  },
+  "dependencies": {
+    "@zodios/core": "^10.9.6",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "openapi-zod-client": "^1.18.2"
+  }
+}
