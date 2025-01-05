@@ -13,14 +13,12 @@ async function handleCountryChange(event: Event) {
 
 <template>
   <div>
-    <div>
-      <select class="select" :value="route.params.country?.toString() ?? null" @change="handleCountryChange">
-        <option v-for="country in countries" :key="country.code" :value="country.code">
-          {{ country.name }}
-        </option>
-      </select>
-    </div>
-    <pre class="max-h-[300px] overflow-y-auto">{{ countries && JSON.stringify(countries, null, 2) }}</pre>
+    <select class="select mb-4" :value="route.params.country?.toString() ?? null" @change="handleCountryChange">
+      <option v-for="country in countries" :key="country.code" :value="country.code">
+        {{ country.name }}
+      </option>
+    </select>
+    <pre class="max-h-[300px] overflow-y-auto mb-4">{{ countries && JSON.stringify(countries, null, 2) }}</pre>
     <NuxtPage />
   </div>
 </template>
