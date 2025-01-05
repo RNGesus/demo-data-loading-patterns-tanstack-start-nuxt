@@ -24,23 +24,23 @@ async function updateQuery(event: Event) {
       </label>
       <input type="hidden" name="page" :value="$route.query.page">
     </form>
-    <nav class="pagination">
-      <NuxtLink :to="{ name: 'openLibrary', query: { ...$route.query, page: undefined } }">
-        page 1
-      </NuxtLink>
-      <NuxtLink :to="{ name: 'openLibrary', query: { ...$route.query, page: 2 } }">
-        page 2
-      </NuxtLink>
+    <nav>
+      <ul class="menu menu-horizontal bg-base-300">
+        <li v-for="i in 3" :key="i">
+          <NuxtLink
+            :to="{
+              name: 'openLibrary',
+              query: {
+                ...$route.query,
+                page: i > 1 ? i : undefined },
+            }"
+            :class="{ 'menu-active': route.query.page === i.toString() || (!route.query.page && i === 1) }"
+          >
+            page {{ i }}
+          </NuxtLink>
+        </li>
+      </ul>
     </nav>
     <pre>{{ results }}</pre>
   </div>
 </template>
-
-<style lang="css" scoped>
-.pagination {
-  display: flex;
-  gap: 1rem;
-  background-color: #00000011;
-  padding: 0.5rem;
-}
-</style>
