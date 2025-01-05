@@ -10,10 +10,12 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@project/helpers": "workspace:*",
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
     "@tanstack/react-router": "^1.95.1",
     "@tanstack/start": "^1.95.1",
+    "@tanstack/zod-adapter": "^1.95.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vinxi": "^0.5.1"

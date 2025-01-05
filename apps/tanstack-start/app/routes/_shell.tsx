@@ -35,7 +35,7 @@ function CountrySelector() {
           <li key={country.code}>
             {/* FIXME: the active class is set but the DaisyUI styles are missing */}
             <Link
-              to="/$country"
+              to="/countries/$country"
               params={{ country: country.code }}
             >
               {country.name}
@@ -50,7 +50,17 @@ function LayoutComponent() {
   return (
     <>
       <header className="navbar bg-base-200 ">
-        <div className="flex-1">{/* start */}</div>
+        <div className="flex-1">
+          {/* start */}
+          <ul className="menu menu-horizontal">
+            <li>
+              <Link to="/countries">Countries ↗️</Link>
+            </li>
+            <li>
+              <Link to="/openLibrary">OpenLibrary ↗️</Link>
+            </li>
+          </ul>
+        </div>
         <div className="flex-none">
           {/* end */}
           <ul className="menu menu-horizontal px-1">
