@@ -6,8 +6,7 @@ import {
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Meta, Scripts } from '@tanstack/start'
 import * as React from 'react'
-// import appCss from '../../styles/global.css?url'
-import '../../styles/global.css'
+import appCss from '../../styles/global.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -19,8 +18,7 @@ export const Route = createRootRoute({
       },
       { title: 'TanStack Start Starter' },
     ],
-    // FIXME: this one leads to a hydration error
-    // links: [{ rel: 'stylesheet', href: appCss }],
+    links: [{ rel: 'stylesheet', href: appCss }],
   }),
   component: RootComponent,
 })
