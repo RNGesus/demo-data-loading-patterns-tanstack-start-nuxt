@@ -1,0 +1,17 @@
+{
+  "name": "@project/helpers",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./form": "./form.ts",
+    "./types": "./types.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

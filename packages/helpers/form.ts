@@ -1,10 +1,10 @@
 // madness!
-export function unwrapFormData(event: Event) {
-  if (!(event.target instanceof HTMLFormElement)) {
+export function unwrapFormData<E extends EventTarget | null>(eventTarget: E) {
+  if (!(eventTarget instanceof HTMLFormElement)) {
     return
   }
 
-  const formDataEntries = new FormData(event.target).entries()
+  const formDataEntries = (new FormData(eventTarget)).entries()
 
   const cleanedFormDataEntries = Array.from(formDataEntries)
     // TODO: fix control flow analysis, which does not work here

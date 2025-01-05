@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/image'],
   imports: {
-    dirs: ['components', 'helpers'],
+    dirs: [],
   },
   devtools: {
     enabled: true,
@@ -39,8 +39,7 @@ export default defineNuxtConfig({
   image: {
     domains: ['api.railway-stations.org'],
     provider: 'ipx',
-    ipx: {
-    },
+    ipx: { },
     quality: 75,
   },
 })

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { unwrapFormData } from '@project/helpers/form'
+
 const route = useRoute('openLibrary')
 const { data: results } = useFetch('/api/openLibrary/search', {
   query: {
@@ -8,7 +10,7 @@ const { data: results } = useFetch('/api/openLibrary/search', {
 })
 
 async function updateQuery(event: Event) {
-  await navigateTo({ name: 'openLibrary', query: unwrapFormData(event) })
+  await navigateTo({ name: 'openLibrary', query: unwrapFormData(event.target) })
 }
 </script>
 
@@ -17,12 +19,13 @@ async function updateQuery(event: Event) {
     <!-- TODO: lookup uncontrolled Vue forms, b/c this is pretty bad -->
     <form action="/openLibrary" @submit.stop.prevent="updateQuery">
       <label class="input input-bordered flex items-center gap-2">
-        <span class="">
+        <span class="sr-only">
           Search
         </span>
+        <span aria-hidden>🔍</span>
         <input type="search" name="q" :value="$route.query.q" class="grow">
       </label>
-      <input type="hidden" name="page" :value="$route.query.page">
+      <input type="hidden" name="page" :value="$route.query.page ?? 1">
     </form>
     <nav>
       <ul class="menu menu-horizontal bg-base-300">
