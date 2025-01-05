@@ -10,36 +10,12 @@ const route = useRoute('countries')
 </script>
 
 <template>
-  <div class="photos">
-    <div v-for="photo in photos" :key="photo.id" class="photo-card">
-      <figure class="photo-figure">
-        <NuxtImg width="384" height="216" placeholder fit="contain" class="photo-img" loading="lazy" :src="photoBaseUrl + photo.path" :alt="`Photo of a railway station in ${(route.params.country?.toString() ?? '').toUpperCase()} by ${photo.photographer}`" />
-        <figcaption class="photographer-caption">
-          {{ `by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString('en-GB')}` }}
-        </figcaption>
-      </figure>
-    </div>
+  <div class="grid grid-cols-[repeat(auto-fit,_minmax(50ch,_1fr))] gap-2">
+    <figure v-for="photo in photos" :key="photo.id">
+      <NuxtImg width="384" height="216" placeholder fit="contain" class="aspect-16/9 block w-full h-auto" loading="lazy" :src="photoBaseUrl + photo.path" :alt="`Photo of a railway station in ${(route.params.country?.toString() ?? '').toUpperCase()} by ${photo.photographer}`" />
+      <figcaption class="bg-base-300 px-2 py-1">
+        {{ `by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString('en-GB')}` }}
+      </figcaption>
+    </figure>
   </div>
 </template>
-
-<style scoped>
-.photos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(384px, 1fr));
-  gap: 0.5rem;
-}
-.photo-figure {
-  margin: 0;
-}
-.photo-img {
-  display: block;
-  aspect-ratio: 16/9;
-  width: 100%;
-  height: auto;
-}
-.photographer-caption {
-  background-color: #000000aa;
-  color: #eaeaea;
-  padding: 0.25rem 0.5rem;
-}
-</style>

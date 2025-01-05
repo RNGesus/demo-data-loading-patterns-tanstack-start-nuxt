@@ -14,13 +14,13 @@ async function handleCountryChange(event: Event) {
 <template>
   <div>
     <div>
-      <select :value="route.params.country?.toString() ?? null" @change="handleCountryChange">
+      <select class="select" :value="route.params.country?.toString() ?? null" @change="handleCountryChange">
         <option v-for="country in countries" :key="country.code" :value="country.code">
           {{ country.name }}
         </option>
       </select>
     </div>
-    <pre class="apiOutput">{{ countries && JSON.stringify(countries, null, 2) }}</pre>
+    <pre class="max-h-[300px] overflow-y-auto">{{ countries && JSON.stringify(countries, null, 2) }}</pre>
     <NuxtPage />
   </div>
 </template>
@@ -28,12 +28,5 @@ async function handleCountryChange(event: Event) {
 <style>
 * {
   min-width: 0;
-}
-</style>
-
-<style scoped>
-.apiOutput {
-  max-height: 300px;
-  overflow-y: auto;
 }
 </style>

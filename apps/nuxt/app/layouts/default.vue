@@ -3,26 +3,25 @@
 
 <template>
   <div>
-    <nav class="navigation">
-      <NuxtLink to="/railwayStations">
-        Railway Stations ➡️
-      </NuxtLink>
-      <NuxtLink to="/openLibrary">
-        Open Library ➡️
-      </NuxtLink>
-    </nav>
+    <header class="navbar bg-base-200">
+      <nav class="navbar-start">
+        <ul class="menu menu-horizontal">
+          <li>
+            <NuxtLink to="/railwayStations">
+              Railway Stations ➡️
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/openLibrary">
+              Open Library ➡️
+            </NuxtLink>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-    <slot />
+    <div class="px-4">
+      <slot />
+    </div>
   </div>
 </template>
-
-<style lang="css" scoped>
-.navigation {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  background-color: bisque;
-  padding: 1rem;
-  margin-bottom: 2rem;
-}
-</style>

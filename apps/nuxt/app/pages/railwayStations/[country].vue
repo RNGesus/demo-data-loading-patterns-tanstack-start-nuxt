@@ -12,20 +12,18 @@ const { data: stationPhotos } = useFetch(`/api/railwayStations/stationPhotos/${r
 </script>
 
 <template>
-  <div>
-    <h1>Station Photos for <em>{{ route.params.country }}</em></h1>
+  <div class="prose max-w-full">
+    <h1>
+      Station Photos for <em>{{ route.params.country }}</em>
+    </h1>
     <p>Station count: {{ stationPhotos?.stationsCount }}</p>
-    <div class="content-layout">
-      <Photographers v-if="stationPhotos?.photographers" :photographers="stationPhotos.photographers" />
-      <Photos v-if="stationPhotos" :photos="stationPhotos.photos" :photo-base-url="stationPhotos.photoBaseUrl" />
-    </div>
+
+    <h2>
+      Photographers
+    </h2>
+    <Photographers v-if="stationPhotos?.photographers" class="not-prose" :photographers="stationPhotos.photographers" />
+
+    <h2>Station photos</h2>
+    <Photos v-if="stationPhotos" class="not-prose" :photos="stationPhotos.photos" :photo-base-url="stationPhotos.photoBaseUrl" />
   </div>
 </template>
-
-<style scoped>
-.content-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-</style>

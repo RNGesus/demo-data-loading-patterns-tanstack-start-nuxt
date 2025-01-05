@@ -7,29 +7,14 @@ defineProps<{
 </script>
 
 <template>
-  <div class="photographers">
-    <div v-for="photographer in photographers" :key="photographer.name" class="photographer-card">
-      <dl>
-        <dt>Name:</dt>
-        <dd>{{ photographer.name }}</dd>
-        <template v-if="photographer.url">
-          <dt>Url:</dt>
-          <dd><a :href="photographer.url" target="_blank">{{ photographer.url }}</a></dd>
-        </template>
-      </dl>
+  <div class="grid grid-cols-[repeat(auto-fill,_minmax(30ch,_1fr))] gap-2">
+    <div v-for="photographer in photographers" :key="photographer.name" class="bg-base-300 card">
+      <div class="card-body">
+        <h3 class="card-title">
+          {{ photographer.name }}
+        </h3>
+        <a v-if="photographer.url" :href="photographer.url" target="_blank" class="link">{{ photographer.url }} ↗️</a>
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.photographers {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.5rem;
-}
-.photographer-card {
-  border: solid 1px #000000aa;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-}
-</style>
