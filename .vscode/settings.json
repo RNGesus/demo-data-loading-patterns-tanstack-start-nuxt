@@ -48,13 +48,5 @@
     "postcss"
   ],
 
-  "typescript.tsdk": "node_modules/typescript/lib",
-
-  // Exclude the auto-generated file from VSCode's refactor actions
-  "files.watcherExclude": {
-    "**/routeTree.gen.ts": true
-  },
-  "files.exclude": {
-    "**/routeTree.gen.ts": true
-  }
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
