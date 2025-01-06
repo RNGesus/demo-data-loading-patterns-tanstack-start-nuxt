@@ -21,6 +21,7 @@ async function updateQuery(event: Event) {
       <label class="input input-bordered flex items-center gap-2">
         <span role="img" aria-label="Search">🔍</span>
         <input type="search" name="q" :value="$route.query.q" class="grow">
+        <kbd class="kbd kbd-sm">Enter</kbd>
       </label>
       <input type="hidden" name="page" :value="$route.query.page ?? 1">
     </form>

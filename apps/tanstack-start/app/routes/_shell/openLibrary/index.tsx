@@ -43,6 +43,7 @@ function RouteComponent() {
             defaultValue={search.q || ''}
             className="grow"
           />
+          <kbd className="kbd kbd-sm">Enter</kbd>
         </label>
         <input type="hidden" name="page" value={search.page || ''} />
       </form>
