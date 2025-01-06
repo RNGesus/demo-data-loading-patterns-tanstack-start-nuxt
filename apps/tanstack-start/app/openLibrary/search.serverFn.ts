@@ -4,10 +4,9 @@ import { query } from './search.querySchema'
 
 export const searchServerFn = createServerFn({ method: 'GET' })
   .validator(query.parse)
-  .handler(async ({ data }) => await apiClient.read_search_json_search_json_get({
+  .handler(async ({ data }) => apiClient.read_search_json_search_json_get({
     queries: {
       q: data.q,
       page: data.page,
     },
-  }),
-  )
+  }))

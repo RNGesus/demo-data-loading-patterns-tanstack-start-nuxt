@@ -1,25 +1,30 @@
 import { query } from '@app/openLibrary/search.querySchema'
 import { searchServerFn } from '@app/openLibrary/search.serverFn'
 import { unwrapFormData } from '@project/helpers/form'
-import { createFileRoute, Link, linkOptions } from '@tanstack/react-router'
+import { Await, createFileRoute, Link, linkOptions } from '@tanstack/react-router'
 import { zodValidator } from '@tanstack/zod-adapter'
+import { Suspense } from 'react'
 
 export const Route = createFileRoute('/_shell/openLibrary/')({
   component: RouteComponent,
   validateSearch: zodValidator(query),
   loaderDeps: ({ search: { page, q } }) => ({ page, q }),
-  loader: async ({ deps }) =>
-    await searchServerFn({ data: { page: deps.page, q: deps.q } }),
+  loader: async ({ deps }) => {
+    const promisedResults = searchServerFn({ data: { page: deps.page, q: deps.q } })
+    return { promisedResults }
+  },
 })
 
 function RouteComponent() {
   const navigateTo = Route.useNavigate()
   const search = Route.useLoaderDeps()
-  const results = Route.useLoaderData()
+  const { promisedResults } = Route.useLoaderData()
 
   return (
     <div>
-      <code>⚠️ same page navigation does not work right now and will trigger a full page load ⚠️</code>
+      <div role="alert" className="alert alert-warning alert-soft my-5 w-auto">
+        <span>⚠️ same page navigation does not work properly right now and will trigger a full page load or always does a page transition ⚠️</span>
+      </div>
       <form
         onSubmit={async (event) => {
           event.preventDefault()
@@ -65,7 +70,12 @@ function RouteComponent() {
           ))}
         </ul>
       </nav>
-      <pre>{JSON.stringify(results, null, 2)}</pre>
+      <Suspense>
+        <Await promise={promisedResults}>
+          {results => (
+            <pre>{JSON.stringify(results, null, 2)}</pre>)}
+        </Await>
+      </Suspense>
     </div>
   )
 }
