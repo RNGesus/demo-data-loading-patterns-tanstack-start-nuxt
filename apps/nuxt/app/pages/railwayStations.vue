@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: countries } = useFetch('/api/railwayStations/countries')
+const { data: countries } = await useFetch('/api/railwayStations/countries')
 const route = useRoute('country')
 
 async function handleCountryChange(event: Event) {

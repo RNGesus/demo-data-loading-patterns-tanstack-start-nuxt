@@ -2,7 +2,7 @@
 import { unwrapFormData } from '@project/helpers/form'
 
 const route = useRoute('openLibrary')
-const { data: results } = useFetch('/api/openLibrary/search', {
+const { data: results } = await useLazyFetch('/api/openLibrary/search', {
   query: {
     q: computed(() => route.query.q),
     page: computed(() => route.query.page),

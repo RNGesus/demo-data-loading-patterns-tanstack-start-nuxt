@@ -8,7 +8,7 @@ definePageMeta({
 // TODO: look up experimental 'typedRoutes' feature
 const route = useRoute('railwayStations/country')
 
-const { data: stationPhotos } = useFetch(`/api/railwayStations/stationPhotos/${route.params.country?.toString() ?? ''}`)
+const { data: stationPhotos } = await useFetch(`/api/railwayStations/stationPhotos/${route.params.country?.toString() ?? ''}`)
 </script>
 
 <template>
