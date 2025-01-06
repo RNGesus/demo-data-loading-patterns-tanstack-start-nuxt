@@ -1,18 +1,15 @@
-import { query, searchServerFn } from '@app/openLibrary/search.serverFn'
+import { query } from '@app/openLibrary/search.querySchema'
+import { searchServerFn } from '@app/openLibrary/search.serverFn'
 import { unwrapFormData } from '@project/helpers/form'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, linkOptions } from '@tanstack/react-router'
 import { zodValidator } from '@tanstack/zod-adapter'
 
 export const Route = createFileRoute('/_shell/openLibrary/')({
   component: RouteComponent,
-  // FIXME: will lead to an error with the 'resolve' package -> wait for fix or find solution
-  // validateSearch: zodValidator(query),
-  /**  @ts-expect-error -- needs 'validateSearch' method  */
+  validateSearch: zodValidator(query),
   loaderDeps: ({ search: { page, q } }) => ({ page, q }),
-  loader: async () =>
-    await searchServerFn({ data: { page: 1, q: '' } }),
-  // loader: async ({ deps }) =>
-  // await searchServerFn({ data: { page: deps.page, q: deps.q } }),
+  loader: async ({ deps }) =>
+    await searchServerFn({ data: { page: deps.page, q: deps.q } }),
 })
 
 function RouteComponent() {
@@ -22,6 +19,7 @@ function RouteComponent() {
 
   return (
     <div>
+      <code>⚠️ same page navigation does not work right now and will trigger a full page load ⚠️</code>
       <form
         onSubmit={async (event) => {
           event.preventDefault()
@@ -48,8 +46,11 @@ function RouteComponent() {
           {[1, 2, 3].map(i => (
             <li key={i}>
               <Link
-                to="/openLibrary"
-                search={{ ...search, page: i > 1 ? i : undefined }}
+                from={Route.fullPath}
+                to="."
+                search={{ q: search.q ?? undefined, page: i > 1 ? i : undefined }}
+                // FIXME: sadly this does not work properly for the first page
+                // activeProps={{ className: 'menu-active' }}
                 className={
                   search.page === i || (!search.page && i === 1)
                     ? 'menu-active'

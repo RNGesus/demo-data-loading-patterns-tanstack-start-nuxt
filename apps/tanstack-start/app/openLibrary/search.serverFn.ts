@@ -1,11 +1,6 @@
 import { apiClient } from '@project/open-library-service/client'
 import { createServerFn } from '@tanstack/start'
-import { z } from 'vinxi'
-
-export const query = z.object({
-  q: z.string().optional().default(''),
-  page: z.coerce.number().nonnegative().optional().default(1),
-})
+import { query } from './search.querySchema'
 
 export const searchServerFn = createServerFn({ method: 'GET' })
   .validator(query.parse)

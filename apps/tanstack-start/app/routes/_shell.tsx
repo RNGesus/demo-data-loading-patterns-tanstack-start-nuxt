@@ -8,7 +8,6 @@ import {
 
 export const Route = createFileRoute('/_shell')({
   component: LayoutComponent,
-
   loader: async ({ params }) => {
     const countries = await countriesServerFn()
     const country = 'country' in params && typeof params.country === 'string' ? params.country : null
