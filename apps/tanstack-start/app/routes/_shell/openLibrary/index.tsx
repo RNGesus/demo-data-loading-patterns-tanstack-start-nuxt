@@ -33,8 +33,7 @@ function RouteComponent() {
         }}
       >
         <label className="input input-bordered flex items-center gap-2">
-          <span className="sr-only">Search</span>
-          <span aria-hidden>🔍</span>
+          <span role="img" aria-label="Search">🔍</span>
           <input
             type="search"
             name="q"

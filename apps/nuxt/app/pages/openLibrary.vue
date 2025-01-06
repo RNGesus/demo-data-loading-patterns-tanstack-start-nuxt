@@ -19,10 +19,7 @@ async function updateQuery(event: Event) {
     <!-- TODO: lookup uncontrolled Vue forms, b/c this is pretty bad -->
     <form action="/openLibrary" @submit.stop.prevent="updateQuery">
       <label class="input input-bordered flex items-center gap-2">
-        <span class="sr-only">
-          Search
-        </span>
-        <span aria-hidden>🔍</span>
+        <span role="img" aria-label="Search">🔍</span>
         <input type="search" name="q" :value="$route.query.q" class="grow">
       </label>
       <input type="hidden" name="page" :value="$route.query.page ?? 1">
