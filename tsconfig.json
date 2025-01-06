@@ -19,6 +19,7 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
 
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
