@@ -4,6 +4,7 @@ import { stationPhotosServerFn } from '@app/countries/stationPhotos.serverFn'
 import { Await, createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
+// TODO: replace with query https://tanstack.com/router/latest/docs/framework/react/start/server-functions#calling-server-functions-from-hooks-and-components
 export const Route = createFileRoute('/_shell/countries/$country')({
   component: RouteComponent,
   loader: ({ params }) => ({
