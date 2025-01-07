@@ -1,4 +1,4 @@
-# TanStack Start playground
+# TanStack Start / Nuxt playground
 
 based on [TanStack Start "Getting Started" section](https://tanstack.com/router/latest/docs/framework/react/start/getting-started)
 
