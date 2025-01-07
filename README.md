@@ -6,7 +6,7 @@ based on [TanStack Start "Getting Started" section](https://tanstack.com/router/
 
 Well, it is still a playground but I got the hang of it and will try to do more.
 
-### Current state (or rather the starting point)
+### 🥚 Current state (or rather the starting point)
 
 - TanStack Start setup with a single route
   - 💬 what a time sink, but a fun one - so many things to try
@@ -21,7 +21,7 @@ Well, it is still a playground but I got the hang of it and will try to do more.
   - 💬 flat config in general is great, it is way too easy to extend and I have a lot of ideas
   - 💬 do yourself a favour and try the ESLint config inspector `pnpm dlx @eslint/config-inspector`
 
-### Next steps
+### 🚶‍➡️ Next steps
 
 - [x] add another app next to the tanstack start one to get a good comparison
   - I guess DaisyUI 5 will be fine
@@ -40,6 +40,6 @@ Well, it is still a playground but I got the hang of it and will try to do more.
   - [ ] hook into post-install step and/or dev/build tasks
 - [ ] overhaul README
 
-### Shower thoughts
+### 🚿 Shower thoughts
 
 - [ ] local-first functionality: store user individual data like favorites, previous selections/combinations
