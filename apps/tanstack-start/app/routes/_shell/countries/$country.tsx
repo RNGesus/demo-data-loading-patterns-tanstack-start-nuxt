@@ -13,6 +13,8 @@ export const Route = createFileRoute('/_shell/countries/$country')({
 
 function RouteComponent() {
   const { promisedStationPhotos } = Route.useLoaderData()
+  // FIXME: sadly this does not replace the <Await/> components for now
+  // const stationPhotos = use(promisedStationPhotos)
   const params = Route.useParams()
 
   return (
