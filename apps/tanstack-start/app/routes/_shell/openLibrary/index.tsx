@@ -1,7 +1,7 @@
 import { query } from '@app/openLibrary/search.querySchema'
 import { searchServerFn } from '@app/openLibrary/search.serverFn'
 import { unwrapFormData } from '@project/helpers/form'
-import { Await, createFileRoute, Link, linkOptions } from '@tanstack/react-router'
+import { Await, createFileRoute, Link } from '@tanstack/react-router'
 import { zodValidator } from '@tanstack/zod-adapter'
 import { Suspense } from 'react'
 
