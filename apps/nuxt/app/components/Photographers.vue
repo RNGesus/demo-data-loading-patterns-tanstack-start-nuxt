@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="grid grid-cols-[repeat(auto-fill,_minmax(30ch,_1fr))] gap-2">
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(30ch,1fr))] gap-2">
     <div v-for="photographer in photographers" :key="photographer.name" class="bg-base-300 card">
       <div class="card-body">
         <h3 class="card-title">

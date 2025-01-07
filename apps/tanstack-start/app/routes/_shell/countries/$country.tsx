@@ -1,5 +1,5 @@
-import { StationPhotos } from '@app/countries/StationPhotographers'
-import { StationPhotographers } from '@app/countries/StationPhotos'
+import { StationPhotographers } from '@app/countries/StationPhotographers'
+import { StationPhotos } from '@app/countries/StationPhotos'
 import { stationPhotosServerFn } from '@app/countries/stationPhotos.serverFn'
 import { Await, createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'

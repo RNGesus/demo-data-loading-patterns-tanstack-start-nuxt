@@ -1,27 +1,28 @@
 import type { PhotoStations } from '@project/railway-station-service/types'
 
 interface Props {
-  photographers: PhotoStations['photographers']
+  photos: PhotoStations['stations'][number]['photos']
+  photoBaseUrl: string
+  country: string
 }
 
-export function StationPhotographers({ photographers }: Props) {
+export function StationPhotos({ photos, photoBaseUrl, country }: Props) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,_minmax(30ch,_1fr))] gap-2">
-      {photographers.map(photographer => (
-        <div key={photographer.name} className="bg-base-300 card">
-          <div className="card-body">
-            <h3 className="card-title">
-              {photographer.name}
-            </h3>
-            {photographer.url && (
-              <a href={photographer.url} target="_blank" className="link">
-                {photographer.url}
-                {' '}
-                ↗️
-              </a>
-            )}
-          </div>
-        </div>
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(50ch,1fr))] gap-2">
+      {photos.map(photo => (
+        <figure key={photo.id}>
+          <img
+            width={384}
+            height={216}
+            className="aspect-16/9 block w-full h-auto"
+            loading="lazy"
+            src={photoBaseUrl + photo.path}
+            alt={`Photo of a railway station in ${(country).toUpperCase()} by ${photo.photographer}`}
+          />
+          <figcaption className="bg-base-300 px-2 py-1">
+            {`by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString('en-GB')}`}
+          </figcaption>
+        </figure>
       ))}
     </div>
   )
