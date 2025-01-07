@@ -4,7 +4,8 @@ import { routeTree } from './routeTree.gen'
 export function createRouter() {
   const router = createTanStackRouter({
     routeTree,
-    defaultPreload: 'intent',
+    // TODO: find a way to debounce the hover behavior
+    // defaultPreload: 'intent',
     defaultPendingComponent: () => (
       <div className="grid place-content-center place-items-center h-dvh"style={{ padding: '1rem' }}>
         <div className="animate-spin text-5xl">😵‍💫</div>
