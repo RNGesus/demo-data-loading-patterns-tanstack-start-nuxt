@@ -1,16 +1,18 @@
 import { StationPhotos } from '@app/countries/StationPhotographers'
 import { StationPhotographers } from '@app/countries/StationPhotos'
 import { stationPhotosServerFn } from '@app/countries/stationPhotos.serverFn'
-import { createFileRoute } from '@tanstack/react-router'
+import { Await, createFileRoute } from '@tanstack/react-router'
+import { Suspense } from 'react'
 
 export const Route = createFileRoute('/_shell/countries/$country')({
   component: RouteComponent,
-  loader: async ({ params }) =>
-    stationPhotosServerFn({ data: { country: params.country } }),
+  loader: ({ params }) => ({
+    promisedStationPhotos: stationPhotosServerFn({ data: { country: params.country } }),
+  }),
 })
 
 function RouteComponent() {
-  const stationPhotos = Route.useLoaderData()
+  const { promisedStationPhotos } = Route.useLoaderData()
   const params = Route.useParams()
 
   return (
@@ -23,26 +25,38 @@ function RouteComponent() {
       <p>
         Station count:
         {' '}
-        {stationPhotos?.stationsCount}
+        <Suspense fallback={<span className="animate-spin inline-block opacity-50">😵‍💫</span>}>
+          <Await promise={promisedStationPhotos}>
+            {({ stationsCount }) => stationsCount}
+          </Await>
+        </Suspense>
       </p>
 
       <h2>Photographers</h2>
-      {!!stationPhotos?.photographers && (
-        <div className="not-prose">
-          <StationPhotographers photographers={stationPhotos.photographers} />
-        </div>
-      )}
+      <Suspense>
+        <Await promise={promisedStationPhotos}>
+          {({ photographers }) => (
+            <div className="not-prose">
+              <StationPhotographers photographers={photographers} />
+            </div>
+          )}
+        </Await>
+      </Suspense>
 
       <h2>Station photos</h2>
-      {!!stationPhotos && (
-        <div className="not-prose">
-          <StationPhotos
-            photos={stationPhotos.photos}
-            photoBaseUrl={stationPhotos.photoBaseUrl}
-            country={params.country}
-          />
-        </div>
-      )}
+      <Suspense>
+        <Await promise={promisedStationPhotos}>
+          {({ photos, photoBaseUrl }) => (
+            <div className="not-prose">
+              <StationPhotos
+                photos={photos}
+                photoBaseUrl={photoBaseUrl}
+                country={params.country}
+              />
+            </div>
+          )}
+        </Await>
+      </Suspense>
     </div>
   )
 }

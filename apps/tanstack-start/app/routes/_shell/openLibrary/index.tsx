@@ -9,10 +9,10 @@ export const Route = createFileRoute('/_shell/openLibrary/')({
   component: RouteComponent,
   validateSearch: zodValidator(query),
   loaderDeps: ({ search: { page, q } }) => ({ page, q }),
-  loader: async ({ deps }) => {
-    const promisedResults = searchServerFn({ data: { page: deps.page, q: deps.q } })
-    return { promisedResults }
-  },
+  loader: async ({ deps }) => ({
+    promisedResults: searchServerFn({ data: { page: deps.page, q: deps.q } }),
+  }),
+
 })
 
 function RouteComponent() {
