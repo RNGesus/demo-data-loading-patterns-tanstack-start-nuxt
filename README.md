@@ -23,12 +23,12 @@ Well, it is still a playground but I got the hang of it and will try to do more.
 
 ### Next steps
 
-- [ ] add another app next to the tanstack start one to get a good comparison
+- [x] add another app next to the tanstack start one to get a good comparison
   - I guess DaisyUI 5 will be fine
-- [ ] init a monorepo
-  - [ ] apps:
+- [x] init a monorepo
+  - [x] apps:
     - [x] tanstack start
-    - [ ] nuxt
+    - [x] nuxt
   - [x] packages:
     - [x] the railway station api
     - [x] eslint config
