@@ -6,9 +6,9 @@
     "*.css"
   ],
   "exports": {
+    ".": "./src/index.ts",
     "./Photos": "./src/components/Photos.vue",
-    "./Photographers": "./src/components/Photographers.vue",
-    ".": "./index.ts"
+    "./Photographers": "./src/components/Photographers.vue"
   },
   "scripts": {
     "lint": "eslint .",
