@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import Photos from '@project/vue-components/Photos'
+// TODO: fix auto-imports for "vue-components" package
+import { Photographers, Photos } from '@project/vue-components'
 
 definePageMeta({
   validate: (route) => {

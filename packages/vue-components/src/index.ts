@@ -1,2 +1,2 @@
-export * from './components/Photographers.vue'
-export * from './components/Photos.vue'
+export { default as Photographers } from './components/Photographers.vue'
+export { default as Photos } from './components/Photos.vue'
