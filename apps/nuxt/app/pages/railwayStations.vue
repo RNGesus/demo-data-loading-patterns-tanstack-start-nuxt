@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: countries } = await useFetch('/api/railwayStations/countries')
-const route = useRoute('country')
+const route = useRoute('railwayStations-country')
 
 async function handleCountryChange(event: Event) {
   if (!event.target || !(event.target instanceof HTMLSelectElement)) {

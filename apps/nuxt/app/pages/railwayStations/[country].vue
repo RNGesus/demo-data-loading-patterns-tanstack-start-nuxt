@@ -1,12 +1,5 @@
 <script lang="ts" setup>
-definePageMeta({
-  validate: (route) => {
-    return typeof route.params.country === 'string'
-  },
-})
-
-// TODO: look up experimental 'typedRoutes' feature
-const route = useRoute('railwayStations/country')
+const route = useRoute('railwayStations-country')
 const country = computed(() => route.params.country?.toString() ?? '')
 
 const { data: stationPhotos } = await useFetch(`/api/railwayStations/stationPhotos/${country.value}`)
