@@ -7,7 +7,7 @@ interface StationPhotographerProps {
 
 export function StationPhotographer({ photographer }: StationPhotographerProps) {
   return (
-    <div className="bg-base-300 card">
+    <div key={photographer.name} className="bg-base-300 card">
       <div className="card-body">
         <h3 className="card-title">
           {photographer.name}

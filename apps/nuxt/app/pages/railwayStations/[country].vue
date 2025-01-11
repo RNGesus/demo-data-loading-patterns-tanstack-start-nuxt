@@ -15,18 +15,13 @@ const { data: stationPhotos } = await useFetch(`/api/railwayStations/stationPhot
     <h2>
       Photographers
     </h2>
-    <Photographers v-if="stationPhotos?.photographers" class="not-prose" :photographers="stationPhotos.photographers" />
+    <Photographers v-if="stationPhotos?.photographers" class="not-prose">
+      <Photographer v-for="photographer in stationPhotos.photographers" :key="photographer.name" :photographer="photographer" />
+    </Photographers>
 
     <h2>Station photos</h2>
-    <Photos v-if="stationPhotos" class="not-prose" :photos="stationPhotos.photos" :photo-base-url="stationPhotos.photoBaseUrl" :country>
-      <template #default="{ src, alt, width, height }">
-        <NuxtImg
-          :width="width" :height="height" placeholder fit="contain"
-          class="aspect-16/9 block w-full h-auto" loading="lazy"
-          :src="src"
-          :alt="alt"
-        />
-      </template>
+    <Photos v-if="stationPhotos" class="not-prose">
+      <Photo v-for="photo in stationPhotos.photos" :key="photo.id" :photo="photo" :photo-base-url="stationPhotos.photoBaseUrl" :country="country" />
     </Photos>
   </div>
 </template>

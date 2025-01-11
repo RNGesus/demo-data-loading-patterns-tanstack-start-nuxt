@@ -1,6 +1,6 @@
-import { StationPhotographers } from '@app/countries/StationPhotographers'
-import { StationPhotos } from '@app/countries/StationPhotos'
-import { stationPhotosServerFn } from '@app/countries/stationPhotos.serverFn'
+import { StationPhotographer, StationPhotographers } from '@app/railwayStations/StationPhotographers'
+import { StationPhoto, StationPhotos } from '@app/railwayStations/StationPhotos'
+import { stationPhotosServerFn } from '@app/railwayStations/stationPhotos.serverFn'
 import { Await, createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
@@ -40,7 +40,9 @@ function RouteComponent() {
         <Await promise={promisedStationPhotos}>
           {({ photographers }) => (
             <div className="not-prose">
-              <StationPhotographers photographers={photographers} />
+              <StationPhotographers>
+                {photographers.map(photographer => <StationPhotographer key={photographer.name} photographer={photographer} />)}
+              </StationPhotographers>
             </div>
           )}
         </Await>
@@ -51,11 +53,9 @@ function RouteComponent() {
         <Await promise={promisedStationPhotos}>
           {({ photos, photoBaseUrl }) => (
             <div className="not-prose">
-              <StationPhotos
-                photos={photos}
-                photoBaseUrl={photoBaseUrl}
-                country={params.country}
-              />
+              <StationPhotos>
+                {photos.map(photo => <StationPhoto key={photo.id} photo={photo} photoBaseUrl={photoBaseUrl} country={params.country} />)}
+              </StationPhotos>
             </div>
           )}
         </Await>
