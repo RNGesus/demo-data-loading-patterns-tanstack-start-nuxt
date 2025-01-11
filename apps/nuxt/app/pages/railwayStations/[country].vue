@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-// TODO: fix auto-imports for "vue-components" package
-import { Photographers, Photos } from '@project/vue-components'
-
 definePageMeta({
   validate: (route) => {
     return typeof route.params.country === 'string'
