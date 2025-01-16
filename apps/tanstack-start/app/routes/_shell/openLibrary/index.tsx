@@ -1,18 +1,21 @@
 import { query } from '@app/openLibrary/search.querySchema'
 import { searchServerFn } from '@app/openLibrary/search.serverFn'
 import { unwrapFormData } from '@project/helpers/form'
-import { Await, createFileRoute, Link } from '@tanstack/react-router'
+import { Await, createFileRoute, Link, stripSearchParams } from '@tanstack/react-router'
 import { zodValidator } from '@tanstack/zod-adapter'
 import { Suspense } from 'react'
 
+// TODO: improve choppy loading behavior: shows cached (stale?) results, then the spinner and then the (fresh) results
 export const Route = createFileRoute('/_shell/openLibrary/')({
   component: RouteComponent,
   validateSearch: zodValidator(query),
+  search: {
+    middlewares: [stripSearchParams({ page: 1, q: '' })],
+  },
   loaderDeps: ({ search: { page, q } }) => ({ page, q }),
   loader: async ({ deps }) => ({
     promisedResults: searchServerFn({ data: { page: deps.page, q: deps.q } }),
   }),
-
 })
 
 function RouteComponent() {
@@ -40,7 +43,7 @@ function RouteComponent() {
           <input
             type="search"
             name="q"
-            defaultValue={search.q || ''}
+            defaultValue={search.q}
             className="grow"
           />
           <kbd className="kbd kbd-sm">Enter</kbd>
@@ -54,18 +57,16 @@ function RouteComponent() {
               <Link
                 from={Route.fullPath}
                 to="."
-                search={{ q: search.q ?? undefined, page: i > 1 ? i : undefined }}
+                search={{ q: search.q, page: i }}
                 // FIXME: sadly this does not work properly for the first page
                 // activeProps={{ className: 'menu-active' }}
                 className={
-                  search.page === i || (!search.page && i === 1)
+                  search.page === i
                     ? 'menu-active'
                     : ''
                 }
               >
-                page
-                {' '}
-                {i}
+                {`page ${i}`}
               </Link>
             </li>
           ))}
