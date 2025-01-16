@@ -9,7 +9,7 @@ interface StationPhotoProps {
 
 export function StationPhoto({ photo, photoBaseUrl, country }: StationPhotoProps) {
   return (
-    <figure key={photo.id}>
+    <figure>
       <img
         width={384}
         height={216}
