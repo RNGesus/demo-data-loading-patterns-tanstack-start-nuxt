@@ -45,7 +45,7 @@ function RouteComponent() {
           />
           <kbd className="kbd kbd-sm">Enter</kbd>
         </label>
-        <input type="hidden" name="page" value={search.page || ''} />
+        <input type="hidden" name="page" value={1} />
       </form>
       <nav>
         <ul className="menu menu-horizontal bg-base-300">

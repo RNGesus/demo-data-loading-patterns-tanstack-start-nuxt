@@ -23,7 +23,7 @@ async function updateQuery(event: Event) {
         <input type="search" name="q" :value="$route.query.q" class="grow">
         <kbd class="kbd kbd-sm">Enter</kbd>
       </label>
-      <input type="hidden" name="page" :value="$route.query.page ?? 1">
+      <input type="hidden" name="page" :value="1">
     </form>
     <nav>
       <ul class="menu menu-horizontal bg-base-300">
