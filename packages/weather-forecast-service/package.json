@@ -4,9 +4,7 @@
   "private": true,
   "exports": {
     "./client": "./client.ts",
-    "./generated": "./generated.ts",
-    "./transforms": "./transforms.ts",
-    "./types": "./types.ts"
+    "./generated": "./generated.ts"
   },
   "scripts": {
     "create-api-client": "openapi-zod-client './vendor/openapi.json' -o './generated/client.ts' --additional-props-default-value=false",
