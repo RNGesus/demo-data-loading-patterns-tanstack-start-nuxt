@@ -28,12 +28,13 @@ async function updateQuery(event: Event) {
     <nav>
       <ul class="menu menu-horizontal bg-base-300">
         <li v-for="i in 3" :key="i">
+          <!-- TODO: simplify active class -->
           <NuxtLink
             :to="{
               name: 'openLibrary',
               query: {
                 ...$route.query,
-                page: i > 1 ? i : undefined },
+                page: i },
             }"
             :class="{ 'menu-active': route.query.page === i.toString() || (!route.query.page && i === 1) }"
           >
