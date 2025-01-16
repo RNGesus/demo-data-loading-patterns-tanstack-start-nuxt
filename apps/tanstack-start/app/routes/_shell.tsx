@@ -1,4 +1,4 @@
-import { countriesServerFn } from '@app/railwayStations/countries.serverFn'
+import { stationCountriesServerFn } from '@app/railwayStations/stationCountries.serverFn'
 import {
   createFileRoute,
   Link,
@@ -9,7 +9,7 @@ import {
 export const Route = createFileRoute('/_shell')({
   component: LayoutComponent,
   loader: async ({ params }) => {
-    const countries = await countriesServerFn()
+    const countries = await stationCountriesServerFn()
     const country = 'country' in params && typeof params.country === 'string' ? params.country : null
 
     if (country && countries.every(c => c.code !== country)) {
@@ -34,7 +34,7 @@ function CountrySelector() {
           <li key={country.code}>
             {/* FIXME: the active class is set but the DaisyUI styles are missing */}
             <Link
-              to="/countries/$country"
+              to="/stationCountries/$country"
               params={{ country: country.code }}
             >
               {country.name}
@@ -45,15 +45,15 @@ function CountrySelector() {
     </details>
   )
 }
+
 function LayoutComponent() {
   return (
     <>
       <header className="navbar bg-base-200 ">
         <div className="flex-1">
-          {/* start */}
           <ul className="menu menu-horizontal">
             <li>
-              <Link to="/countries">Countries ↗️</Link>
+              <Link to="/stationCountries">Countries ↗️</Link>
             </li>
             <li>
               <Link to="/openLibrary">OpenLibrary ↗️</Link>
@@ -61,7 +61,6 @@ function LayoutComponent() {
           </ul>
         </div>
         <div className="flex-none">
-          {/* end */}
           <ul className="menu menu-horizontal px-1">
             <li>
               <CountrySelector />

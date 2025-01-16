@@ -13,9 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as ShellImport } from './routes/_shell'
 import { Route as ShellIndexImport } from './routes/_shell/index'
+import { Route as ShellStationCountriesIndexImport } from './routes/_shell/stationCountries/index'
 import { Route as ShellOpenLibraryIndexImport } from './routes/_shell/openLibrary/index'
-import { Route as ShellCountriesIndexImport } from './routes/_shell/countries/index'
-import { Route as ShellCountriesCountryImport } from './routes/_shell/countries/$country'
+import { Route as ShellStationCountriesCountryImport } from './routes/_shell/stationCountries/$country'
 
 // Create/Update Routes
 
@@ -30,23 +30,26 @@ const ShellIndexRoute = ShellIndexImport.update({
   getParentRoute: () => ShellRoute,
 } as any)
 
+const ShellStationCountriesIndexRoute = ShellStationCountriesIndexImport.update(
+  {
+    id: '/stationCountries/',
+    path: '/stationCountries/',
+    getParentRoute: () => ShellRoute,
+  } as any,
+)
+
 const ShellOpenLibraryIndexRoute = ShellOpenLibraryIndexImport.update({
   id: '/openLibrary/',
   path: '/openLibrary/',
   getParentRoute: () => ShellRoute,
 } as any)
 
-const ShellCountriesIndexRoute = ShellCountriesIndexImport.update({
-  id: '/countries/',
-  path: '/countries/',
-  getParentRoute: () => ShellRoute,
-} as any)
-
-const ShellCountriesCountryRoute = ShellCountriesCountryImport.update({
-  id: '/countries/$country',
-  path: '/countries/$country',
-  getParentRoute: () => ShellRoute,
-} as any)
+const ShellStationCountriesCountryRoute =
+  ShellStationCountriesCountryImport.update({
+    id: '/stationCountries/$country',
+    path: '/stationCountries/$country',
+    getParentRoute: () => ShellRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -66,18 +69,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellIndexImport
       parentRoute: typeof ShellImport
     }
-    '/_shell/countries/$country': {
-      id: '/_shell/countries/$country'
-      path: '/countries/$country'
-      fullPath: '/countries/$country'
-      preLoaderRoute: typeof ShellCountriesCountryImport
-      parentRoute: typeof ShellImport
-    }
-    '/_shell/countries/': {
-      id: '/_shell/countries/'
-      path: '/countries'
-      fullPath: '/countries'
-      preLoaderRoute: typeof ShellCountriesIndexImport
+    '/_shell/stationCountries/$country': {
+      id: '/_shell/stationCountries/$country'
+      path: '/stationCountries/$country'
+      fullPath: '/stationCountries/$country'
+      preLoaderRoute: typeof ShellStationCountriesCountryImport
       parentRoute: typeof ShellImport
     }
     '/_shell/openLibrary/': {
@@ -87,6 +83,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellOpenLibraryIndexImport
       parentRoute: typeof ShellImport
     }
+    '/_shell/stationCountries/': {
+      id: '/_shell/stationCountries/'
+      path: '/stationCountries'
+      fullPath: '/stationCountries'
+      preLoaderRoute: typeof ShellStationCountriesIndexImport
+      parentRoute: typeof ShellImport
+    }
   }
 }
 
@@ -94,16 +97,16 @@ declare module '@tanstack/react-router' {
 
 interface ShellRouteChildren {
   ShellIndexRoute: typeof ShellIndexRoute
-  ShellCountriesCountryRoute: typeof ShellCountriesCountryRoute
-  ShellCountriesIndexRoute: typeof ShellCountriesIndexRoute
+  ShellStationCountriesCountryRoute: typeof ShellStationCountriesCountryRoute
   ShellOpenLibraryIndexRoute: typeof ShellOpenLibraryIndexRoute
+  ShellStationCountriesIndexRoute: typeof ShellStationCountriesIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellIndexRoute: ShellIndexRoute,
-  ShellCountriesCountryRoute: ShellCountriesCountryRoute,
-  ShellCountriesIndexRoute: ShellCountriesIndexRoute,
+  ShellStationCountriesCountryRoute: ShellStationCountriesCountryRoute,
   ShellOpenLibraryIndexRoute: ShellOpenLibraryIndexRoute,
+  ShellStationCountriesIndexRoute: ShellStationCountriesIndexRoute,
 }
 
 const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
@@ -111,39 +114,44 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof ShellRouteWithChildren
   '/': typeof ShellIndexRoute
-  '/countries/$country': typeof ShellCountriesCountryRoute
-  '/countries': typeof ShellCountriesIndexRoute
+  '/stationCountries/$country': typeof ShellStationCountriesCountryRoute
   '/openLibrary': typeof ShellOpenLibraryIndexRoute
+  '/stationCountries': typeof ShellStationCountriesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof ShellIndexRoute
-  '/countries/$country': typeof ShellCountriesCountryRoute
-  '/countries': typeof ShellCountriesIndexRoute
+  '/stationCountries/$country': typeof ShellStationCountriesCountryRoute
   '/openLibrary': typeof ShellOpenLibraryIndexRoute
+  '/stationCountries': typeof ShellStationCountriesIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_shell': typeof ShellRouteWithChildren
   '/_shell/': typeof ShellIndexRoute
-  '/_shell/countries/$country': typeof ShellCountriesCountryRoute
-  '/_shell/countries/': typeof ShellCountriesIndexRoute
+  '/_shell/stationCountries/$country': typeof ShellStationCountriesCountryRoute
   '/_shell/openLibrary/': typeof ShellOpenLibraryIndexRoute
+  '/_shell/stationCountries/': typeof ShellStationCountriesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/' | '/countries/$country' | '/countries' | '/openLibrary'
+  fullPaths:
+    | ''
+    | '/'
+    | '/stationCountries/$country'
+    | '/openLibrary'
+    | '/stationCountries'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/countries/$country' | '/countries' | '/openLibrary'
+  to: '/' | '/stationCountries/$country' | '/openLibrary' | '/stationCountries'
   id:
     | '__root__'
     | '/_shell'
     | '/_shell/'
-    | '/_shell/countries/$country'
-    | '/_shell/countries/'
+    | '/_shell/stationCountries/$country'
     | '/_shell/openLibrary/'
+    | '/_shell/stationCountries/'
   fileRoutesById: FileRoutesById
 }
 
@@ -172,25 +180,25 @@ export const routeTree = rootRoute
       "filePath": "_shell.tsx",
       "children": [
         "/_shell/",
-        "/_shell/countries/$country",
-        "/_shell/countries/",
-        "/_shell/openLibrary/"
+        "/_shell/stationCountries/$country",
+        "/_shell/openLibrary/",
+        "/_shell/stationCountries/"
       ]
     },
     "/_shell/": {
       "filePath": "_shell/index.tsx",
       "parent": "/_shell"
     },
-    "/_shell/countries/$country": {
-      "filePath": "_shell/countries/$country.tsx",
-      "parent": "/_shell"
-    },
-    "/_shell/countries/": {
-      "filePath": "_shell/countries/index.tsx",
+    "/_shell/stationCountries/$country": {
+      "filePath": "_shell/stationCountries/$country.tsx",
       "parent": "/_shell"
     },
     "/_shell/openLibrary/": {
       "filePath": "_shell/openLibrary/index.tsx",
+      "parent": "/_shell"
+    },
+    "/_shell/stationCountries/": {
+      "filePath": "_shell/stationCountries/index.tsx",
       "parent": "/_shell"
     }
   }

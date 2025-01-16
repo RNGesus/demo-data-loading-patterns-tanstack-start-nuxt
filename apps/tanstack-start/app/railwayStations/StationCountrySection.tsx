@@ -66,7 +66,7 @@ export function ProviderApps({ apps: providerApps }: { apps?: types.ProviderApp[
   )
 }
 
-export function CountrySection({
+export function StationCountrySection({
   country,
   children,
 }: { country: types.Country } & PropsWithChildren) {
