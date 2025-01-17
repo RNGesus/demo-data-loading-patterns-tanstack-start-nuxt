@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-router'
 import { fallback } from '@tanstack/zod-adapter'
 import { z } from 'zod'
+import { Menu } from '../components/Menu'
 
 const countryParamSchema = z.object({
   country: fallback(z.string(), '').default(''),
@@ -31,25 +32,21 @@ function CountrySelector() {
   const countries = Route.useLoaderData()
   const params = Route.useParams()
   return (
-    <details>
-      <summary className="flex gap-2">
+    <Menu>
+      <Menu.Trigger>
         Selected country:
         {'country' in params && typeof params.country === 'string' && <b>{params.country}</b>}
-      </summary>
-      <ul className="bg-base-200 rounded-t-none p-2 z-[1]">
+      </Menu.Trigger>
+      <Menu.List>
         {countries.map(country => (
-          <li key={country.code}>
-            {/* FIXME: the active class is set but the DaisyUI styles are missing */}
-            <Link
-              to="/stationCountries/$country"
-              params={{ country: country.code }}
-            >
+          <Menu.Item key={country.code}>
+            <Link to="/stationCountries/$country" params={{ country: country.code }}>
               {country.name}
             </Link>
-          </li>
+          </Menu.Item>
         ))}
-      </ul>
-    </details>
+      </Menu.List>
+    </Menu>
   )
 }
 
@@ -64,6 +61,9 @@ function LayoutComponent() {
             </li>
             <li>
               <Link to="/openLibrary">OpenLibrary ↗️</Link>
+            </li>
+            <li>
+              <Link to="/energyCharts">Energy Charts ↗️</Link>
             </li>
           </ul>
         </div>
