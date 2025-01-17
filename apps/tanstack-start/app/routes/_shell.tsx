@@ -5,12 +5,19 @@ import {
   notFound,
   Outlet,
 } from '@tanstack/react-router'
+import { fallback } from '@tanstack/zod-adapter'
+import { z } from 'zod'
+
+const countryParamSchema = z.object({
+  country: fallback(z.string(), '').default(''),
+})
 
 export const Route = createFileRoute('/_shell')({
   component: LayoutComponent,
   loader: async ({ params }) => {
     const countries = await stationCountriesServerFn()
-    const country = 'country' in params && typeof params.country === 'string' ? params.country : null
+    const parsedParams = countryParamSchema.safeParse(params)
+    const country = parsedParams.success ? parsedParams.data.country : null
 
     if (country && countries.every(c => c.code !== country)) {
       throw notFound()
