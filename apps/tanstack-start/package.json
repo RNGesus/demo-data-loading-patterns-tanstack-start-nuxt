@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@project/energy-charts-service": "workspace:*",
     "@project/helpers": "workspace:*",
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
