@@ -1,12 +1,17 @@
-import { query } from '@app/openLibrary/search.querySchema'
-import { searchServerFn } from '@app/openLibrary/search.serverFn'
+import { query } from '@app/integrations/openLibrary/search.querySchema'
+import { searchServerFn } from '@app/integrations/openLibrary/search.serverFn'
 import { unwrapFormData } from '@project/helpers/form'
-import { Await, createFileRoute, Link, stripSearchParams } from '@tanstack/react-router'
+import {
+  Await,
+  createFileRoute,
+  Link,
+  stripSearchParams,
+} from '@tanstack/react-router'
 import { zodValidator } from '@tanstack/zod-adapter'
 import { Suspense } from 'react'
 
 // TODO: improve choppy loading behavior: shows cached (stale?) results, then the spinner and then the (fresh) results
-export const Route = createFileRoute('/_shell/openLibrary/')({
+export const Route = createFileRoute('/_shell/openLibrary')({
   component: RouteComponent,
   validateSearch: zodValidator(query),
   search: {
@@ -26,7 +31,10 @@ function RouteComponent() {
   return (
     <div>
       <div role="alert" className="alert alert-warning alert-soft my-5 w-auto">
-        <span>⚠️ same page navigation does not work properly right now and will trigger a full page load or always does a page transition ⚠️</span>
+        <span>
+          ⚠️ same page navigation does not work properly right now and will
+          trigger a full page load or always does a page transition ⚠️
+        </span>
       </div>
       <form
         onSubmit={async (event) => {
@@ -39,7 +47,9 @@ function RouteComponent() {
         }}
       >
         <label className="input input-bordered flex items-center gap-2">
-          <span role="img" aria-label="Search">🔍</span>
+          <span role="img" aria-label="Search">
+            🔍
+          </span>
           <input
             type="search"
             name="q"
@@ -52,7 +62,7 @@ function RouteComponent() {
       </form>
       <nav>
         <ul className="menu menu-horizontal bg-base-300">
-          {[1, 2, 3].map(i => (
+          {[1, 2, 3].map((i) => (
             <li key={i}>
               <Link
                 from={Route.fullPath}
@@ -60,11 +70,7 @@ function RouteComponent() {
                 search={{ q: search.q, page: i }}
                 // FIXME: sadly this does not work properly for the first page
                 // activeProps={{ className: 'menu-active' }}
-                className={
-                  search.page === i
-                    ? 'menu-active'
-                    : ''
-                }
+                className={search.page === i ? 'menu-active' : ''}
               >
                 {`page ${i}`}
               </Link>
@@ -74,8 +80,7 @@ function RouteComponent() {
       </nav>
       <Suspense>
         <Await promise={promisedResults}>
-          {results => (
-            <pre>{JSON.stringify(results, null, 2)}</pre>)}
+          {(results) => <pre>{JSON.stringify(results, null, 2)}</pre>}
         </Await>
       </Suspense>
     </div>

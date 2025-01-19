@@ -1,4 +1,4 @@
-import { stationCountriesServerFn } from '@app/railwayStations/stationCountries.serverFn'
+import { stationCountriesServerFn } from '@app/integrations/railwayStations/stationCountries.serverFn'
 import {
   createFileRoute,
   Link,

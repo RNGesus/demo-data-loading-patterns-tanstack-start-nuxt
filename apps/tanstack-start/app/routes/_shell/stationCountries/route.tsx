@@ -1,12 +1,12 @@
-import { stationCountriesServerFn } from '@app/railwayStations/stationCountries.serverFn'
+import { stationCountriesServerFn } from '@app/integrations/railwayStations/stationCountries.serverFn'
 import {
   ProviderApps,
   StationCountrySection,
   TimeTableTemplate,
-} from '@app/railwayStations/StationCountrySection'
+} from '@app/integrations/railwayStations/StationCountrySection'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_shell/stationCountries/')({
+export const Route = createFileRoute('/_shell/stationCountries')({
   component: RouteComponent,
   loader: async () => stationCountriesServerFn(),
 })
@@ -18,7 +18,7 @@ function RouteComponent() {
     <>
       <h1>Countries with apps</h1>
       <ul className="flex flex-col gap-4">
-        {countries.map(country => (
+        {countries.map((country) => (
           <li key={country.code}>
             <StationCountrySection country={country}>
               <TimeTableTemplate template={country.timetableUrlTemplate} />

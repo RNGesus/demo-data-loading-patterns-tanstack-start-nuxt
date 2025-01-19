@@ -1,9 +1,9 @@
 import {
   StationPhotographer,
   StationPhotographers,
-} from '@app/railwayStations/StationPhotographers'
-import { StationPhoto, StationPhotos } from '@app/railwayStations/StationPhotos'
-import { stationPhotosServerFn } from '@app/railwayStations/stationPhotos.serverFn'
+} from '@app/integrations/railwayStations/StationPhotographers'
+import { StationPhoto, StationPhotos } from '@app/integrations/railwayStations/StationPhotos'
+import { stationPhotosServerFn } from '@app/integrations/railwayStations/stationPhotos.serverFn'
 import { Await, createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
@@ -19,7 +19,7 @@ export const Route = createFileRoute('/_shell/stationCountries/$country')({
 
 function RouteComponent() {
   const { promisedStationPhotos } = Route.useLoaderData()
-  // FIXME: sadly this does not replace the <Await/> components for now
+  /** FIXME: sadly this does not replace the <Await/> components for now @see /energyCharts/$country.tsx for a better example */
   // const stationPhotos = use(promisedStationPhotos)
   const params = Route.useParams()
 
