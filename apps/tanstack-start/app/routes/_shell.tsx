@@ -57,7 +57,7 @@ function LayoutComponent() {
         <div className="flex-1">
           <ul className="menu menu-horizontal">
             <li>
-              <Link to="/stationCountries">Countries ↗️</Link>
+              <Link to="/stationCountries">Railway Station Countries ↗️</Link>
             </li>
             <li>
               <Link to="/openLibrary">OpenLibrary ↗️</Link>
