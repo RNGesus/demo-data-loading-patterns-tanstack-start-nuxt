@@ -24,6 +24,9 @@ importers:
 
   apps/nuxt:
     dependencies:
+      '@project/energy-charts-service':
+        specifier: workspace:*
+        version: link:../../packages/energy-charts-service
       '@project/helpers':
         specifier: workspace:*
         version: link:../../packages/helpers
