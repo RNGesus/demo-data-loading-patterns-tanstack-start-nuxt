@@ -15,13 +15,13 @@ const { data: stationPhotos } = await useFetch(`/api/railwayStations/stationPhot
     <h2>
       Photographers
     </h2>
-    <Photographers v-if="stationPhotos?.photographers" class="not-prose">
-      <Photographer v-for="photographer in stationPhotos.photographers" :key="photographer.name" :photographer="photographer" />
-    </Photographers>
+    <RailwayStationsPhotographers v-if="stationPhotos?.photographers" class="not-prose">
+      <RailwayStationsPhotographer v-for="photographer in stationPhotos.photographers" :key="photographer.name" :photographer="photographer" />
+    </RailwayStationsPhotographers>
 
     <h2>Station photos</h2>
-    <Photos v-if="stationPhotos" class="not-prose">
-      <Photo v-for="photo in stationPhotos.photos" :key="photo.id" :photo="photo" :photo-base-url="stationPhotos.photoBaseUrl" :country="country" />
-    </Photos>
+    <RailwayStationsPhotos v-if="stationPhotos" class="not-prose">
+      <RailwayStationsPhoto v-for="photo in stationPhotos.photos" :key="photo.id" :photo="photo" :photo-base-url="stationPhotos.photoBaseUrl" :country="country" />
+    </RailwayStationsPhotos>
   </div>
 </template>
