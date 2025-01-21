@@ -16,6 +16,11 @@
               Open Library ➡️
             </NuxtLink>
           </li>
+          <li>
+            <NuxtLink to="/energyCharts">
+              Energy Charts ➡️
+            </NuxtLink>
+          </li>
         </ul>
       </nav>
     </header>
