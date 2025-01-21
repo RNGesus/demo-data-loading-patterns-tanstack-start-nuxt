@@ -19,8 +19,16 @@ function RouteComponent() {
   return (
     <Suspense fallback={<div>Loading power data...</div>}>
       <div className="overflow-x-auto">
-        <table className="table table-pin-cols">
+        <table className="table table-xs table-pin-cols">
           <thead>
+            <tr>
+              <th rowSpan={2}>
+                Production Type
+              </th>
+              <th colSpan={powerData.unix_seconds?.length}>
+                Data Point at
+              </th>
+            </tr>
             <tr>
               <th>Production Type</th>
               {powerData.unix_seconds?.map(unixSecondsEntry => (
