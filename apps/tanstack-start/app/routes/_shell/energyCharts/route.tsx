@@ -1,16 +1,5 @@
 import { Dropdown } from '@app/components/Dropdown'
-import { query } from '@app/integrations/energyCharts/power.querySchema'
-import { powerServerFn } from '@app/integrations/energyCharts/power.serverFn'
-import {
-  Await,
-  createFileRoute,
-  Link,
-  Outlet,
-  stripSearchParams,
-  useParams,
-} from '@tanstack/react-router'
-import { zodValidator } from '@tanstack/zod-adapter'
-import { Suspense } from 'react'
+import { createFileRoute, Link, Outlet, useParams } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_shell/energyCharts')({
   component: RouteComponent,

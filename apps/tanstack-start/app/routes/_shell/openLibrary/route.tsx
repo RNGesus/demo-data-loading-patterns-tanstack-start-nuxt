@@ -62,7 +62,7 @@ function RouteComponent() {
       </form>
       <nav>
         <ul className="menu menu-horizontal bg-base-300">
-          {[1, 2, 3].map((i) => (
+          {[1, 2, 3].map(i => (
             <li key={i}>
               <Link
                 from={Route.fullPath}
@@ -80,7 +80,7 @@ function RouteComponent() {
       </nav>
       <Suspense>
         <Await promise={promisedResults}>
-          {(results) => <pre>{JSON.stringify(results, null, 2)}</pre>}
+          {results => <pre>{JSON.stringify(results, null, 2)}</pre>}
         </Await>
       </Suspense>
     </div>

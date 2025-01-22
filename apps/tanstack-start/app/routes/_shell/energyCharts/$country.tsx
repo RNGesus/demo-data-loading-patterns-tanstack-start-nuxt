@@ -1,8 +1,5 @@
 import { powerServerFn } from '@app/integrations/energyCharts/power.serverFn'
-import {
-  Await,
-  createFileRoute,
-} from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { Suspense, use } from 'react'
 
 export const Route = createFileRoute('/_shell/energyCharts/$country')({
