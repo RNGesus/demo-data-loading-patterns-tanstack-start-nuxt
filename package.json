@@ -11,6 +11,6 @@
   "devDependencies": {
     "@project/eslint-config": "workspace:*",
     "@types/node": "^22.10.10",
-    "eslint": "^9.18.0"
+    "eslint": "^9.19.0"
   }
 }

@@ -16,7 +16,7 @@
     "@project/helpers": "workspace:*",
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
-    "nuxt": "^3.15.2",
+    "nuxt": "^3.15.3",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.24.1"
