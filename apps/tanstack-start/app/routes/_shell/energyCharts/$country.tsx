@@ -1,4 +1,5 @@
 import { powerServerFn } from '@app/integrations/energyCharts/power.serverFn'
+import { calculateEnergyChartHueRotation } from '@project/helpers/chart'
 import { formatEnergyChartDataPoint, formatEnergyChartDataPointDate } from '@project/helpers/formatters'
 import { createFileRoute } from '@tanstack/react-router'
 import { Suspense, use } from 'react'
@@ -40,8 +41,14 @@ function RouteComponent() {
               <tr key={productionType.name}>
                 <th>{productionType.name}</th>
                 {productionType.data?.map((data, index) => (
+                  <td
                   // eslint-disable-next-line react/no-array-index-key -- there is nothing else to use as a key
-                  <td className="text-right" key={index}>{data ? formatEnergyChartDataPoint(data) : 'no data'}</td>
+                    key={index}
+                    style={{ ['--color-grade' as string]: `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg` }}
+                    className="text-right bg-blue-600 hue-rotate-(--color-grade)"
+                  >
+                    {data ? formatEnergyChartDataPoint(data) : 'no data'}
+                  </td>
                 ))}
               </tr>
             ))}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { calculateEnergyChartHueRotation } from '@project/helpers/chart'
 import { formatEnergyChartDataPoint, formatEnergyChartDataPointDate } from '@project/helpers/formatters'
 
 const route = useRoute('energyCharts-country')
@@ -28,7 +29,12 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
       <tbody>
         <tr v-for="productionType in powerData?.production_types" :key="productionType.name">
           <th>{{ productionType.name }}</th>
-          <td v-for="(data, index) in productionType.data" :key="index">
+          <td
+            v-for="(data, index) in productionType.data"
+            :key="index"
+            :style="{ '--color-grade': `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg` }"
+            class="text-right bg-blue-600 hue-rotate-(--color-grade)"
+          >
             {{ data ? formatEnergyChartDataPoint(data) : 'no data' }}
           </td>
         </tr>
