@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { formatEnergyChartDataPoint, formatEnergyChartDataPointDate } from '@project/helpers/formatters'
+
 const route = useRoute('energyCharts-country')
 const { data: powerData } = useFetch('/api/energyCharts/power', {
   query: { country: computed(() => route.params.country) },
@@ -13,19 +15,13 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
           <th rowspan="2">
             Production Type
           </th>
-          <th :colspan="powerData?.unix_seconds?.length">
+          <th class="text-center" :colspan="powerData?.unix_seconds?.length">
             Data Point at
           </th>
         </tr>
         <tr>
-          <th v-for="unixSecondsEntry in powerData?.unix_seconds" :key="unixSecondsEntry">
-            {{ new Date(unixSecondsEntry * 1000).toLocaleString(
-              'en-GB',
-              {
-                timeStyle: 'short',
-                timeZone: 'Europe/Berlin',
-              },
-            ) }}
+          <th v-for="unixSecondsEntry in powerData?.unix_seconds" :key="unixSecondsEntry" class="text-right">
+            {{ formatEnergyChartDataPointDate(unixSecondsEntry) }}
           </th>
         </tr>
       </thead>
@@ -33,7 +29,7 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
         <tr v-for="productionType in powerData?.production_types" :key="productionType.name">
           <th>{{ productionType.name }}</th>
           <td v-for="(data, index) in productionType.data" :key="index">
-            {{ data ?? 'no data' }}
+            {{ data ? formatEnergyChartDataPoint(data) : 'no data' }}
           </td>
         </tr>
       </tbody>
