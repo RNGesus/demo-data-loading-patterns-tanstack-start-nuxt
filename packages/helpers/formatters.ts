@@ -1,6 +1,6 @@
 export function formatEnergyChartDataPoint(number: number) {
   return new Intl.NumberFormat(
-    'en-US',
+    'de-DE',
     {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
@@ -10,7 +10,7 @@ export function formatEnergyChartDataPoint(number: number) {
 
 export function formatEnergyChartDataPointDate(unixSeconds: number) {
   return new Date(unixSeconds * 1000).toLocaleString(
-    'en-GB',
+    'de-DE',
     {
       timeStyle: 'short',
       timeZone: 'Europe/Berlin',
