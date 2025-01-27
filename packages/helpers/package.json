@@ -5,6 +5,7 @@
   "exports": {
     "./form": "./form.ts",
     "./formatters": "./formatters.ts",
+    "./chart": "./chart.ts",
     "./types": "./types.ts"
   },
   "scripts": {
