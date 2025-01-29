@@ -9,7 +9,7 @@ interface StationPhotoProps {
 
 export function StationPhoto({ photo, photoBaseUrl, country }: StationPhotoProps) {
   return (
-    <figure>
+    <figure className="rounded-md">
       <img
         width={384}
         height={216}

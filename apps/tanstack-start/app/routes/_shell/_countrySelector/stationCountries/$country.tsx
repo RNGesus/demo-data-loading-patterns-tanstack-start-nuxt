@@ -2,13 +2,18 @@ import {
   StationPhotographer,
   StationPhotographers,
 } from '@app/integrations/railwayStations/StationPhotographers'
-import { StationPhoto, StationPhotos } from '@app/integrations/railwayStations/StationPhotos'
+import {
+  StationPhoto,
+  StationPhotos,
+} from '@app/integrations/railwayStations/StationPhotos'
 import { stationPhotosServerFn } from '@app/integrations/railwayStations/stationPhotos.serverFn'
 import { Await, createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
 // TODO: replace with query https://tanstack.com/router/latest/docs/framework/react/start/server-functions#calling-server-functions-from-hooks-and-components
-export const Route = createFileRoute('/_shell/stationCountries/$country')({
+export const Route = createFileRoute(
+  '/_shell/_countrySelector/stationCountries/$country',
+)({
   component: RouteComponent,
   loader: ({ params }) => ({
     promisedStationPhotos: stationPhotosServerFn({
@@ -26,13 +31,10 @@ function RouteComponent() {
   return (
     <div className="prose max-w-full">
       <h1>
-        Station Photos for
-        {' '}
-        <em>{params.country}</em>
+        Station Photos for <em>{params.country}</em>
       </h1>
       <p>
-        Station count:
-        {' '}
+        Station count:{' '}
         <Suspense
           fallback={
             <span className="animate-spin inline-block opacity-50">😵‍💫</span>
@@ -50,7 +52,7 @@ function RouteComponent() {
           {({ photographers }) => (
             <div className="not-prose">
               <StationPhotographers>
-                {photographers.map(photographer => (
+                {photographers.map((photographer) => (
                   <StationPhotographer
                     key={photographer.name}
                     photographer={photographer}
@@ -68,7 +70,7 @@ function RouteComponent() {
           {({ photos, photoBaseUrl }) => (
             <div className="not-prose">
               <StationPhotos>
-                {photos.map(photo => (
+                {photos.map((photo) => (
                   <StationPhoto
                     key={photo.id}
                     photo={photo}

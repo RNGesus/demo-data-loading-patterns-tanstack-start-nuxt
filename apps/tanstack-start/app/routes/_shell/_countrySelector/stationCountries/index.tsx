@@ -6,7 +6,9 @@ import {
 } from '@app/integrations/railwayStations/StationCountrySection'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_shell/stationCountries/')({
+export const Route = createFileRoute(
+  '/_shell/_countrySelector/stationCountries/',
+)({
   component: RouteComponent,
   loader: async () => stationCountriesServerFn(),
 })
