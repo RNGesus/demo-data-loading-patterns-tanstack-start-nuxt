@@ -1,8 +1,4 @@
-import {
-  createRootRoute,
-  Outlet,
-  ScrollRestoration,
-} from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Meta, Scripts } from '@tanstack/start'
 import * as React from 'react'
@@ -41,7 +37,6 @@ function RootDocument({ children }: React.PropsWithChildren) {
         <div className="p-4">
           {children}
         </div>
-        <ScrollRestoration />
         <React.Suspense>
           <TanStackRouterDevtools position="bottom-right" />
         </React.Suspense>

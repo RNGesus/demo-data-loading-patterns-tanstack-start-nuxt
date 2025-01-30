@@ -18,6 +18,7 @@ export function createRouter() {
         <Link to="/" className="link">Home ➡️</Link>
       </div>
     ),
+    scrollRestoration: true,
   })
   return router
 }
