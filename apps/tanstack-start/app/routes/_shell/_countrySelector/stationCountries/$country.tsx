@@ -31,10 +31,13 @@ function RouteComponent() {
   return (
     <div className="prose max-w-full">
       <h1>
-        Station Photos for <em>{params.country}</em>
+        Station Photos for
+        {' '}
+        <em>{params.country}</em>
       </h1>
       <p>
-        Station count:{' '}
+        Station count:
+        {' '}
         <Suspense
           fallback={
             <span className="animate-spin inline-block opacity-50">😵‍💫</span>
@@ -52,7 +55,7 @@ function RouteComponent() {
           {({ photographers }) => (
             <div className="not-prose">
               <StationPhotographers>
-                {photographers.map((photographer) => (
+                {photographers.map(photographer => (
                   <StationPhotographer
                     key={photographer.name}
                     photographer={photographer}
@@ -70,7 +73,7 @@ function RouteComponent() {
           {({ photos, photoBaseUrl }) => (
             <div className="not-prose">
               <StationPhotos>
-                {photos.map((photo) => (
+                {photos.map(photo => (
                   <StationPhoto
                     key={photo.id}
                     photo={photo}

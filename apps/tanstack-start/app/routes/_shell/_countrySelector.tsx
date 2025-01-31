@@ -26,7 +26,7 @@ function RouteComponent() {
           {country && <b>{country}</b>}
         </Dropdown.Trigger>
         <Dropdown.List>
-          {countries.map((country) => (
+          {countries.map(country => (
             <Dropdown.Item key={country.code}>
               <Link
                 to="/stationCountries/$country"
