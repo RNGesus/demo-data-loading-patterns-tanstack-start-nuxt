@@ -14,9 +14,9 @@
     "@project/helpers": "workspace:*",
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
-    "@tanstack/react-router": "^1.98.4",
-    "@tanstack/start": "^1.98.6",
-    "@tanstack/zod-adapter": "^1.98.4",
+    "@tanstack/react-router": "^1.99.0",
+    "@tanstack/start": "^1.99.0",
+    "@tanstack/zod-adapter": "^1.99.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vinxi": "^0.5.1",
@@ -25,16 +25,16 @@
   "devDependencies": {
     "@eslint-react/eslint-plugin": "^1.26.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.0.1",
-    "@tanstack/eslint-plugin-router": "^1.98.1",
-    "@tanstack/router-devtools": "^1.98.4",
+    "@tailwindcss/vite": "^4.0.3",
+    "@tanstack/eslint-plugin-router": "^1.99.0",
+    "@tanstack/router-devtools": "^1.99.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "^3.7.2",
     "daisyui": "5.0.0-beta.5",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
-    "tailwindcss": "^4.0.1",
+    "tailwindcss": "^4.0.3",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
