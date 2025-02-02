@@ -15,7 +15,7 @@
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
     "@tanstack/react-router": "^1.99.0",
-    "@tanstack/start": "^1.99.0",
+    "@tanstack/start": "^1.99.1",
     "@tanstack/zod-adapter": "^1.99.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
