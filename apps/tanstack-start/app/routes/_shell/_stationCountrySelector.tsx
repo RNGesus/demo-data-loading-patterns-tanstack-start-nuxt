@@ -7,7 +7,7 @@ import {
   useParams,
 } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_shell/_countrySelector')({
+export const Route = createFileRoute('/_shell/_stationCountrySelector')({
   component: RouteComponent,
   loader: async () => stationCountriesServerFn(),
 })
@@ -26,7 +26,7 @@ function RouteComponent() {
           {country && <b>{country}</b>}
         </Dropdown.Trigger>
         <Dropdown.List>
-          {countries.map(country => (
+          {countries.map((country) => (
             <Dropdown.Item key={country.code}>
               <Link
                 to="/stationCountries/$country"

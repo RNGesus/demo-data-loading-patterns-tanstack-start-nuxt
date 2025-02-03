@@ -11,7 +11,7 @@ import { zodValidator } from '@tanstack/zod-adapter'
 import { Suspense } from 'react'
 
 // TODO: improve choppy loading behavior: shows cached (stale?) results, then the spinner and then the (fresh) results
-export const Route = createFileRoute('/_shell/openLibrary')({
+export const Route = createFileRoute('/_shell/openLibrary/')({
   component: RouteComponent,
   validateSearch: zodValidator(query),
   search: {

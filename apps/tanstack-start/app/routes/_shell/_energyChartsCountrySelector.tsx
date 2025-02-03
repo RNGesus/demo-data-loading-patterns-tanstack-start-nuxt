@@ -1,8 +1,13 @@
 import { Dropdown } from '@app/components/Dropdown'
-import { createFileRoute, Link, Outlet, useParams } from '@tanstack/react-router'
-import { countries } from '../../../integrations/energyCharts/countries'
+import { countries } from '@app/integrations/energyCharts/countries'
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  useParams,
+} from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_shell/energyCharts')({
+export const Route = createFileRoute('/_shell/_energyChartsCountrySelector')({
   component: RouteComponent,
 })
 
