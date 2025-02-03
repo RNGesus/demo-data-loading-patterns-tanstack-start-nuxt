@@ -17,6 +17,7 @@ interface CalculateEnergyChartHueRotationProps {
   value: number
   maxRotation?: number
 }
+// TODO: use pure CSS instead
 export function calculateEnergyChartHueRotation({
   value,
   maxRotation = 180,
