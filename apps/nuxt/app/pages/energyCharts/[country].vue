@@ -32,8 +32,12 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
           <td
             v-for="(data, index) in productionType.data"
             :key="index"
-            :style="{ '--color-grade': `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg` }"
-            class="text-right bg-blue-600 hue-rotate-(--color-grade)"
+            :style="{
+              '--color-grade': `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg`,
+            }"
+            class="text-right bg-blue-600 hue-rotate-(--color-grade)" :class="[{
+              'grayscale-60': !data,
+            }]"
           >
             {{ data ? formatEnergyChartDataPoint(data) : 'no data' }}
           </td>
