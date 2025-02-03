@@ -12,9 +12,9 @@ export function unwrapFormData<E extends EventTarget | null>(eventTarget: E) {
 
   const formDataEntries = (new FormData(eventTarget)).entries()
 
-  const cleanedFormDataEntries = Array.from(formDataEntries).filter(entry =>
-    cleanedFormDataEntrySchema.safeParse(entry).success,
-  )
+  const cleanedFormDataEntries = Array
+    .from(formDataEntries)
+    .filter(entry => cleanedFormDataEntrySchema.safeParse(entry).success)
 
   const formDataObject = Object.fromEntries(cleanedFormDataEntries)
   return formDataObject
