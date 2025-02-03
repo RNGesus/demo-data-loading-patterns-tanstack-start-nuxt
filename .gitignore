@@ -176,6 +176,7 @@ dist
 
 # Local Dev
 .cursorrules
+.cursor
 
 # TanStack Start output
 .output
