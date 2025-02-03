@@ -19,6 +19,9 @@ export default defineNuxtConfig({
       linkExactActiveClass: 'exact-active',
     },
   },
+  routeRules: {
+    '/api/**': { cache: { maxAge: 60 } },
+  },
   devServer: {
     port: 5000,
   },

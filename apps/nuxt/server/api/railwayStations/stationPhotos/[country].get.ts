@@ -6,7 +6,7 @@ const routeParamsSchema = z.object({
   country: z.string(),
 })
 
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const params = await getValidatedRouterParams(
     event,
     routeParamsSchema.parse,

@@ -1,7 +1,7 @@
 import { apiClient } from '@project/open-library-service/client'
 import { z } from 'zod'
 
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, z.object({
     q: z.string().optional().default(''),
     page: z.coerce.number().optional().default(1),
