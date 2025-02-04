@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="p-4">
     <header class="navbar bg-base-200">
       <nav class="navbar-start">
         <ul class="menu menu-horizontal">
@@ -24,9 +24,6 @@
         </ul>
       </nav>
     </header>
-
-    <div class="px-4">
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
