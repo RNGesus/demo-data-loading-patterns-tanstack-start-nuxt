@@ -7,8 +7,8 @@
       <nav class="flex-1">
         <ul class="menu menu-horizontal">
           <li>
-            <NuxtLink to="/railwayStations">
-              Railway Stations ➡️
+            <NuxtLink to="/stationCountries">
+              Railway Station Countries ➡️
             </NuxtLink>
           </li>
           <li>
