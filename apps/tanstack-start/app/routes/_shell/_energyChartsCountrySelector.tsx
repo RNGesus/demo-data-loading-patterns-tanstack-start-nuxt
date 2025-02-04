@@ -1,10 +1,8 @@
-import { Dropdown } from '@app/components/Dropdown'
 import { countries } from '@app/integrations/energyCharts/countries'
 import {
   createFileRoute,
   Link,
   Outlet,
-  useParams,
 } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_shell/_energyChartsCountrySelector')({
@@ -12,37 +10,31 @@ export const Route = createFileRoute('/_shell/_energyChartsCountrySelector')({
 })
 
 function CountrySelector() {
-  // TODO: find a better way to access the country param
-  // const { country } = useParams({ from: '/_shell/energyCharts/$country' })
-  const { country } = useParams({ strict: false })
   return (
-    <Dropdown>
-      <Dropdown.Trigger>
+    <ul className="menu menu-horizontal bg-base-200 my-2">
+      <li className="menu-title">
         Selected country:
-        {country && <b>{country}</b>}
-      </Dropdown.Trigger>
-      <Dropdown.List>
-        {countries.map(country => (
-          <Dropdown.Item key={country.code}>
-            <Link
-              to="/energyCharts/$country"
-              params={{ country: country.code }}
-            >
-              {country.name}
-            </Link>
-          </Dropdown.Item>
-        ))}
-      </Dropdown.List>
-    </Dropdown>
+      </li>
+      {countries.map(countryEntry => (
+        <li key={countryEntry.code}>
+          <Link
+            activeProps={{ className: 'menu-active' }}
+            to="/energyCharts/$country"
+            params={{ country: countryEntry.code }}
+          >
+            {countryEntry.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
   )
 }
 
 function RouteComponent() {
   return (
-    <div className="prose max-w-full">
-      <h1>Energy Charts Power Data</h1>
+    <>
       <CountrySelector />
       <Outlet />
-    </div>
+    </>
   )
 }

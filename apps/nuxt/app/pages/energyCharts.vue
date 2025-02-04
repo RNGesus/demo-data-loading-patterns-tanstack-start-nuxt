@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const route = useRoute('energyCharts')
-const countryParam = computed(() => 'country' in route.params ? route.params.country?.toString() : undefined)
 const countries = [
   { code: 'de', name: 'Germany' },
   { code: 'fr', name: 'France' },
@@ -13,19 +11,19 @@ const countries = [
 
 <template>
   <div>
-    <Dropdown>
-      <DropdownTrigger>
+    <ul className="menu menu-horizontal bg-base-200 my-2">
+      <li className="menu-title">
         Selected country:
-        <b>{{ countryParam }}</b>
-      </DropdownTrigger>
-      <DropdownList>
-        <DropdownItem v-for="country in countries" :key="country.code">
-          <NuxtLink :to="{ name: 'energyCharts-country', params: { country: country.code } }">
-            {{ country.name }}
-          </NuxtLink>
-        </DropdownItem>
-      </DropdownList>
-    </Dropdown>
+      </li>
+      <li v-for="countryEntry in countries" :key="countryEntry.code">
+        <NuxtLink
+          active-class="menu-active"
+          :to="{ name: 'energyCharts-country', params: { country: countryEntry.code } }"
+        >
+          {{ countryEntry.name }}
+        </NuxtLink>
+      </li>
+    </ul>
 
     <NuxtPage />
   </div>

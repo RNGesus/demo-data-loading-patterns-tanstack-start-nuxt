@@ -7,17 +7,17 @@
       <nav class="flex-1">
         <ul class="menu menu-horizontal">
           <li>
-            <NuxtLink to="/stationCountries">
+            <NuxtLink to="/stationCountries" active-class="menu-active">
               Railway Station Countries ➡️
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/openLibrary">
+            <NuxtLink to="/openLibrary" active-class="menu-active">
               Open Library ➡️
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/energyCharts">
+            <NuxtLink to="/energyCharts" active-class="menu-active">
               Energy Charts ➡️
             </NuxtLink>
           </li>
