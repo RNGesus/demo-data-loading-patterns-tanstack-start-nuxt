@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const route = useRoute('railwayStations-country')
+const route = useRoute('stationCountries-country')
 const country = computed(() => route.params.country?.toString() ?? '')
 
-const { data: stationPhotos } = await useFetch(`/api/railwayStations/stationPhotos/${country.value}`)
+const { data: stationPhotos } = await useFetch(`/api/stationCountries/stationPhotos/${country.value}`)
 </script>
 
 <template>
