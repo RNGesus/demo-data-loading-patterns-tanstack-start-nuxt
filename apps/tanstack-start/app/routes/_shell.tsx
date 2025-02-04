@@ -7,8 +7,8 @@ export const Route = createFileRoute('/_shell')({
 function LayoutComponent() {
   return (
     <div className="p-4">
-      <header className="navbar bg-base-200 ">
-        <nav className="navbar-start">
+      <header className="navbar bg-base-200">
+        <nav className="flex-1">
           <ul className="menu menu-horizontal">
             <li>
               <Link to="/stationCountries">Railway Station Countries ➡️</Link>
