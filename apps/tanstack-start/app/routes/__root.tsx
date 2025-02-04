@@ -34,9 +34,7 @@ function RootDocument({ children }: React.PropsWithChildren) {
         <Meta />
       </head>
       <body>
-        <div className="p-4">
-          {children}
-        </div>
+        {children}
         <React.Suspense>
           <TanStackRouterDevtools position="bottom-right" />
         </React.Suspense>
