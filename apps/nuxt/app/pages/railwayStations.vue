@@ -22,9 +22,3 @@ async function handleCountryChange(event: Event) {
     <NuxtPage />
   </div>
 </template>
-
-<style>
-* {
-  min-width: 0;
-}
-</style>

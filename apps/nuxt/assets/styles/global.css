@@ -7,3 +7,7 @@
   root: ':root';
   logs: true;
 }
+
+* {
+  min-width: 0;
+}
