@@ -1,4 +1,6 @@
-import { countries } from '@app/integrations/energyCharts/countries'
+import { sampleCountries } from '@project/energy-charts-service/countries'
+import { formatCountryName } from '@project/helpers/formatters'
+
 import {
   createFileRoute,
   Link,
@@ -8,6 +10,11 @@ import {
 export const Route = createFileRoute('/_shell/_energyChartsCountrySelector')({
   component: RouteComponent,
 })
+
+const countries = sampleCountries.map(country => ({
+  code: country,
+  name: formatCountryName(country),
+}))
 
 function CountrySelector() {
   return (

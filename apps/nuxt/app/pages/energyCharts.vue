@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const countries = [
-  { code: 'de', name: 'Germany' },
-  { code: 'fr', name: 'France' },
-  { code: 'es', name: 'Spain' },
-  { code: 'pl', name: 'Poland' },
-  { code: 'pt', name: 'Portugal' },
-  { code: 'ro', name: 'Romania' },
-] as const
+import { sampleCountries } from '@project/energy-charts-service/countries'
+import { formatCountryName } from '@project/helpers/formatters'
+
+const countries = sampleCountries.map(country => ({
+  code: country,
+  name: formatCountryName(country),
+}))
 </script>
 
 <template>
