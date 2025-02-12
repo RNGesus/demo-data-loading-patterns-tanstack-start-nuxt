@@ -13,3 +13,8 @@ const energyChartDataPointDateFormatter = new Intl.DateTimeFormat('de-DE', {
 export function formatEnergyChartDataPointDate(unixSeconds: number) {
   return energyChartDataPointDateFormatter.format(new Date(unixSeconds * 1000))
 }
+
+const countryNameFormatter = new Intl.DisplayNames(['en-GB'], { type: 'region' })
+export function formatCountryName(countryCode: string) {
+  return countryNameFormatter.of(countryCode)
+}
