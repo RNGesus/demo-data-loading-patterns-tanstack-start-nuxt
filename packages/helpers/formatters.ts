@@ -16,5 +16,5 @@ export function formatEnergyChartDataPointDate(unixSeconds: number) {
 
 const countryNameFormatter = new Intl.DisplayNames(['en-GB'], { type: 'region' })
 export function formatCountryName(countryCode: string) {
-  return countryNameFormatter.of(countryCode)
+  return countryNameFormatter.of(countryCode.toUpperCase())
 }
