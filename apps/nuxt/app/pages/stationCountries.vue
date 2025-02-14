@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { useDropdown } from '~/components/Dropdown/useDropdown'
-
 const { data: countries } = await useFetch('/api/stationCountries/countries')
 const route = useRoute('stationCountries-country')
-const { buttonProps, listProps } = useDropdown()
 </script>
 
 <template>
   <div>
     <Dropdown>
-      <DropdownTrigger v-bind="buttonProps">
+      <DropdownTrigger>
         Selected country: <b v-if="route.params.country">{{ route.params.country }}</b>
       </DropdownTrigger>
-      <DropdownList v-bind="listProps">
+      <DropdownList>
         <DropdownItem v-for="country in countries" :key="country.code">
           <NuxtLink :to="{ name: 'stationCountries-country', params: { country: country.code } }">
             {{ country.name }}
