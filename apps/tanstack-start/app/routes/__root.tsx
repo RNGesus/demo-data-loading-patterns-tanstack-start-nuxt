@@ -1,7 +1,7 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router'
+import type { PropsWithChildren } from 'react'
+import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import { Meta, Scripts } from '@tanstack/start'
-import * as React from 'react'
+import { Suspense } from 'react'
 import appCss from '../../styles/global.css?url'
 
 export const Route = createRootRoute({
@@ -27,17 +27,17 @@ function RootComponent() {
   )
 }
 
-function RootDocument({ children }: React.PropsWithChildren) {
+function RootDocument({ children }: PropsWithChildren) {
   return (
     <html>
       <head>
-        <Meta />
+        <HeadContent />
       </head>
       <body>
         {children}
-        <React.Suspense>
+        <Suspense>
           <TanStackRouterDevtools position="bottom-right" />
-        </React.Suspense>
+        </Suspense>
         <Scripts />
       </body>
     </html>
