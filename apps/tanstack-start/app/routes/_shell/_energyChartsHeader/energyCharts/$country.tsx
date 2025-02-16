@@ -8,7 +8,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Suspense, use } from 'react'
 
 export const Route = createFileRoute(
-  '/_shell/_energyChartsCountrySelector/energyCharts/$country',
+  '/_shell/_energyChartsHeader/energyCharts/$country',
 )({
   component: RouteComponent,
   loader: async ({ params }) => ({

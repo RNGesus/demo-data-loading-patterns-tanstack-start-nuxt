@@ -14,12 +14,12 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ShellImport } from './routes/_shell'
 import { Route as ShellIndexImport } from './routes/_shell/index'
 import { Route as ShellStationCountrySelectorImport } from './routes/_shell/_stationCountrySelector'
-import { Route as ShellEnergyChartsCountrySelectorImport } from './routes/_shell/_energyChartsCountrySelector'
+import { Route as ShellEnergyChartsHeaderImport } from './routes/_shell/_energyChartsHeader'
 import { Route as ShellOpenLibraryIndexImport } from './routes/_shell/openLibrary/index'
 import { Route as ShellStationCountrySelectorStationCountriesIndexImport } from './routes/_shell/_stationCountrySelector/stationCountries/index'
-import { Route as ShellEnergyChartsCountrySelectorEnergyChartsIndexImport } from './routes/_shell/_energyChartsCountrySelector/energyCharts/index'
+import { Route as ShellEnergyChartsHeaderEnergyChartsIndexImport } from './routes/_shell/_energyChartsHeader/energyCharts/index'
 import { Route as ShellStationCountrySelectorStationCountriesCountryImport } from './routes/_shell/_stationCountrySelector/stationCountries/$country'
-import { Route as ShellEnergyChartsCountrySelectorEnergyChartsCountryImport } from './routes/_shell/_energyChartsCountrySelector/energyCharts/$country'
+import { Route as ShellEnergyChartsHeaderEnergyChartsCountryImport } from './routes/_shell/_energyChartsHeader/energyCharts/$country'
 
 // Create/Update Routes
 
@@ -40,11 +40,10 @@ const ShellStationCountrySelectorRoute =
     getParentRoute: () => ShellRoute,
   } as any)
 
-const ShellEnergyChartsCountrySelectorRoute =
-  ShellEnergyChartsCountrySelectorImport.update({
-    id: '/_energyChartsCountrySelector',
-    getParentRoute: () => ShellRoute,
-  } as any)
+const ShellEnergyChartsHeaderRoute = ShellEnergyChartsHeaderImport.update({
+  id: '/_energyChartsHeader',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 const ShellOpenLibraryIndexRoute = ShellOpenLibraryIndexImport.update({
   id: '/openLibrary/',
@@ -59,11 +58,11 @@ const ShellStationCountrySelectorStationCountriesIndexRoute =
     getParentRoute: () => ShellStationCountrySelectorRoute,
   } as any)
 
-const ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute =
-  ShellEnergyChartsCountrySelectorEnergyChartsIndexImport.update({
+const ShellEnergyChartsHeaderEnergyChartsIndexRoute =
+  ShellEnergyChartsHeaderEnergyChartsIndexImport.update({
     id: '/energyCharts/',
     path: '/energyCharts/',
-    getParentRoute: () => ShellEnergyChartsCountrySelectorRoute,
+    getParentRoute: () => ShellEnergyChartsHeaderRoute,
   } as any)
 
 const ShellStationCountrySelectorStationCountriesCountryRoute =
@@ -73,11 +72,11 @@ const ShellStationCountrySelectorStationCountriesCountryRoute =
     getParentRoute: () => ShellStationCountrySelectorRoute,
   } as any)
 
-const ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute =
-  ShellEnergyChartsCountrySelectorEnergyChartsCountryImport.update({
+const ShellEnergyChartsHeaderEnergyChartsCountryRoute =
+  ShellEnergyChartsHeaderEnergyChartsCountryImport.update({
     id: '/energyCharts/$country',
     path: '/energyCharts/$country',
-    getParentRoute: () => ShellEnergyChartsCountrySelectorRoute,
+    getParentRoute: () => ShellEnergyChartsHeaderRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -91,11 +90,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellImport
       parentRoute: typeof rootRoute
     }
-    '/_shell/_energyChartsCountrySelector': {
-      id: '/_shell/_energyChartsCountrySelector'
+    '/_shell/_energyChartsHeader': {
+      id: '/_shell/_energyChartsHeader'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof ShellEnergyChartsCountrySelectorImport
+      preLoaderRoute: typeof ShellEnergyChartsHeaderImport
       parentRoute: typeof ShellImport
     }
     '/_shell/_stationCountrySelector': {
@@ -119,12 +118,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellOpenLibraryIndexImport
       parentRoute: typeof ShellImport
     }
-    '/_shell/_energyChartsCountrySelector/energyCharts/$country': {
-      id: '/_shell/_energyChartsCountrySelector/energyCharts/$country'
+    '/_shell/_energyChartsHeader/energyCharts/$country': {
+      id: '/_shell/_energyChartsHeader/energyCharts/$country'
       path: '/energyCharts/$country'
       fullPath: '/energyCharts/$country'
-      preLoaderRoute: typeof ShellEnergyChartsCountrySelectorEnergyChartsCountryImport
-      parentRoute: typeof ShellEnergyChartsCountrySelectorImport
+      preLoaderRoute: typeof ShellEnergyChartsHeaderEnergyChartsCountryImport
+      parentRoute: typeof ShellEnergyChartsHeaderImport
     }
     '/_shell/_stationCountrySelector/stationCountries/$country': {
       id: '/_shell/_stationCountrySelector/stationCountries/$country'
@@ -133,12 +132,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellStationCountrySelectorStationCountriesCountryImport
       parentRoute: typeof ShellStationCountrySelectorImport
     }
-    '/_shell/_energyChartsCountrySelector/energyCharts/': {
-      id: '/_shell/_energyChartsCountrySelector/energyCharts/'
+    '/_shell/_energyChartsHeader/energyCharts/': {
+      id: '/_shell/_energyChartsHeader/energyCharts/'
       path: '/energyCharts'
       fullPath: '/energyCharts'
-      preLoaderRoute: typeof ShellEnergyChartsCountrySelectorEnergyChartsIndexImport
-      parentRoute: typeof ShellEnergyChartsCountrySelectorImport
+      preLoaderRoute: typeof ShellEnergyChartsHeaderEnergyChartsIndexImport
+      parentRoute: typeof ShellEnergyChartsHeaderImport
     }
     '/_shell/_stationCountrySelector/stationCountries/': {
       id: '/_shell/_stationCountrySelector/stationCountries/'
@@ -152,22 +151,22 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-interface ShellEnergyChartsCountrySelectorRouteChildren {
-  ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute: typeof ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute
-  ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute: typeof ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute
+interface ShellEnergyChartsHeaderRouteChildren {
+  ShellEnergyChartsHeaderEnergyChartsCountryRoute: typeof ShellEnergyChartsHeaderEnergyChartsCountryRoute
+  ShellEnergyChartsHeaderEnergyChartsIndexRoute: typeof ShellEnergyChartsHeaderEnergyChartsIndexRoute
 }
 
-const ShellEnergyChartsCountrySelectorRouteChildren: ShellEnergyChartsCountrySelectorRouteChildren =
+const ShellEnergyChartsHeaderRouteChildren: ShellEnergyChartsHeaderRouteChildren =
   {
-    ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute:
-      ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute,
-    ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute:
-      ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute,
+    ShellEnergyChartsHeaderEnergyChartsCountryRoute:
+      ShellEnergyChartsHeaderEnergyChartsCountryRoute,
+    ShellEnergyChartsHeaderEnergyChartsIndexRoute:
+      ShellEnergyChartsHeaderEnergyChartsIndexRoute,
   }
 
-const ShellEnergyChartsCountrySelectorRouteWithChildren =
-  ShellEnergyChartsCountrySelectorRoute._addFileChildren(
-    ShellEnergyChartsCountrySelectorRouteChildren,
+const ShellEnergyChartsHeaderRouteWithChildren =
+  ShellEnergyChartsHeaderRoute._addFileChildren(
+    ShellEnergyChartsHeaderRouteChildren,
   )
 
 interface ShellStationCountrySelectorRouteChildren {
@@ -189,15 +188,14 @@ const ShellStationCountrySelectorRouteWithChildren =
   )
 
 interface ShellRouteChildren {
-  ShellEnergyChartsCountrySelectorRoute: typeof ShellEnergyChartsCountrySelectorRouteWithChildren
+  ShellEnergyChartsHeaderRoute: typeof ShellEnergyChartsHeaderRouteWithChildren
   ShellStationCountrySelectorRoute: typeof ShellStationCountrySelectorRouteWithChildren
   ShellIndexRoute: typeof ShellIndexRoute
   ShellOpenLibraryIndexRoute: typeof ShellOpenLibraryIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
-  ShellEnergyChartsCountrySelectorRoute:
-    ShellEnergyChartsCountrySelectorRouteWithChildren,
+  ShellEnergyChartsHeaderRoute: ShellEnergyChartsHeaderRouteWithChildren,
   ShellStationCountrySelectorRoute:
     ShellStationCountrySelectorRouteWithChildren,
   ShellIndexRoute: ShellIndexRoute,
@@ -210,9 +208,9 @@ export interface FileRoutesByFullPath {
   '': typeof ShellStationCountrySelectorRouteWithChildren
   '/': typeof ShellIndexRoute
   '/openLibrary': typeof ShellOpenLibraryIndexRoute
-  '/energyCharts/$country': typeof ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute
+  '/energyCharts/$country': typeof ShellEnergyChartsHeaderEnergyChartsCountryRoute
   '/stationCountries/$country': typeof ShellStationCountrySelectorStationCountriesCountryRoute
-  '/energyCharts': typeof ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute
+  '/energyCharts': typeof ShellEnergyChartsHeaderEnergyChartsIndexRoute
   '/stationCountries': typeof ShellStationCountrySelectorStationCountriesIndexRoute
 }
 
@@ -220,22 +218,22 @@ export interface FileRoutesByTo {
   '': typeof ShellStationCountrySelectorRouteWithChildren
   '/': typeof ShellIndexRoute
   '/openLibrary': typeof ShellOpenLibraryIndexRoute
-  '/energyCharts/$country': typeof ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute
+  '/energyCharts/$country': typeof ShellEnergyChartsHeaderEnergyChartsCountryRoute
   '/stationCountries/$country': typeof ShellStationCountrySelectorStationCountriesCountryRoute
-  '/energyCharts': typeof ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute
+  '/energyCharts': typeof ShellEnergyChartsHeaderEnergyChartsIndexRoute
   '/stationCountries': typeof ShellStationCountrySelectorStationCountriesIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_shell': typeof ShellRouteWithChildren
-  '/_shell/_energyChartsCountrySelector': typeof ShellEnergyChartsCountrySelectorRouteWithChildren
+  '/_shell/_energyChartsHeader': typeof ShellEnergyChartsHeaderRouteWithChildren
   '/_shell/_stationCountrySelector': typeof ShellStationCountrySelectorRouteWithChildren
   '/_shell/': typeof ShellIndexRoute
   '/_shell/openLibrary/': typeof ShellOpenLibraryIndexRoute
-  '/_shell/_energyChartsCountrySelector/energyCharts/$country': typeof ShellEnergyChartsCountrySelectorEnergyChartsCountryRoute
+  '/_shell/_energyChartsHeader/energyCharts/$country': typeof ShellEnergyChartsHeaderEnergyChartsCountryRoute
   '/_shell/_stationCountrySelector/stationCountries/$country': typeof ShellStationCountrySelectorStationCountriesCountryRoute
-  '/_shell/_energyChartsCountrySelector/energyCharts/': typeof ShellEnergyChartsCountrySelectorEnergyChartsIndexRoute
+  '/_shell/_energyChartsHeader/energyCharts/': typeof ShellEnergyChartsHeaderEnergyChartsIndexRoute
   '/_shell/_stationCountrySelector/stationCountries/': typeof ShellStationCountrySelectorStationCountriesIndexRoute
 }
 
@@ -261,13 +259,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_shell'
-    | '/_shell/_energyChartsCountrySelector'
+    | '/_shell/_energyChartsHeader'
     | '/_shell/_stationCountrySelector'
     | '/_shell/'
     | '/_shell/openLibrary/'
-    | '/_shell/_energyChartsCountrySelector/energyCharts/$country'
+    | '/_shell/_energyChartsHeader/energyCharts/$country'
     | '/_shell/_stationCountrySelector/stationCountries/$country'
-    | '/_shell/_energyChartsCountrySelector/energyCharts/'
+    | '/_shell/_energyChartsHeader/energyCharts/'
     | '/_shell/_stationCountrySelector/stationCountries/'
   fileRoutesById: FileRoutesById
 }
@@ -296,18 +294,18 @@ export const routeTree = rootRoute
     "/_shell": {
       "filePath": "_shell.tsx",
       "children": [
-        "/_shell/_energyChartsCountrySelector",
+        "/_shell/_energyChartsHeader",
         "/_shell/_stationCountrySelector",
         "/_shell/",
         "/_shell/openLibrary/"
       ]
     },
-    "/_shell/_energyChartsCountrySelector": {
-      "filePath": "_shell/_energyChartsCountrySelector.tsx",
+    "/_shell/_energyChartsHeader": {
+      "filePath": "_shell/_energyChartsHeader.tsx",
       "parent": "/_shell",
       "children": [
-        "/_shell/_energyChartsCountrySelector/energyCharts/$country",
-        "/_shell/_energyChartsCountrySelector/energyCharts/"
+        "/_shell/_energyChartsHeader/energyCharts/$country",
+        "/_shell/_energyChartsHeader/energyCharts/"
       ]
     },
     "/_shell/_stationCountrySelector": {
@@ -326,17 +324,17 @@ export const routeTree = rootRoute
       "filePath": "_shell/openLibrary/index.tsx",
       "parent": "/_shell"
     },
-    "/_shell/_energyChartsCountrySelector/energyCharts/$country": {
-      "filePath": "_shell/_energyChartsCountrySelector/energyCharts/$country.tsx",
-      "parent": "/_shell/_energyChartsCountrySelector"
+    "/_shell/_energyChartsHeader/energyCharts/$country": {
+      "filePath": "_shell/_energyChartsHeader/energyCharts/$country.tsx",
+      "parent": "/_shell/_energyChartsHeader"
     },
     "/_shell/_stationCountrySelector/stationCountries/$country": {
       "filePath": "_shell/_stationCountrySelector/stationCountries/$country.tsx",
       "parent": "/_shell/_stationCountrySelector"
     },
-    "/_shell/_energyChartsCountrySelector/energyCharts/": {
-      "filePath": "_shell/_energyChartsCountrySelector/energyCharts/index.tsx",
-      "parent": "/_shell/_energyChartsCountrySelector"
+    "/_shell/_energyChartsHeader/energyCharts/": {
+      "filePath": "_shell/_energyChartsHeader/energyCharts/index.tsx",
+      "parent": "/_shell/_energyChartsHeader"
     },
     "/_shell/_stationCountrySelector/stationCountries/": {
       "filePath": "_shell/_stationCountrySelector/stationCountries/index.tsx",

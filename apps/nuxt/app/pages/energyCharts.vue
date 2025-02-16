@@ -10,8 +10,8 @@ const countries = sampleCountries.map(country => ({
 
 <template>
   <div>
-    <ul className="menu menu-horizontal bg-base-200 my-2">
-      <li className="menu-title">
+    <ul class="menu menu-horizontal bg-base-200 my-2">
+      <li class="menu-title">
         Selected country:
       </li>
       <li v-for="countryEntry in countries" :key="countryEntry.code">
@@ -23,6 +23,8 @@ const countries = sampleCountries.map(country => ({
         </NuxtLink>
       </li>
     </ul>
+
+    <ColorScale />
 
     <NuxtPage />
   </div>
