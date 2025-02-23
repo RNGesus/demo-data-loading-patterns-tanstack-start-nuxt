@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   experimental: { typedPages: true },
-  compatibilityDate: '2025-01-13',
+  compatibilityDate: '2025-02-23',
   vite: {
     plugins: [tailwindcss()],
   },
