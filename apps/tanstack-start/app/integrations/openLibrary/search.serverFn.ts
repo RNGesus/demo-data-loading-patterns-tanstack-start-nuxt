@@ -1,5 +1,5 @@
 import { apiClient } from '@project/open-library-service/client'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tanstack/react-start'
 import { query } from './search.querySchema'
 
 export const searchServerFn = createServerFn({ method: 'GET' })

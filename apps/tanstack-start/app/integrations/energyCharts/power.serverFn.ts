@@ -1,5 +1,5 @@
 import { apiClient } from '@project/energy-charts-service/client'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tanstack/react-start'
 import { query } from './power.querySchema'
 
 export const powerServerFn = createServerFn({ method: 'GET' })
