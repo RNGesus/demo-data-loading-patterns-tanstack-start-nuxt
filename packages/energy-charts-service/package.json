@@ -12,6 +12,7 @@
     "create-api-client": "openapi-zod-client './vendor/openapi.json' -o './generated/client.ts' --additional-props-default-value=false",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "typecheck": "tsc --noEmit",
     "postinstall": "pnpm create-api-client"
   },
   "dependencies": {
