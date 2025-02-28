@@ -23,7 +23,7 @@ function RouteComponent() {
   return (
     <Suspense fallback={<div>Loading power data...</div>}>
       <div className="overflow-x-auto">
-        <table className="table table-xs table-pin-cols">
+        <table className="table table-xs table-pin-cols tabular-nums slashed-zero">
           <thead>
             <tr>
               <th rowSpan={2}>Production Type</th>

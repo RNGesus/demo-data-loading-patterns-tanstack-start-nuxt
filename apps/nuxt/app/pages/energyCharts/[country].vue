@@ -10,7 +10,7 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
 
 <template>
   <div className="overflow-x-auto">
-    <table className="table table-xs table-pin-cols">
+    <table className="table table-xs table-pin-cols tabular-nums slashed-zero">
       <thead>
         <tr>
           <th rowspan="2">

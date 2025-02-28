@@ -4,7 +4,7 @@ import {
   ENERGY_CHART_HUE_ROTATION_MAX,
   ENERGY_CHART_HUE_ROTATION_MIN,
 } from '@project/helpers/chart'
-import { formatCountryName } from '@project/helpers/formatters'
+import { formatCountryName, formatEnergyChartDataPoint } from '@project/helpers/formatters'
 
 import {
   createFileRoute,
@@ -30,7 +30,7 @@ function ColorScale({ steps = 9, minValue = ENERGY_CHART_HUE_ROTATION_MIN, maxVa
   return (
     <div
       role="img"
-      className="w-full h-12 grid grid-flow-col auto-cols-fr rounded-lg overflow-hidden font-mono text-xs"
+      className="w-full h-12 grid grid-flow-col auto-cols-fr rounded-lg overflow-hidden tabular-nums slashed-zero text-xs"
       aria-label={ariaLabel}
     >
       {values.map((value, index) => (
@@ -42,7 +42,7 @@ function ColorScale({ steps = 9, minValue = ENERGY_CHART_HUE_ROTATION_MIN, maxVa
           }}
           className="bg-blue-600 hue-rotate-[var(--color-grade)] grid place-items-center"
         >
-          {Math.round(value).toLocaleString()}
+          {formatEnergyChartDataPoint(Math.round(value))}
         </div>
       ))}
     </div>
