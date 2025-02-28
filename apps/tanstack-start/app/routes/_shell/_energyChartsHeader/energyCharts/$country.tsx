@@ -31,7 +31,7 @@ function RouteComponent() {
                 className="text-center"
                 colSpan={powerData.unix_seconds?.length}
               >
-                Data Point at
+                Megawatts (MW) at
               </th>
             </tr>
             <tr>

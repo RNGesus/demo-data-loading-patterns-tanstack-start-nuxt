@@ -17,7 +17,7 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
             Production Type
           </th>
           <th class="text-center" :colspan="powerData?.unix_seconds?.length">
-            Data Point at
+            Megawatts (MW) at
           </th>
         </tr>
         <tr>

@@ -10,6 +10,8 @@ const countries = sampleCountries.map(country => ({
 
 <template>
   <div>
+    <PageHeading>Energy Production per Region in Megawatts(MW)</PageHeading>
+
     <ul class="menu menu-horizontal bg-base-200 my-2">
       <li class="menu-title">
         Selected country:

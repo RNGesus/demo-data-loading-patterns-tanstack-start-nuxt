@@ -19,13 +19,13 @@ const {
 const values = Array.from({ length: steps }, (_, i) => {
   return minValue + (maxValue - minValue) * (i / (steps - 1))
 })
-const ariaLabel = `Color scale from ${minValue} to ${maxValue}`
+const ariaLabel = `Color scale from ${minValue} to ${maxValue} MegaWatts (MW)`
 </script>
 
 <template>
   <div
     role="img"
-    class="w-full h-12 grid grid-flow-col auto-cols-fr rounded-lg overflow-hidden tabular-nums slashed-zero text-xs"
+    class="w-full h-12 grid grid-flow-col auto-cols-fr rounded-box overflow-hidden tabular-nums slashed-zero text-xs"
     :aria-label="ariaLabel"
   >
     <div
