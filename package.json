@@ -13,7 +13,7 @@
     "typecheck": "pnpm --parallel -r typecheck"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@project/eslint-config": "workspace:*",
