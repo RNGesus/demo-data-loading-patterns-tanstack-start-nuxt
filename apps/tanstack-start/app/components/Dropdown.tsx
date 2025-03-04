@@ -51,8 +51,8 @@ Dropdown.List = function List({ children }: PropsWithChildren) {
   return (
     <ul
       popover="auto"
-      {...listProps}
       className="dropdown menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm h-[min(500px,60vh)] overscroll-contain"
+      {...listProps}
     >
       {children}
     </ul>
