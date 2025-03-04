@@ -9,17 +9,9 @@ NavMenu.Trigger = function Trigger({ children }: PropsWithChildren) {
 }
 
 NavMenu.List = function List({ children }: PropsWithChildren) {
-  return (
-    <ul className="bg-base-200 rounded-t-none p-2 z-[1]">
-      {children}
-    </ul>
-  )
+  return <ul className="bg-base-200 rounded-t-none p-2 z-[1]">{children}</ul>
 }
 
 NavMenu.Item = function Item({ children }: PropsWithChildren) {
-  return (
-    <li>
-      {children}
-    </li>
-  )
+  return <li>{children}</li>
 }
