@@ -32,14 +32,14 @@ Well, it is still a playground but I got the hang of it and will try to do more.
   - [x] packages:
     - [x] the railway station api
     - [x] eslint config
-    - [ ] &hellip;
+    - [x] &hellip;
 - [x] create more (nested) routes
 - [ ] use different loader patterns
 - [ ] improve api client generation
   - [ ] replace vendored OpenAPI yaml file with an on-demand download
   - [ ] hook into post-install step and/or dev/build tasks
   - [ ] find a way to fix incomplete specs (see library service)
-- [ ] overhaul README
+- [x] overhaul README
 
 ### 🚿 Shower thoughts
 
