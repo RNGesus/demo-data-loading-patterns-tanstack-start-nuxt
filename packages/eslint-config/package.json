@@ -9,7 +9,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.10.2",
     "@eslint/compat": "^1.2.7",
-    "eslint": "^9.22.0",
+    "eslint": "^9.23.0",
     "eslint-plugin-format": "^1.0.1"
   }
 }
