@@ -41,8 +41,7 @@ export default defineNuxtConfig({
   },
   image: {
     domains: ['api.railway-stations.org'],
-    provider: 'ipx',
-    ipx: { },
+    ipx: { maxAge: 60 * 60 * 24 * 30 },
     quality: 75,
   },
 })
