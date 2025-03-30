@@ -2,6 +2,10 @@
 import type { StyleValue } from 'vue'
 import { buttonInjectionKey, listInjectionKey } from './Dropdown/keys'
 
+const { keepOpenOnRouteChange = false } = defineProps<{
+  keepOpenOnRouteChange?: boolean
+}>()
+
 const popoverId = useId()
 const anchorId = useId()
 const anchorName = `--${anchorId}`
@@ -13,6 +17,7 @@ provide(buttonInjectionKey, {
 })
 provide(listInjectionKey, {
   id: popoverId,
+  keepOpenOnRouteChange,
   // @ts-expect-error -- positionAnchor is not in StyleValue yet
   style: { positionAnchor: anchorName } satisfies StyleValue,
 })

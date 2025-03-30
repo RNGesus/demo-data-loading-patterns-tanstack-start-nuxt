@@ -1,9 +1,10 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react'
-import { createContext, use, useId, useMemo } from 'react'
+import { useRouter } from '@tanstack/react-router'
+import { createContext, use, useEffect, useId, useMemo, useRef } from 'react'
 
 interface DropdownContextType {
   buttonProps: Pick<HTMLAttributes<HTMLButtonElement>, 'popoverTarget' | 'style'>
-  listProps: Pick<HTMLAttributes<HTMLUListElement>, 'id' | 'style'>
+  listProps: Pick<HTMLAttributes<HTMLUListElement>, 'id' | 'style'> & { keepOpenOnRouteChange?: boolean }
 }
 
 const DropdownContext = createContext<DropdownContextType>({
@@ -11,7 +12,7 @@ const DropdownContext = createContext<DropdownContextType>({
   listProps: {},
 })
 
-export function Dropdown({ children }: PropsWithChildren) {
+export function Dropdown({ children, keepOpenOnRouteChange = false }: PropsWithChildren<{ keepOpenOnRouteChange?: boolean }>) {
   const popoverId = useId()
   const anchorId = useId()
   const anchorName = `--${anchorId.replace(/:/g, '')}`
@@ -24,11 +25,12 @@ export function Dropdown({ children }: PropsWithChildren) {
     },
     listProps: {
       id: popoverId,
+      keepOpenOnRouteChange,
       // @ts-expect-error -- positionAnchor is not in csstype yet, see https://www.npmjs.com/package/csstype
       style: { positionAnchor: anchorName },
 
     },
-  } satisfies DropdownContextType), [popoverId, anchorName])
+  } satisfies DropdownContextType), [popoverId, anchorName, keepOpenOnRouteChange])
   // @ts-expect-error -- anchorName and positionAnchor are not in csstype yet
   return <DropdownContext value={value}>{children}</DropdownContext>
 }
@@ -47,12 +49,24 @@ Dropdown.Trigger = function Trigger({ children }: PropsWithChildren) {
 }
 
 Dropdown.List = function List({ children }: PropsWithChildren) {
-  const { listProps } = use(DropdownContext)
+  const { listProps: { keepOpenOnRouteChange, ...restListProps } } = use(DropdownContext)
+
+  const popoverRef = useRef<HTMLUListElement>(null)
+
+  const route = useRouter()
+  useEffect(() => {
+    const unsubscribe = route.subscribe('onBeforeNavigate', () => {
+      !keepOpenOnRouteChange && popoverRef.current?.hidePopover()
+    })
+    return unsubscribe
+  }, [keepOpenOnRouteChange, route])
+
   return (
     <ul
+      ref={popoverRef}
       popover="auto"
       className="dropdown menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm h-[min(500px,60vh)] overscroll-contain"
-      {...listProps}
+      {...restListProps}
     >
       {children}
     </ul>

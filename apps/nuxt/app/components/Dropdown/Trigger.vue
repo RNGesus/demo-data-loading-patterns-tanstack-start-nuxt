@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { buttonInjectionKey } from './keys'
 
-const buttonProps = inject(buttonInjectionKey)
+const buttonProps = injectStrict(buttonInjectionKey)
 </script>
 
 <template>
