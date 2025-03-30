@@ -11,7 +11,7 @@ defineProps<{
 <template>
   <figure>
     <NuxtImg
-      width="384" height="216" placeholder fit="contain"
+      width="384" height="216" fit="contain"
       class="aspect-16/9 block w-full h-auto" loading="lazy"
       :src="photoBaseUrl + photo.path"
       :alt="`Photo of a railway station in ${country.toUpperCase()} by ${photo.photographer}`"
