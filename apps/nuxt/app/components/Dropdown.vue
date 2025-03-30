@@ -8,7 +8,7 @@ const anchorName = `--${anchorId}`
 
 provide(buttonInjectionKey, {
   popoverTarget: popoverId,
-  // @ts-expect-error -- positionAnchor is not in StyleValue yet
+  // @ts-expect-error -- anchorName is not in StyleValue yet
   style: { anchorName } satisfies StyleValue,
 })
 provide(listInjectionKey, {
