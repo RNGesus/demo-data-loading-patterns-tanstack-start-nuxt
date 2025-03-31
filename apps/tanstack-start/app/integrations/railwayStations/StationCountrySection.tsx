@@ -29,11 +29,7 @@ export function AppLink({ app }: { app: types.ProviderApp }) {
   )
 }
 
-export function TimeTableTemplate({
-  template: timetableUrlTemplate,
-}: {
-  template?: string
-}) {
+export function TimeTableTemplate({ template: timetableUrlTemplate }: { template?: string }) {
   return (
     <p>
       Time Table Template:
@@ -66,10 +62,7 @@ export function ProviderApps({ apps: providerApps }: { apps?: types.ProviderApp[
   )
 }
 
-export function StationCountrySection({
-  country,
-  children,
-}: { country: types.Country } & PropsWithChildren) {
+export function StationCountrySection({ country, children }: { country: types.Country } & PropsWithChildren) {
   return (
     <section className="flex flex-col gap-2 card bg-base-300 shadow-sm">
       <div className="card-body">
