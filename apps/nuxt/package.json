@@ -17,7 +17,7 @@
     "@project/helpers": "workspace:*",
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
-    "nuxt": "^3.16.1",
+    "nuxt": "^3.16.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "zod": "^3.24.2"
@@ -27,9 +27,9 @@
     "@nuxt/eslint": "1.2.0",
     "@nuxt/image": "1.10.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.0.17",
+    "@tailwindcss/vite": "^4.1.0",
     "daisyui": "^5.0.9",
-    "tailwindcss": "^4.0.17",
+    "tailwindcss": "^4.1.0",
     "unplugin-vue-router": "^0.12.0"
   }
 }
