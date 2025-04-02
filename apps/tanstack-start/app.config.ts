@@ -7,11 +7,6 @@ export default defineConfig({
     autoCodeSplitting: true,
   },
   vite: {
-    plugins: [
-      tailwindcss(),
-      viteTsConfigPaths({
-        projects: ['./tsconfig.json'],
-      }),
-    ],
+    plugins: [tailwindcss(), viteTsConfigPaths()],
   },
 })
