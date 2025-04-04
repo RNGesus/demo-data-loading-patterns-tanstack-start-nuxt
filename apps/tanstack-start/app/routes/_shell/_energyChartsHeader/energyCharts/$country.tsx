@@ -23,29 +23,21 @@ function RouteComponent() {
   return (
     <Suspense fallback={<div>Loading power data...</div>}>
       <div className="overflow-x-auto">
-        <table className="table table-xs table-pin-cols tabular-nums slashed-zero">
+        <table className="table table-xs table-pin-cols tabular-nums">
           <thead>
             <tr>
-              <th rowSpan={2}>Production Type</th>
-              <th
-                className="text-center"
-                colSpan={powerData.unix_seconds?.length}
-              >
-                Megawatts (MW) at
-              </th>
-            </tr>
-            <tr>
+              <th>Production Type</th>
               {powerData.unix_seconds?.map(unixSecondsEntry => (
-                <th className="text-right" key={unixSecondsEntry}>
+                <td className="text-right" key={unixSecondsEntry}>
                   {formatEnergyChartDataPointDate(unixSecondsEntry)}
-                </th>
+                </td>
               ))}
             </tr>
           </thead>
           <tbody>
             {powerData.production_types?.map(productionType => (
               <tr key={productionType.name}>
-                <th>{productionType.name}</th>
+                <th className="z-1">{productionType.name}</th>
                 {productionType.data?.map((data, index) => (
                   <td
                     // eslint-disable-next-line react/no-array-index-key -- there is nothing else to use as a key

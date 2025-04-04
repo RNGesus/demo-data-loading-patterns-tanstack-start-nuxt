@@ -10,32 +10,30 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
 
 <template>
   <div className="overflow-x-auto">
-    <table className="table table-xs table-pin-cols tabular-nums slashed-zero">
+    <table className="table table-xs table-pin-cols tabular-nums">
       <thead>
         <tr>
-          <th rowspan="2">
+          <th>
             Production Type
           </th>
-          <th class="text-center" :colspan="powerData?.unix_seconds?.length">
-            Megawatts (MW) at
-          </th>
-        </tr>
-        <tr>
-          <th v-for="unixSecondsEntry in powerData?.unix_seconds" :key="unixSecondsEntry" class="text-right">
+          <td v-for="unixSecondsEntry in powerData?.unix_seconds" :key="unixSecondsEntry" class="text-right">
             {{ formatEnergyChartDataPointDate(unixSecondsEntry) }}
-          </th>
+          </td>
         </tr>
       </thead>
       <tbody>
         <tr v-for="productionType in powerData?.production_types" :key="productionType.name">
-          <th>{{ productionType.name }}</th>
+          <th class="z-1">
+            {{ productionType.name }}
+          </th>
           <td
             v-for="(data, index) in productionType.data"
             :key="index"
             :style="{
               '--color-grade': `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg`,
             }"
-            class="text-right bg-blue-600 hue-rotate-(--color-grade)" :class="[{
+            class="text-right bg-blue-600 hue-rotate-(--color-grade)"
+            :class="[{
               'grayscale-60': !data,
             }]"
           >
