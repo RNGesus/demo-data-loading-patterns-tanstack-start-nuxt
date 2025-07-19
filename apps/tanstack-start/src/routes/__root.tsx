@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from 'react'
+import appCss from '@app/global.css?url'
 import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { Suspense } from 'react'
-import appCss from '../../styles/global.css?url'
 
 export const Route = createRootRoute({
   head: () => ({

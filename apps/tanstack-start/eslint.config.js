@@ -4,5 +4,5 @@ import pluginRouter from '@tanstack/eslint-plugin-router'
 export default createConfig({
   react: true,
 }, ...pluginRouter.configs['flat/recommended'], {
-  ignores: ['app/routeTree.gen.ts'],
+  ignores: ['src/routeTree.gen.ts'],
 })
