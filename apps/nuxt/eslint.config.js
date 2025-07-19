@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { includeIgnoreFile } from '@eslint/compat'
 import createConfig from '@project/eslint-config/create-config'
 
-import withNuxt from './.nuxt/eslint.config.mjs'
+import withNuxt from '.nuxt/eslint.config.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
