@@ -1,0 +1,19 @@
+{
+  "name": "hono-datastar",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "hono --watch src/index.ts",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@project/energy-charts-service": "workspace:*",
+    "@project/helpers": "workspace:*",
+    "@project/open-library-service": "workspace:*",
+    "@project/railway-station-service": "workspace:*",
+    "@sudodevnull/datastar": "^0.21.0",
+    "hono": "^4.8.5"
+  }
+}

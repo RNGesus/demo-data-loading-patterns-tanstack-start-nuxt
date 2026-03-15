@@ -8,6 +8,7 @@
     "dev": "pnpm -r dev",
     "dev:tanstack-start": "pnpm --filter 'tanstack-start' dev",
     "dev:nuxt": "pnpm --filter 'nuxt' dev",
+    "dev:hono-datastar": "pnpm --filter 'hono-datastar' dev",
     "lint": "pnpm --parallel -r lint",
     "lint:fix": "pnpm --parallel -r lint:fix",
     "typecheck": "pnpm --parallel -r typecheck"
