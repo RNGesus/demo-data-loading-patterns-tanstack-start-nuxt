@@ -8,10 +8,8 @@
     "dev:tanstack-start": "pnpm --filter 'tanstack-start' dev",
     "dev:nuxt": "pnpm --filter 'nuxt' dev",
     "dev:datastar-hono": "pnpm --filter 'datastar-hono' dev",
-    "format": "oxfmt .",
-    "format:check": "oxfmt --check .",
-    "lint": "pnpm --parallel -r lint",
-    "lint:fix": "pnpm --parallel -r lint:fix",
+    "lint": "oxlint && oxfmt --check",
+    "lint:fix": "oxlint --fix && oxfmt",
     "typecheck": "pnpm --parallel -r typecheck"
   },
   "devDependencies": {

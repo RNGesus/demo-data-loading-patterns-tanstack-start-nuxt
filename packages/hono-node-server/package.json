@@ -6,8 +6,6 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "lint": "oxlint .",
-    "lint:fix": "oxlint --fix .",
     "typecheck": "tsc --noEmit"
   }
 }
