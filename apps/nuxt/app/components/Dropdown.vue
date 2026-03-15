@@ -12,13 +12,11 @@ const anchorName = `--${anchorId}`
 
 provide(buttonInjectionKey, {
   popoverTarget: popoverId,
-  // @ts-expect-error -- anchorName is not in StyleValue yet
   style: { anchorName } satisfies StyleValue,
 })
 provide(listInjectionKey, {
   id: popoverId,
   keepOpenOnRouteChange,
-  // @ts-expect-error -- positionAnchor is not in StyleValue yet
   style: { positionAnchor: anchorName } satisfies StyleValue,
 })
 </script>

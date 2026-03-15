@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
     "@project/energy-charts-service": "workspace:*",
