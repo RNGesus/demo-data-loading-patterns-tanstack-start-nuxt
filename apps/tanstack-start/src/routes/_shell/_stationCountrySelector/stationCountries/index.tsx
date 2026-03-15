@@ -1,18 +1,20 @@
-import { stationCountriesServerFn } from '@app/integrations/railwayStations/stationCountries.serverFn'
+import { stationCountriesServerFn } from "@app/integrations/railwayStations/stationCountries.serverFn";
 import {
   ProviderApps,
   StationCountrySection,
   TimeTableTemplate,
-} from '@app/integrations/railwayStations/StationCountrySection'
-import { createFileRoute } from '@tanstack/react-router'
+} from "@app/integrations/railwayStations/StationCountrySection";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/_shell/_stationCountrySelector/stationCountries/')({
+export const Route = createFileRoute(
+  "/_shell/_stationCountrySelector/stationCountries/",
+)({
   component: RouteComponent,
   loader: async () => stationCountriesServerFn(),
-})
+});
 
 function RouteComponent() {
-  const countries = Route.useLoaderData()
+  const countries = Route.useLoaderData();
 
   return (
     <>
@@ -21,12 +23,14 @@ function RouteComponent() {
         {countries.map((country) => (
           <li key={country.code}>
             <StationCountrySection country={country}>
-              <TimeTableTemplate template={country.timetableUrlTemplate} />
+              <TimeTableTemplate
+                template={country.timetableUrlTemplate ?? undefined}
+              />
               <ProviderApps apps={country.providerApps} />
             </StationCountrySection>
           </li>
         ))}
       </ul>
     </>
-  )
+  );
 }

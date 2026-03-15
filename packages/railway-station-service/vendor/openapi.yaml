@@ -3,11 +3,11 @@ openapi: 3.0.1
 info:
   title: RSAPI
   description: |
-    Backend Service for https://www.railway-stations.org/. 
-    Sourcecode available at: https://github.com/RailwayStations/RSAPI.
+    Backend Service for https://www.railway-stations.org/.
+    Sourcecode available at: https://codeberg.org/RailwayStations/RSAPI.
   license:
     name: MIT
-    url: https://github.com/RailwayStations/RSAPI/blob/master/LICENSE.txt
+    url: https://codeberg.org/RailwayStations/RSAPI/blob/master/LICENSE.txt
   version: "20240607.2121"
 servers:
   - url: https://api.railway-stations.org
@@ -75,7 +75,7 @@ paths:
           schema:
             type: string
         - name: code_challenge_method
-          description: OAuth code chellenge method
+          description: OAuth code challenge method
           in: query
           schema:
             type: string
@@ -109,7 +109,7 @@ paths:
               $ref: '#/components/schemas/OAuthTokenRequest'
       responses:
         "200":
-          description: successfull token request
+          description: successful token request
           content:
             application/json:
               schema:
@@ -389,9 +389,7 @@ paths:
       tags:
         - photoUpload
       parameters:
-        - $ref: '#/components/parameters/AuthorizationOptional'
-        - $ref: '#/components/parameters/Upload-Token'
-        - $ref: '#/components/parameters/Email'
+        - $ref: '#/components/parameters/Authorization'
         - name: Country
           in: header
           description: country code
@@ -496,7 +494,7 @@ paths:
 
   /reportProblem:
     post:
-      summary: Report a for a Railway-Station
+      summary: Report a problem for a Railway-Station
       operationId: postReportProblem
       tags:
         - inbox
@@ -906,7 +904,7 @@ paths:
       summary: Delete the users profile.
       description: |
         The delete request closes the account of the logged in user on railway-stations.org.
-        The account will be changed to anonymous. 
+        The account will be changed to anonymous.
         The email-address, nickname, link and credentials will be removed from the account.
         All OAuth tokens will be removed as well. No further login will be possible.
       operationId: deleteMyProfile
@@ -1151,34 +1149,6 @@ components:
       required: true
       schema:
         type: string
-    AuthorizationOptional:
-      name: Authorization
-      in: header
-      description: |
-        JWT authorization
-      required: false
-      schema:
-        type: string
-    Upload-Token:
-      name: Upload-Token
-      in: header
-      description: |
-        DEPRECATED authentication via personal Upload-Token!
-        Used together with Email header.
-      deprecated: true
-      required: false
-      schema:
-        type: string
-    Email:
-      name: Email
-      in: header
-      description: |
-        DEPRECATED, use basic authorization! 
-        Email or name of the user, used together with the Upload-Token.
-      deprecated: true
-      required: false
-      schema:
-        type: string
 
   schemas:
     OAuthTokenRequest:
@@ -1229,7 +1199,7 @@ components:
         - token_type
 
     OAuthRevokeTokenRequest:
-      description: OAuth2 token revokation request
+      description: OAuth2 token revocation request
       type: object
       properties:
         token:
@@ -1328,10 +1298,11 @@ components:
         lon:
           type: number
           format: double
-          description: Longitute of the station
+          description: Longitude of the station
         shortCode:
           type: string
           description: Provider specific short code of the station, e.g. RIL100 or DS100 for german stations
+          nullable: true
         inactive:
           type: boolean
           description: Indicates if this station is inactive
@@ -1430,12 +1401,21 @@ components:
           description: |
             URL template for the timetable, contains {title}, {id} and
             {DS100} placeholders which need to be replaced
+          nullable: true
         overrideLicense:
           type: string
           description: if a country needs a special license
+          nullable: true
         active:
           type: boolean
           description: Is this an active country where we collect photos?
+        allowPhotoUploads:
+          type: boolean
+          description: Are photo uploads allowed?
+        message:
+          type: string
+          description: Informational message about this country
+          nullable: true
         providerApps:
           type: array
           description: array with links to provider apps
@@ -1445,6 +1425,7 @@ components:
         - code
         - name
         - active
+        - allowPhotoUploads
 
     ProviderApp:
       description: Provider App information
@@ -1546,6 +1527,8 @@ components:
             - NOT_ENOUGH_DATA
             - UNSUPPORTED_CONTENT_TYPE
             - PHOTO_TOO_LARGE
+            - PHOTO_UPLOAD_NOT_ALLOWED
+            - COUNTRY_DISABLED
             - CONFLICT
             - UNAUTHORIZED
             - ERROR

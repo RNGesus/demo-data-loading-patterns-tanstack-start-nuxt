@@ -1,15 +1,15 @@
-import { apiClient } from "@project/open-library-service/client";
-import { createServerFn } from "@tanstack/react-start";
-import { query } from "./search.querySchema";
+import { readSearchJsonSearchJsonGet } from '@project/open-library-service/client'
+import { createServerFn } from '@tanstack/react-start'
+import { query } from './search.querySchema'
 
-export const searchServerFn = createServerFn({ method: "GET" })
+export const searchServerFn = createServerFn({ method: 'GET' })
   .inputValidator(query.parse)
   .handler(
     async ({ data }) =>
-      await apiClient.read_search_json_search_json_get({
-        queries: {
+      (await readSearchJsonSearchJsonGet({
+        query: {
           q: data.q,
           page: data.page,
         },
-      }),
-  );
+      })) as Record<string, {}>,
+  )

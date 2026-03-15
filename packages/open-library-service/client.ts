@@ -1,14 +1,18 @@
-import { createApiClient } from './generated/client'
+import type { Options as SdkOptions } from './generated/sdk.gen'
+import type {
+  ReadSearchJsonSearchJsonGetData,
+  ReadSearchJsonSearchJsonGetResponses,
+} from './generated/types.gen'
+import { createClient, createConfig } from './generated/client'
+import { client } from './generated/client.gen'
+import { readSearchJsonSearchJsonGet as generatedReadSearchJsonSearchJsonGet } from './generated/sdk.gen'
 
-/** @see https://openlibrary.org/developers/api -- for frequent use the user agent should be specified */
-const userAgent = [import.meta.env.OPEN_LIBRARY_APP_NAME, import.meta.env.OPEN_LIBRARY_EMAIL]
-  .filter(Boolean)
-  .join(' - ')
+export { client, createClient, createConfig }
 
-export const apiClient = createApiClient('https://openlibrary.org', {
-  axiosConfig: {
-    headers: {
-      'User-Agent': userAgent,
-    },
-  },
-})
+type ReadSearchJsonSearchJsonGetOptions = SdkOptions<ReadSearchJsonSearchJsonGetData, true>
+type ReadSearchJsonSearchJsonGetResponse = ReadSearchJsonSearchJsonGetResponses[200]
+
+export const readSearchJsonSearchJsonGet = (
+  options: ReadSearchJsonSearchJsonGetOptions,
+): Promise<ReadSearchJsonSearchJsonGetResponse> =>
+  generatedReadSearchJsonSearchJsonGet({ ...options, throwOnError: true })

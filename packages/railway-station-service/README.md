@@ -4,4 +4,4 @@
 
 ## API docs
 
-[https://github.com/RailwayStations/RSAPI](https://github.com/RailwayStations/RSAPI)
+[https://codeberg.org/RailwayStations/RSAPI](https://codeberg.org/RailwayStations/RSAPI)

@@ -4,20 +4,20 @@
   "type": "module",
   "exports": {
     "./client": "./client.ts",
-    "./generated": "./generated.ts",
+    "./generated": "./generated/index.ts",
     "./transforms": "./transforms.ts",
     "./types": "./types.ts"
   },
   "scripts": {
-    "create-api-client": "openapi-zod-client './vendor/openapi.yaml' -o './generated/client.ts' --additional-props-default-value=false",
+    "create-api-client": "openapi-ts",
     "typecheck": "tsc --noEmit",
     "postinstall": "pnpm create-api-client"
   },
   "dependencies": {
-    "@zodios/core": "^10.9.6",
+    "@hey-api/client-fetch": "0.13.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "openapi-zod-client": "^1.18.3"
+    "@hey-api/openapi-ts": "0.94.1"
   }
 }

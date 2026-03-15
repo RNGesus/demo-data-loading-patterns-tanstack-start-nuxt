@@ -1,4 +1,4 @@
-import { apiClient } from '@project/open-library-service/client'
+import { readSearchJsonSearchJsonGet } from '@project/open-library-service/client'
 import * as z from 'zod'
 
 export default defineEventHandler(async (event) => {
@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       page: z.coerce.number().optional().default(1),
     }).parse,
   )
-  return await apiClient.read_search_json_search_json_get({
-    queries: { page: query.page, q: query.q },
+  return await readSearchJsonSearchJsonGet({
+    query: { page: query.page, q: query.q },
   })
 })
