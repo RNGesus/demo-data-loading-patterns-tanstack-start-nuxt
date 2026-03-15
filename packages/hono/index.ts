@@ -28,7 +28,9 @@ export class Hono {
 
   fetch = async (request: Request): Promise<Response> => {
     const url = new URL(request.url)
-    const route = this.routes.find(item => item.method === request.method && item.path === url.pathname)
+    const route = this.routes.find(
+      (item) => item.method === request.method && item.path === url.pathname,
+    )
 
     if (!route) {
       return new Response('Not Found', { status: 404 })
@@ -36,18 +38,21 @@ export class Hono {
 
     return route.handler({
       req: request,
-      json: payload => new Response(JSON.stringify(payload), {
-        status: 200,
-        headers: { 'content-type': 'application/json; charset=utf-8' },
-      }),
-      text: payload => new Response(payload, {
-        status: 200,
-        headers: { 'content-type': 'text/plain; charset=utf-8' },
-      }),
-      html: payload => new Response(payload, {
-        status: 200,
-        headers: { 'content-type': 'text/html; charset=utf-8' },
-      }),
+      json: (payload) =>
+        new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: { 'content-type': 'application/json; charset=utf-8' },
+        }),
+      text: (payload) =>
+        new Response(payload, {
+          status: 200,
+          headers: { 'content-type': 'text/plain; charset=utf-8' },
+        }),
+      html: (payload) =>
+        new Response(payload, {
+          status: 200,
+          headers: { 'content-type': 'text/html; charset=utf-8' },
+        }),
     })
   }
 }

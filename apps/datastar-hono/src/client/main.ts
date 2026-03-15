@@ -19,7 +19,7 @@ async function stateRoute() {
     return
   }
 
-  const payload = await response.json() as StateResponse
+  const payload = (await response.json()) as StateResponse
   counterState.count = payload.count
   syncCounterState()
   statusTextElement.textContent = ''
@@ -39,7 +39,7 @@ async function incrementHandler() {
     return
   }
 
-  const payload = await response.json() as StateResponse
+  const payload = (await response.json()) as StateResponse
   counterState.count = payload.count
   syncCounterState()
   statusTextElement.textContent = ''

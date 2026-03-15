@@ -1,11 +1,9 @@
-import type { CounterState } from './routes/state.ts'
-import { readFile } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
-
-import { fileURLToPath } from 'node:url'
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-
+import { readFile } from 'node:fs/promises'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import type { CounterState } from './routes/state.ts'
 import { incrementRoute } from './routes/increment.ts'
 import { stateRoute } from './routes/state.ts'
 
@@ -34,7 +32,7 @@ app.get('/main.js', async () => {
   })
 })
 
-app.get('/health', context => context.text('ok'))
+app.get('/health', (context) => context.text('ok'))
 
 const port = 3001
 

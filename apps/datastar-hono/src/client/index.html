@@ -4,12 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DataStar + Hono Demo</title>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@sudodevnull/datastar@0.21.0/dist/datastar.min.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"
+    ></script>
   </head>
   <body>
     <main style="font-family: sans-serif; margin: 2rem; max-width: 32rem">
       <h1>DataStar + Hono Demo</h1>
-      <p>Counter value: <strong id="counter-value" data-text="$counterState.count">0</strong></p>
+      <p>
+        Counter value:
+        <strong id="counter-value" data-text="$counterState.count">0</strong>
+      </p>
       <button id="increment-button" data-on-click="$incrementHandler()">Increment</button>
       <p id="status-text" aria-live="polite"></p>
     </main>

@@ -1,5 +1,4 @@
 import type { Context, Hono } from 'hono'
-
 import type { CounterState } from './state.ts'
 
 export function incrementRoute(app: Hono, counterState: CounterState) {

@@ -9,7 +9,10 @@ export function serve(options: {
     const requestInit: RequestInit & { duplex: 'half' } = {
       method: request.method,
       headers: request.headers as HeadersInit,
-      body: request.method === 'GET' || request.method === 'HEAD' ? undefined : request as unknown as BodyInit,
+      body:
+        request.method === 'GET' || request.method === 'HEAD'
+          ? undefined
+          : (request as unknown as BodyInit),
       duplex: 'half',
     }
 

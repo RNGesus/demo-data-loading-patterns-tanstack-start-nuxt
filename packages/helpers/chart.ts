@@ -1,7 +1,9 @@
 export const ENERGY_CHART_HUE_ROTATION_MIN = -10000
-const ENERGY_CHART_HUE_ROTATION_OFFSET = ENERGY_CHART_HUE_ROTATION_MIN < 0 ? Math.abs(ENERGY_CHART_HUE_ROTATION_MIN) : 0
+const ENERGY_CHART_HUE_ROTATION_OFFSET =
+  ENERGY_CHART_HUE_ROTATION_MIN < 0 ? Math.abs(ENERGY_CHART_HUE_ROTATION_MIN) : 0
 export const ENERGY_CHART_HUE_ROTATION_MAX = 70000
-const ENERGY_CHART_HUE_ROTATION_MAX_WITH_OFFSET = ENERGY_CHART_HUE_ROTATION_MAX + ENERGY_CHART_HUE_ROTATION_OFFSET
+const ENERGY_CHART_HUE_ROTATION_MAX_WITH_OFFSET =
+  ENERGY_CHART_HUE_ROTATION_MAX + ENERGY_CHART_HUE_ROTATION_OFFSET
 
 function clampEnergyChartHueRotation(value: number) {
   if (value < ENERGY_CHART_HUE_ROTATION_MIN) {
@@ -24,5 +26,7 @@ export function calculateEnergyChartHueRotation({
 }: CalculateEnergyChartHueRotationProps) {
   const clampedValue = clampEnergyChartHueRotation(value)
   const clampedValueWithOffset = clampedValue + ENERGY_CHART_HUE_ROTATION_OFFSET
-  return Math.floor(clampedValueWithOffset / ENERGY_CHART_HUE_ROTATION_MAX_WITH_OFFSET * maxRotation)
+  return Math.floor(
+    (clampedValueWithOffset / ENERGY_CHART_HUE_ROTATION_MAX_WITH_OFFSET) * maxRotation,
+  )
 }

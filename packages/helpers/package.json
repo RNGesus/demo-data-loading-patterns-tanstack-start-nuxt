@@ -1,7 +1,7 @@
 {
   "name": "@project/helpers",
-  "type": "module",
   "private": true,
+  "type": "module",
   "exports": {
     "./form": "./form.ts",
     "./formatters": "./formatters.ts",
@@ -9,11 +9,11 @@
     "./types": "./types.ts"
   },
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "zod": "^3.25.76"
+    "zod": "^4.3.6"
   }
 }

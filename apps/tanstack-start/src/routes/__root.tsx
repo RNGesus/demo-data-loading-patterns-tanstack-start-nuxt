@@ -1,35 +1,40 @@
-import type { PropsWithChildren } from 'react'
-import appCss from '@app/global.css?url'
-import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { Suspense } from 'react'
+import type { PropsWithChildren } from "react";
+import appCss from "@app/global.css?url";
+import {
+  createRootRoute,
+  HeadContent,
+  Outlet,
+  Scripts,
+} from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Suspense } from "react";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      { charSet: 'utf-8' },
+      { charSet: "utf-8" },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
       },
-      { title: 'TanStack Start Starter' },
+      { title: "TanStack Start Starter" },
     ],
-    links: [{ rel: 'stylesheet', href: appCss }],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   component: RootComponent,
-})
+});
 
 function RootComponent() {
   return (
     <RootDocument>
       <Outlet />
     </RootDocument>
-  )
+  );
 }
 
 function RootDocument({ children }: PropsWithChildren) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
@@ -41,5 +46,5 @@ function RootDocument({ children }: PropsWithChildren) {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }

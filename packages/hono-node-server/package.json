@@ -1,13 +1,13 @@
 {
   "name": "@hono/node-server",
-  "type": "module",
   "private": true,
+  "type": "module",
   "exports": {
     ".": "./index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
     "typecheck": "tsc --noEmit"
   }
 }
