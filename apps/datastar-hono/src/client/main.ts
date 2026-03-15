@@ -1,57 +1,66 @@
-interface StateResponse {
-  count: number
+import '@starfederation/datastar/bundles/datastar'
+
+const counterButtonId = 'counter-increment'
+const datastarSseEvent = 'datastar-sse'
+const datastarMergeSignalsEvent = 'datastar-merge-signals'
+
+interface DatastarSseDetail {
+  type: string
+  elId: string
+  argsRaw: Record<string, string>
 }
 
-const counterValueElement = document.querySelector<HTMLElement>('#counter-value')!
-const incrementButtonElement = document.querySelector<HTMLButtonElement>('#increment-button')!
-const statusTextElement = document.querySelector<HTMLElement>('#status-text')!
-
-const counterState = {
-  count: 0,
-}
-
-async function stateRoute() {
-  statusTextElement.textContent = 'Loading state…'
-  const response = await fetch('/api/state')
-
-  if (!response.ok) {
-    statusTextElement.textContent = 'Failed to load initial state.'
+document.addEventListener(datastarSseEvent, (event) => {
+  if (!(event instanceof CustomEvent)) {
     return
   }
 
-  const payload = (await response.json()) as StateResponse
-  counterState.count = payload.count
-  syncCounterState()
-  statusTextElement.textContent = ''
-}
+  const detail = event.detail as DatastarSseDetail
 
-async function incrementHandler() {
-  incrementButtonElement.disabled = true
-  statusTextElement.textContent = 'Incrementing…'
-
-  const response = await fetch('/api/increment', {
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    statusTextElement.textContent = 'Increment failed.'
-    incrementButtonElement.disabled = false
+  if (detail.elId !== counterButtonId) {
     return
   }
 
-  const payload = (await response.json()) as StateResponse
-  counterState.count = payload.count
-  syncCounterState()
-  statusTextElement.textContent = ''
-  incrementButtonElement.disabled = false
-}
-
-function syncCounterState() {
-  counterValueElement.textContent = String(counterState.count)
-}
-
-incrementButtonElement.addEventListener('click', () => {
-  void incrementHandler()
+  switch (detail.type) {
+    case 'started':
+      patchSignals({ mutationError: '' })
+      break
+    case 'error':
+      patchSignals({
+        mutationError: messageForStatus(detail.argsRaw.status),
+      })
+      break
+    case 'retries-failed':
+      patchSignals({
+        mutationError: 'The request could not reach the server. Try again.',
+      })
+      break
+  }
 })
 
-void stateRoute()
+function patchSignals(signals: Record<string, string>) {
+  ;(document as unknown as EventTarget).dispatchEvent(
+    new CustomEvent(datastarSseEvent, {
+      detail: {
+        type: datastarMergeSignalsEvent,
+        elId: counterButtonId,
+        argsRaw: {
+          signals: JSON.stringify(signals),
+        },
+      },
+    }) as Event,
+  )
+}
+
+function messageForStatus(status: string | undefined) {
+  switch (status) {
+    case '400':
+      return 'The counter request was malformed.'
+    case '422':
+      return 'Step must be a whole number between 1 and 10.'
+    case '500':
+      return 'The server could not update the counter.'
+    default:
+      return 'The counter request failed.'
+  }
+}
