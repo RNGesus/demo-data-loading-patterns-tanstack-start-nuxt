@@ -1,0 +1,16 @@
+{
+  "name": "datastar-hono",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --experimental-strip-types src/server/index.ts",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix ."
+  },
+  "dependencies": {
+    "@hono/node-server": "workspace:*",
+    "hono": "workspace:*"
+  }
+}

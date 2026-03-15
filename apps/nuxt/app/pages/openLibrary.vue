@@ -20,10 +20,10 @@ async function updateQuery(event: Event) {
     <form action="/openLibrary" @submit.stop.prevent="updateQuery">
       <label class="input input-bordered flex items-center gap-2">
         <span role="img" aria-label="Search">🔍</span>
-        <input type="search" name="q" :value="$route.query.q" class="grow">
+        <input type="search" name="q" :value="$route.query.q" class="grow" />
         <kbd class="kbd kbd-sm">Enter</kbd>
       </label>
-      <input type="hidden" name="page" :value="1">
+      <input type="hidden" name="page" :value="1" />
     </form>
     <nav>
       <ul class="menu menu-horizontal bg-base-300">
@@ -33,9 +33,12 @@ async function updateQuery(event: Event) {
               name: 'openLibrary',
               query: {
                 ...$route.query,
-                page: i > 1 ? i : undefined },
+                page: i > 1 ? i : undefined,
+              },
             }"
-            :class="{ 'menu-active': route.query.page === i.toString() || (!route.query.page && i === 1) }"
+            :class="{
+              'menu-active': route.query.page === i.toString() || (!route.query.page && i === 1),
+            }"
           >
             page {{ i }}
           </NuxtLink>

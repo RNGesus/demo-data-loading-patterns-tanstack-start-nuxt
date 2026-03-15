@@ -25,7 +25,7 @@ const ariaLabel = `Color scale from ${minValue} to ${maxValue} MegaWatts (MW)`
 <template>
   <div
     role="img"
-    class="w-full h-12 grid grid-flow-col auto-cols-fr rounded-box overflow-hidden tabular-nums slashed-zero text-xs"
+    class="rounded-box grid h-12 w-full auto-cols-fr grid-flow-col overflow-hidden text-xs slashed-zero tabular-nums"
     :aria-label="ariaLabel"
   >
     <div
@@ -34,7 +34,7 @@ const ariaLabel = `Color scale from ${minValue} to ${maxValue} MegaWatts (MW)`
       :style="{
         '--color-grade': `${calculateEnergyChartHueRotation({ value })}deg`,
       }"
-      class="bg-blue-600 hue-rotate-[var(--color-grade)] grid place-items-center"
+      class="grid place-items-center bg-blue-600 hue-rotate-(--color-grade)"
     >
       {{ formatEnergyChartDataPoint(Math.round(value)) }}
     </div>

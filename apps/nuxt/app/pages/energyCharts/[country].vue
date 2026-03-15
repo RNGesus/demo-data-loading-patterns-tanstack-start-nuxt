@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { calculateEnergyChartHueRotation } from '@project/helpers/chart'
-import { formatEnergyChartDataPoint, formatEnergyChartDataPointDate } from '@project/helpers/formatters'
+import {
+  formatEnergyChartDataPoint,
+  formatEnergyChartDataPointDate,
+} from '@project/helpers/formatters'
 
 const route = useRoute('energyCharts-country')
 const { data: powerData } = useFetch('/api/energyCharts/power', {
@@ -13,10 +16,12 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
     <table className="table table-xs table-pin-cols tabular-nums">
       <thead>
         <tr>
-          <th>
-            Production Type
-          </th>
-          <td v-for="unixSecondsEntry in powerData?.unix_seconds" :key="unixSecondsEntry" class="text-right">
+          <th>Production Type</th>
+          <td
+            v-for="unixSecondsEntry in powerData?.unix_seconds"
+            :key="unixSecondsEntry"
+            class="text-right"
+          >
             {{ formatEnergyChartDataPointDate(unixSecondsEntry) }}
           </td>
         </tr>
@@ -32,10 +37,12 @@ const { data: powerData } = useFetch('/api/energyCharts/power', {
             :style="{
               '--color-grade': `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg`,
             }"
-            class="text-right bg-blue-600 hue-rotate-(--color-grade)"
-            :class="[{
-              'grayscale-60': !data,
-            }]"
+            class="bg-blue-600 text-right hue-rotate-(--color-grade)"
+            :class="[
+              {
+                'grayscale-60': !data,
+              },
+            ]"
           >
             {{ data ? formatEnergyChartDataPoint(data) : 'no data' }}
           </td>

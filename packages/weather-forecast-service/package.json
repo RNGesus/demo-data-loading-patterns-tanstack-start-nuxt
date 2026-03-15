@@ -1,21 +1,21 @@
 {
   "name": "@project/weather-forecast-service",
-  "type": "module",
   "private": true,
+  "type": "module",
   "exports": {
     "./client": "./client.ts",
     "./generated": "./generated.ts"
   },
   "scripts": {
     "create-api-client": "openapi-zod-client './vendor/openapi.json' -o './generated/client.ts' --additional-props-default-value=false",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
     "typecheck": "tsc --noEmit",
     "postinstall": "pnpm create-api-client"
   },
   "dependencies": {
     "@zodios/core": "^10.9.6",
-    "zod": "^3.25.76"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "openapi-zod-client": "^1.18.3"

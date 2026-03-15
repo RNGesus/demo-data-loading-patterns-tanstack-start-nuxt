@@ -1,24 +1,27 @@
 {
   "name": "project",
-  "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.13.1",
+  "type": "module",
   "module": "index.ts",
   "scripts": {
     "dev": "pnpm -r dev",
     "dev:tanstack-start": "pnpm --filter 'tanstack-start' dev",
     "dev:nuxt": "pnpm --filter 'nuxt' dev",
-    "dev:hono-datastar": "pnpm --filter 'hono-datastar' dev",
+    "dev:datastar-hono": "pnpm --filter 'datastar-hono' dev",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
     "lint": "pnpm --parallel -r lint",
     "lint:fix": "pnpm --parallel -r lint:fix",
     "typecheck": "pnpm --parallel -r typecheck"
   },
-  "peerDependencies": {
-    "typescript": "^5.8.2"
-  },
   "devDependencies": {
-    "@project/eslint-config": "workspace:*",
-    "@types/node": "^24.0.15",
-    "eslint": "^9.31.0"
-  }
+    "@types/node": "^25.5.0",
+    "oxfmt": "^0.40.0",
+    "oxlint": "^1.55.0",
+    "oxlint-tsgolint": "^0.17.0"
+  },
+  "peerDependencies": {
+    "typescript": "6.0.0-beta"
+  },
+  "packageManager": "pnpm@10.32.1"
 }

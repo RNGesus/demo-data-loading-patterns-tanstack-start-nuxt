@@ -181,3 +181,6 @@ dist
 # TanStack Start output
 .output
 .vinxi
+
+# AI
+.agents

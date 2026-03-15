@@ -1,32 +1,32 @@
-import { query } from '@app/integrations/openLibrary/search.querySchema'
-import { searchServerFn } from '@app/integrations/openLibrary/search.serverFn'
-import { unwrapFormData } from '@project/helpers/form'
+import { query } from "@app/integrations/openLibrary/search.querySchema";
+import { searchServerFn } from "@app/integrations/openLibrary/search.serverFn";
+import { unwrapFormData } from "@project/helpers/form";
 import {
   Await,
   createFileRoute,
   Link,
   stripSearchParams,
-} from '@tanstack/react-router'
-import { zodValidator } from '@tanstack/zod-adapter'
-import { Suspense } from 'react'
+} from "@tanstack/react-router";
+import { zodValidator } from "@tanstack/zod-adapter";
+import { Suspense } from "react";
 
 // TODO: improve choppy loading behavior: shows cached (stale?) results, then the spinner and then the (fresh) results
-export const Route = createFileRoute('/_shell/openLibrary/')({
+export const Route = createFileRoute("/_shell/openLibrary/")({
   component: RouteComponent,
   validateSearch: zodValidator(query),
   search: {
-    middlewares: [stripSearchParams({ page: 1, q: '' })],
+    middlewares: [stripSearchParams({ page: 1, q: "" })],
   },
   loaderDeps: ({ search: { page, q } }) => ({ page, q }),
   loader: async ({ deps }) => ({
     promisedResults: searchServerFn({ data: { page: deps.page, q: deps.q } }),
   }),
-})
+});
 
 function RouteComponent() {
-  const navigateTo = Route.useNavigate()
-  const search = Route.useLoaderDeps()
-  const { promisedResults } = Route.useLoaderData()
+  const navigateTo = Route.useNavigate();
+  const search = Route.useLoaderDeps();
+  const { promisedResults } = Route.useLoaderData();
 
   return (
     <div>
@@ -37,13 +37,13 @@ function RouteComponent() {
         </span>
       </div>
       <form
-        onSubmit={async (event) => {
-          event.preventDefault()
-          event.stopPropagation()
+        onSubmit={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
 
-          await navigateTo({
+          void navigateTo({
             search: unwrapFormData(event.target),
-          })
+          });
         }}
       >
         <label className="input input-bordered flex items-center gap-2">
@@ -62,7 +62,7 @@ function RouteComponent() {
       </form>
       <nav>
         <ul className="menu menu-horizontal bg-base-300">
-          {[1, 2, 3].map(i => (
+          {[1, 2, 3].map((i) => (
             <li key={i}>
               <Link
                 from={Route.fullPath}
@@ -70,7 +70,7 @@ function RouteComponent() {
                 search={{ q: search.q, page: i }}
                 // FIXME: sadly this does not work properly for the first page
                 // activeProps={{ className: 'menu-active' }}
-                className={search.page === i ? 'menu-active' : ''}
+                className={search.page === i ? "menu-active" : ""}
               >
                 {`page ${i}`}
               </Link>
@@ -80,9 +80,9 @@ function RouteComponent() {
       </nav>
       <Suspense>
         <Await promise={promisedResults}>
-          {results => <pre>{JSON.stringify(results, null, 2)}</pre>}
+          {(results) => <pre>{JSON.stringify(results, null, 2)}</pre>}
         </Await>
       </Suspense>
     </div>
-  )
+  );
 }

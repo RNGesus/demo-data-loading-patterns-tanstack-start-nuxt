@@ -1,5 +1,5 @@
 import { apiClient } from '@project/energy-charts-service/client'
-import { z } from 'zod'
+import * as z from 'zod'
 
 export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, z.object({ country: z.string() }).parse)

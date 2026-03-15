@@ -16,10 +16,8 @@ Well, it is still a playground but I got the hang of it and will try to do more.
   - 💬 this was my top priority but then all these yaks started showing up
 - add DaisyUI 5 and Tailwind 4
   - 💬 works well for now, looking forward to finding some bugs
-- use antfu's ESLint config as a base
-  - 💬 awesome 🫳🎤
-  - 💬 flat config in general is great, it is way too easy to extend and I have a lot of ideas
-  - 💬 do yourself a favour and try the ESLint config inspector `pnpm dlx @eslint/config-inspector`
+- use Oxlint and Oxfmt for linting and formatting
+  - 💬 fast, direct, and a much better fit for this workspace
 
 ### 🚶‍➡️ Next steps
 
@@ -31,7 +29,7 @@ Well, it is still a playground but I got the hang of it and will try to do more.
     - [x] nuxt
   - [x] packages:
     - [x] the railway station api
-    - [x] eslint config
+    - [x] oxlint config
     - [x] &hellip;
 - [x] create more (nested) routes
 - [ ] use different loader patterns

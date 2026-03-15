@@ -12,7 +12,9 @@ defineProps<{
       <h3 class="card-title">
         {{ photographer.name }}
       </h3>
-      <a v-if="photographer.url" :href="photographer.url" target="_blank" class="link">{{ photographer.url }} ↗️</a>
+      <a v-if="photographer.url" :href="photographer.url" target="_blank" class="link"
+        >{{ photographer.url }} ↗️</a
+      >
     </div>
   </div>
 </template>

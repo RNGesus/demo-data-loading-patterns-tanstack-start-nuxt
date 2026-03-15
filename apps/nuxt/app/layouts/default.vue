@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="p-4">
@@ -12,14 +11,10 @@
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/openLibrary" active-class="menu-active">
-              Open Library ➡️
-            </NuxtLink>
+            <NuxtLink to="/openLibrary" active-class="menu-active"> Open Library ➡️ </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/energyCharts" active-class="menu-active">
-              Energy Charts ➡️
-            </NuxtLink>
+            <NuxtLink to="/energyCharts" active-class="menu-active"> Energy Charts ➡️ </NuxtLink>
           </li>
         </ul>
       </nav>

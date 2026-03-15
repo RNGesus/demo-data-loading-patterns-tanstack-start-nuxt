@@ -11,13 +11,19 @@ function LayoutComponent() {
         <nav className="flex-1">
           <ul className="menu menu-horizontal">
             <li>
-              <Link to="/stationCountries" activeProps={{ className: 'menu-active' }}>Railway Station Countries ➡️</Link>
+              <Link to="/stationCountries" activeProps={{ className: 'menu-active' }}>
+                Railway Station Countries ➡️
+              </Link>
             </li>
             <li>
-              <Link to="/openLibrary" activeProps={{ className: 'menu-active' }}>Open Library ➡️</Link>
+              <Link to="/openLibrary" activeProps={{ className: 'menu-active' }}>
+                Open Library ➡️
+              </Link>
             </li>
             <li>
-              <Link to="/energyCharts" activeProps={{ className: 'menu-active' }}>Energy Charts ➡️</Link>
+              <Link to="/energyCharts" activeProps={{ className: 'menu-active' }}>
+                Energy Charts ➡️
+              </Link>
             </li>
           </ul>
         </nav>
