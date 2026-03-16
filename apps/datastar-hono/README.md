@@ -1,14 +1,14 @@
 # DataStar + Hono data loading demo
 
-This app now mirrors the functionality from the existing Nuxt and TanStack Start apps,
-but rendered from one Hono app with SSR HTML pages.
+This app mirrors the functionality from the existing Nuxt and TanStack Start apps,
+but runs as one Hono app with Hono JSX templates and Datastar-enhanced interactions.
 
 ## Features
 
 - Railway station countries list and station photo details
-- Open Library search with page query navigation
+- Open Library search with Datastar signal-based updates
 - Energy charts country navigation and data table
-- Tailwind CSS v4 + DaisyUI v5 styling
+- Tailwind + DaisyUI styling
 
 ## Run
 
@@ -30,9 +30,9 @@ Open `http://localhost:3004`.
 ## Structure
 
 - `src/app.ts` wires page and API routes
-- `src/routes/pages/index.ts` contains page handlers for stationCountries, openLibrary, and energyCharts
+- `src/components/Layout.tsx` provides the shared Hono JSX layout
+- `src/routes/pages/index.tsx` contains page handlers for stationCountries, openLibrary, and energyCharts
 - `src/routes/api/*` contains API endpoints matching the Nuxt and TanStack integrations
-- `src/styles/global.css` provides Tailwind and DaisyUI setup
 
 ## Verification
 
