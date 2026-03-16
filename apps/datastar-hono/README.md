@@ -1,7 +1,14 @@
-# DataStar Hono Starter
+# DataStar + Hono data loading demo
 
-Starter app for future demos built around one Hono app, a Vite-powered dev/build flow, prerendered
-public pages, and live API routes.
+This app now mirrors the functionality from the existing Nuxt and TanStack Start apps,
+but rendered from one Hono app with SSR HTML pages.
+
+## Features
+
+- Railway station countries list and station photo details
+- Open Library search with page query navigation
+- Energy charts country navigation and data table
+- Tailwind CSS v4 + DaisyUI v5 styling
 
 ## Run
 
@@ -11,47 +18,21 @@ From the monorepo root:
 pnpm --filter datastar-hono dev
 ```
 
-Or use the workspace shortcut:
-
-```bash
-pnpm dev:datastar-hono
-```
-
-Open `http://localhost:3000`.
+Open `http://localhost:3004`.
 
 ## Scripts
 
-- `pnpm --filter datastar-hono dev` starts the Vite dev server around the Hono app.
-- `pnpm --filter datastar-hono typecheck` runs TypeScript without emitting files.
-- `pnpm --filter datastar-hono build` builds client assets, prerendered pages, and the Node server.
-- `pnpm --filter datastar-hono start` runs the built Node server from `dist/server.js`.
+- `pnpm --filter datastar-hono dev` runs the Vite + Hono dev server
+- `pnpm --filter datastar-hono typecheck` runs TypeScript checks
+- `pnpm --filter datastar-hono build` builds client assets, prerendered pages, and server bundle
+- `pnpm --filter datastar-hono start` starts the built server
 
 ## Structure
 
-- `src/app.ts` exports the single Hono app used by dev, SSG, and server builds.
-- `src/routes/pages.ts` defines prerenderable public pages.
-- `src/routes/api/counter.ts` handles the counter API.
-- `src/lib/demo-counter.ts` contains the demo-only in-memory store.
-- `src/client/main.ts` loads Datastar and handles request lifecycle edge cases.
-
-## Counter demo
-
-The starter counter demonstrates:
-
-- initial server-rendered state from Hono
-- Datastar `@post(...)` interactions instead of manual `fetch` wiring
-- server-driven signal patches via `@starfederation/datastar-sdk/web`
-- visible mutation failures for invalid or broken requests
-
-The counter store is intentionally in-memory. A prerendered page can therefore diverge from the live
-runtime state after mutations until a persistent backing store replaces the demo module.
-
-## Endpoints
-
-- `GET /` renders the starter page.
-- `GET /api/counter` returns the current counter state as JSON.
-- `POST /api/counter/increment` validates the Datastar signal payload and returns Datastar updates.
-- `GET /health` returns a basic liveness response.
+- `src/app.ts` wires page and API routes
+- `src/routes/pages/index.ts` contains page handlers for stationCountries, openLibrary, and energyCharts
+- `src/routes/api/*` contains API endpoints matching the Nuxt and TanStack integrations
+- `src/styles/global.css` provides Tailwind and DaisyUI setup
 
 ## Verification
 

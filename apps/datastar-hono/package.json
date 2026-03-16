@@ -16,8 +16,11 @@
     "@hono/vite-build": "^1.10.0",
     "@hono/vite-dev-server": "^0.25.1",
     "@hono/vite-ssg": "^0.3.3",
+    "@project/energy-charts-service": "workspace:*",
+    "@project/helpers": "workspace:*",
+    "@project/open-library-service": "workspace:*",
+    "@project/railway-station-service": "workspace:*",
     "@starfederation/datastar": "1.0.0-beta.11",
-    "@starfederation/datastar-sdk": "1.0.0-RC.3",
     "hono": "^4.12.8",
     "vite": "^8.0.0"
   }
