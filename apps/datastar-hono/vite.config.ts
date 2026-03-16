@@ -9,8 +9,11 @@ const appEntry = './src/app.ts'
 const clientEntry = resolve(__dirname, 'src/client/main.ts')
 
 export default defineConfig(({ command, mode }) => {
+  const projectAlias = { '@project': resolve(__dirname, '../../packages') }
+
   if (command === 'serve') {
     return {
+      resolve: { alias: projectAlias },
       plugins: [
         devServer({
           entry: appEntry,
@@ -25,6 +28,7 @@ export default defineConfig(({ command, mode }) => {
 
   if (mode === 'client') {
     return {
+      resolve: { alias: projectAlias },
       build: {
         copyPublicDir: false,
         emptyOutDir: true,
@@ -43,6 +47,7 @@ export default defineConfig(({ command, mode }) => {
 
   if (mode === 'ssg') {
     return {
+      resolve: { alias: projectAlias },
       build: {
         copyPublicDir: false,
         emptyOutDir: false,
@@ -57,6 +62,7 @@ export default defineConfig(({ command, mode }) => {
   }
 
   return {
+    resolve: { alias: projectAlias },
     build: {
       copyPublicDir: false,
       outDir: 'dist',
