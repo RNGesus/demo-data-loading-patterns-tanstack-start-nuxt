@@ -1,23 +1,24 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// @ts-expect-error -- Golar/TypeScript-Go currently exceeds its comparison depth on NuxtConfig.
 export default defineNuxtConfig({
-  modules: ["@nuxt/image"],
+  modules: ['@nuxt/image'],
   devtools: {
     enabled: true,
     timeline: {
       enabled: true,
     },
   },
-  css: ["./assets/styles/global.css"],
+  css: ['./assets/styles/global.css'],
   router: {
     options: {
-      linkActiveClass: "active",
-      linkExactActiveClass: "exact-active",
+      linkActiveClass: 'active',
+      linkExactActiveClass: 'exact-active',
     },
   },
   routeRules: {
-    "/api/**": { cache: { maxAge: 60 } },
+    '/api/**': { cache: { maxAge: 60 } },
   },
   devServer: {
     port: 5000,
@@ -25,14 +26,14 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 5,
   },
-  experimental: { typedPages: true },
-  compatibilityDate: "2026-03-15",
+  experimental: { typedPages: true, typescriptPlugin: true, nitroAutoImports: true },
+  compatibilityDate: '2026-07-17',
   vite: {
     plugins: [tailwindcss()],
   },
   image: {
-    domains: ["api.railway-stations.org"],
+    domains: ['api.railway-stations.org'],
     ipx: { maxAge: 60 * 60 * 24 * 30 },
     quality: 75,
   },
-});
+})

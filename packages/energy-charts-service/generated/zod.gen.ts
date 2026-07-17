@@ -6,136 +6,132 @@ import * as z from 'zod';
  * DailyAvgDict
  */
 export const zDailyAvgDict = z.object({
-    days: z.array(z.string()),
-    data: z.array(z.union([z.number(), z.null()])),
-    deprecated: z.boolean()
+  days: z.array(z.string()),
+  data: z.array(z.union([z.number(), z.null()])),
+  deprecated: z.boolean()
 });
 
 /**
  * FrequencyModel
  */
 export const zFrequencyModel = z.object({
-    unix_seconds: z.array(z.int()).nullish(),
-    data: z.array(z.union([z.number(), z.null()])),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()).nullish(),
+  data: z.array(z.union([z.number(), z.null()])),
+  deprecated: z.boolean()
 });
 
 /**
  * NamedData
  */
 export const zNamedData = z.object({
-    name: z.string(),
-    data: z.array(z.union([z.number(), z.null()]))
+  name: z.string(),
+  data: z.array(z.union([z.number(), z.null()]))
 });
 
 /**
  * CrossBorderModel
  */
 export const zCrossBorderModel = z.object({
-    unix_seconds: z.array(z.int()).nullish(),
-    countries: z.array(zNamedData).nullish(),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()).nullish(),
+  countries: z.array(zNamedData).nullish(),
+  deprecated: z.boolean()
 });
 
 /**
  * InstalledModel
  */
 export const zInstalledModel = z.object({
-    time: z.array(z.string()),
-    production_types: z.array(zNamedData).nullish(),
-    deprecated: z.boolean()
+  time: z.array(z.string()),
+  production_types: z.array(zNamedData).nullish(),
+  deprecated: z.boolean()
 });
 
 /**
  * PriceModel
  */
 export const zPriceModel = z.object({
-    license_info: z.string(),
-    unix_seconds: z.array(z.int()).nullish(),
-    price: z.array(z.union([z.number(), z.null()])).nullish(),
-    unit: z.string(),
-    deprecated: z.boolean()
+  license_info: z.string(),
+  unix_seconds: z.array(z.int()).nullish(),
+  price: z.array(z.union([z.number(), z.null()])).nullish(),
+  unit: z.string(),
+  deprecated: z.boolean()
 });
 
 /**
  * ProductionModel
  */
 export const zProductionModel = z.object({
-    unix_seconds: z.array(z.int()).nullish(),
-    production_types: z.array(zNamedData).nullish(),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()).nullish(),
+  production_types: z.array(zNamedData).nullish(),
+  deprecated: z.boolean()
 });
 
 /**
  * PublicPowerForecastModel
  */
 export const zPublicPowerForecastModel = z.object({
-    unix_seconds: z.array(z.int()),
-    forecast_values: z.array(z.union([z.number(), z.null()])),
-    production_type: z.string(),
-    forecast_type: z.string(),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()),
+  forecast_values: z.array(z.union([z.number(), z.null()])),
+  production_type: z.string(),
+  forecast_type: z.string(),
+  deprecated: z.boolean()
 });
 
 /**
  * RenShareModel
  */
 export const zRenShareModel = z.object({
-    unix_seconds: z.array(z.int()),
-    ren_share: z.array(z.union([z.number(), z.null()])),
-    solar_share: z.array(z.number()).nullish(),
-    wind_onshore_share: z.array(z.number()).nullish(),
-    wind_offshore_share: z.array(z.number()).nullish(),
-    substitute: z.boolean(),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()),
+  ren_share: z.array(z.union([z.number(), z.null()])),
+  solar_share: z.array(z.number()).nullish(),
+  wind_onshore_share: z.array(z.number()).nullish(),
+  wind_offshore_share: z.array(z.number()).nullish(),
+  substitute: z.boolean(),
+  deprecated: z.boolean()
 });
 
 /**
  * ShareModel
  */
 export const zShareModel = z.object({
-    unix_seconds: z.array(z.int()).nullish(),
-    data: z.array(z.union([z.number(), z.null()])).nullish(),
-    forecast: z.array(z.union([z.number(), z.null()])).nullish(),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()).nullish(),
+  data: z.array(z.union([z.number(), z.null()])).nullish(),
+  forecast: z.array(z.union([z.number(), z.null()])).nullish(),
+  deprecated: z.boolean()
 });
 
 /**
  * TrafficModel
  */
 export const zTrafficModel = z.object({
-    unix_seconds: z.array(z.int()),
-    share: z.array(z.union([z.number(), z.null()])),
-    signal: z.array(z.union([z.int(), z.null()])).optional(),
-    substitute: z.boolean(),
-    deprecated: z.boolean()
+  unix_seconds: z.array(z.int()),
+  share: z.array(z.union([z.number(), z.null()])),
+  signal: z.array(z.union([z.int(), z.null()])).optional(),
+  substitute: z.boolean(),
+  deprecated: z.boolean()
 });
 
 /**
  * ValidationError
  */
 export const zValidationError = z.object({
-    loc: z.array(z.union([z.string(), z.int()])),
-    msg: z.string(),
-    type: z.string()
+  loc: z.array(z.union([z.string(), z.int()])),
+  msg: z.string(),
+  type: z.string()
 });
 
 /**
  * HTTPValidationError
  */
 export const zHttpValidationError = z.object({
-    detail: z.array(zValidationError).optional()
+  detail: z.array(zValidationError).optional()
 });
 
-export const zPublicPowerPublicPowerGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default(''),
-        subtype: z.string().optional().default('')
-    }).optional()
+export const zPublicPowerPublicPowerGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default(''),
+  subtype: z.string().optional().default('')
 });
 
 /**
@@ -143,16 +139,12 @@ export const zPublicPowerPublicPowerGetData = z.object({
  */
 export const zPublicPowerPublicPowerGetResponse = zProductionModel;
 
-export const zPublicPowerForecastPublicPowerForecastGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        production_type: z.string().optional().default('solar'),
-        forecast_type: z.string().optional().default('current'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default('')
-    }).optional()
+export const zPublicPowerForecastPublicPowerForecastGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  production_type: z.string().optional().default('solar'),
+  forecast_type: z.string().optional().default('current'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default('')
 });
 
 /**
@@ -160,14 +152,10 @@ export const zPublicPowerForecastPublicPowerForecastGetData = z.object({
  */
 export const zPublicPowerForecastPublicPowerForecastGetResponse = zPublicPowerForecastModel;
 
-export const zTotalPowerTotalPowerGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default('')
-    }).optional()
+export const zTotalPowerTotalPowerGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default('')
 });
 
 /**
@@ -175,14 +163,10 @@ export const zTotalPowerTotalPowerGetData = z.object({
  */
 export const zTotalPowerTotalPowerGetResponse = zProductionModel;
 
-export const zInstalledPowerInstalledPowerGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        time_step: z.string().optional().default('yearly'),
-        installation_decommission: z.boolean().optional().default(false)
-    }).optional()
+export const zInstalledPowerInstalledPowerGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  time_step: z.string().optional().default('yearly'),
+  installation_decommission: z.boolean().optional().default(false)
 });
 
 /**
@@ -190,14 +174,10 @@ export const zInstalledPowerInstalledPowerGetData = z.object({
  */
 export const zInstalledPowerInstalledPowerGetResponse = zInstalledModel;
 
-export const zDayAheadPricePriceGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        bzn: z.string().optional().default('DE-LU'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default('')
-    }).optional()
+export const zDayAheadPricePriceGetQuery = z.object({
+  bzn: z.string().optional().default('DE-LU'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default('')
 });
 
 /**
@@ -205,14 +185,10 @@ export const zDayAheadPricePriceGetData = z.object({
  */
 export const zDayAheadPricePriceGetResponse = zPriceModel;
 
-export const zCrossBorderElectricityTradingCbetGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default('')
-    }).optional()
+export const zCrossBorderElectricityTradingCbetGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default('')
 });
 
 /**
@@ -220,14 +196,10 @@ export const zCrossBorderElectricityTradingCbetGetData = z.object({
  */
 export const zCrossBorderElectricityTradingCbetGetResponse = zCrossBorderModel;
 
-export const zCrossBorderPhysicalFlowsCbpfGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default('')
-    }).optional()
+export const zCrossBorderPhysicalFlowsCbpfGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default('')
 });
 
 /**
@@ -235,13 +207,9 @@ export const zCrossBorderPhysicalFlowsCbpfGetData = z.object({
  */
 export const zCrossBorderPhysicalFlowsCbpfGetResponse = zCrossBorderModel;
 
-export const zTrafficSignalSignalGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        postal_code: z.string().optional().default('')
-    }).optional()
+export const zTrafficSignalSignalGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  postal_code: z.string().optional().default('')
 });
 
 /**
@@ -249,12 +217,8 @@ export const zTrafficSignalSignalGetData = z.object({
  */
 export const zTrafficSignalSignalGetResponse = zTrafficModel;
 
-export const zRenewableShareForecastRenShareForecastGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de')
-    }).optional()
+export const zRenewableShareForecastRenShareForecastGetQuery = z.object({
+  country: z.string().optional().default('de')
 });
 
 /**
@@ -262,13 +226,9 @@ export const zRenewableShareForecastRenShareForecastGetData = z.object({
  */
 export const zRenewableShareForecastRenShareForecastGetResponse = zRenShareModel;
 
-export const zRenShareDailyAvgRenShareDailyAvgGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        year: z.int().optional().default(-1)
-    }).optional()
+export const zRenShareDailyAvgRenShareDailyAvgGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  year: z.int().optional().default(-1)
 });
 
 /**
@@ -276,12 +236,8 @@ export const zRenShareDailyAvgRenShareDailyAvgGetData = z.object({
  */
 export const zRenShareDailyAvgRenShareDailyAvgGetResponse = zDailyAvgDict;
 
-export const zSolarShareSolarShareGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de')
-    }).optional()
+export const zSolarShareSolarShareGetQuery = z.object({
+  country: z.string().optional().default('de')
 });
 
 /**
@@ -289,13 +245,9 @@ export const zSolarShareSolarShareGetData = z.object({
  */
 export const zSolarShareSolarShareGetResponse = zShareModel;
 
-export const zSolarShareDailyAvgSolarShareDailyAvgGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        year: z.int().optional().default(-1)
-    }).optional()
+export const zSolarShareDailyAvgSolarShareDailyAvgGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  year: z.int().optional().default(-1)
 });
 
 /**
@@ -303,12 +255,8 @@ export const zSolarShareDailyAvgSolarShareDailyAvgGetData = z.object({
  */
 export const zSolarShareDailyAvgSolarShareDailyAvgGetResponse = zDailyAvgDict;
 
-export const zWindOnshoreShareWindOnshoreShareGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de')
-    }).optional()
+export const zWindOnshoreShareWindOnshoreShareGetQuery = z.object({
+  country: z.string().optional().default('de')
 });
 
 /**
@@ -316,13 +264,9 @@ export const zWindOnshoreShareWindOnshoreShareGetData = z.object({
  */
 export const zWindOnshoreShareWindOnshoreShareGetResponse = zShareModel;
 
-export const zWindOnshoreShareDailyAvgWindOnshoreShareDailyAvgGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        year: z.int().optional().default(-1)
-    }).optional()
+export const zWindOnshoreShareDailyAvgWindOnshoreShareDailyAvgGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  year: z.int().optional().default(-1)
 });
 
 /**
@@ -330,12 +274,8 @@ export const zWindOnshoreShareDailyAvgWindOnshoreShareDailyAvgGetData = z.object
  */
 export const zWindOnshoreShareDailyAvgWindOnshoreShareDailyAvgGetResponse = zDailyAvgDict;
 
-export const zWindOffshoreShareWindOffshoreShareGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de')
-    }).optional()
+export const zWindOffshoreShareWindOffshoreShareGetQuery = z.object({
+  country: z.string().optional().default('de')
 });
 
 /**
@@ -343,13 +283,9 @@ export const zWindOffshoreShareWindOffshoreShareGetData = z.object({
  */
 export const zWindOffshoreShareWindOffshoreShareGetResponse = zShareModel;
 
-export const zWindOffshoreShareDailyAvgWindOffshoreShareDailyAvgGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: z.string().optional().default('de'),
-        year: z.int().optional().default(-1)
-    }).optional()
+export const zWindOffshoreShareDailyAvgWindOffshoreShareDailyAvgGetQuery = z.object({
+  country: z.string().optional().default('de'),
+  year: z.int().optional().default(-1)
 });
 
 /**
@@ -357,14 +293,10 @@ export const zWindOffshoreShareDailyAvgWindOffshoreShareDailyAvgGetData = z.obje
  */
 export const zWindOffshoreShareDailyAvgWindOffshoreShareDailyAvgGetResponse = zDailyAvgDict;
 
-export const zFrequencyFrequencyGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        region: z.string().optional().default('UCTE'),
-        start: z.string().optional().default(''),
-        end: z.string().optional().default('')
-    }).optional()
+export const zFrequencyFrequencyGetQuery = z.object({
+  region: z.string().optional().default('UCTE'),
+  start: z.string().optional().default(''),
+  end: z.string().optional().default('')
 });
 
 /**

@@ -6,115 +6,77 @@ import * as z from 'zod';
  * ValidationError
  */
 export const zValidationError = z.object({
-    loc: z.array(z.string()),
-    msg: z.string(),
-    type: z.string()
+  loc: z.array(z.string()),
+  msg: z.string(),
+  type: z.string()
 });
 
 /**
  * HTTPValidationError
  */
 export const zHttpValidationError = z.object({
-    detail: z.array(zValidationError).optional()
+  detail: z.array(zValidationError).optional()
 });
 
-export const zReadApiBooksApiBooksGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        bibkeys: z.string(),
-        format: z.string().optional().default('json'),
-        callback: z.unknown().optional(),
-        jscmd: z.string().optional().default('viewapi')
-    })
+export const zReadApiBooksApiBooksGetQuery = z.object({
+  bibkeys: z.string(),
+  format: z.string().optional().default('json'),
+  callback: z.unknown().optional(),
+  jscmd: z.string().optional().default('viewapi')
 });
 
-export const zReadApiVolumesBriefApiVolumesBriefKeyTypeValueJsonGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        key_type: z.unknown(),
-        value: z.unknown()
-    }),
-    query: z.object({
-        callback: z.unknown().optional()
-    }).optional()
+export const zReadApiVolumesBriefApiVolumesBriefKeyTypeValueJsonGetPath = z.object({
+  key_type: z.unknown(),
+  value: z.unknown()
 });
 
-export const zReadAuthorsAuthorsOlidJsonGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        olid: z.unknown()
-    }),
-    query: z.never().optional()
+export const zReadApiVolumesBriefApiVolumesBriefKeyTypeValueJsonGetQuery = z.object({
+  callback: z.unknown().optional()
 });
 
-export const zReadAuthorsWorksAuthorsOlidWorksJsonGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        olid: z.unknown()
-    }),
-    query: z.object({
-        limit: z.int().optional()
-    }).optional()
+export const zReadAuthorsAuthorsOlidJsonGetPath = z.object({
+  olid: z.unknown()
 });
 
-export const zReadBooksBooksOlidGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        olid: z.unknown()
-    }),
-    query: z.never().optional()
+export const zReadAuthorsWorksAuthorsOlidWorksJsonGetPath = z.object({
+  olid: z.unknown()
 });
 
-export const zReadCoversKeyTypeValueSizeJpegCoversKeyTypeValueSizeJpgGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        key_type: z.unknown(),
-        value: z.unknown(),
-        size: z.unknown()
-    }),
-    query: z.never().optional()
+export const zReadAuthorsWorksAuthorsOlidWorksJsonGetQuery = z.object({
+  limit: z.int().optional()
 });
 
-export const zReadIsbnIsbnIsbnGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        isbn: z.unknown()
-    }),
-    query: z.never().optional()
+export const zReadBooksBooksOlidGetPath = z.object({
+  olid: z.unknown()
 });
 
-export const zReadSearchJsonSearchJsonGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        q: z.unknown(),
-        page: z.int().optional()
-    })
+export const zReadCoversKeyTypeValueSizeJpegCoversKeyTypeValueSizeJpgGetPath = z.object({
+  key_type: z.unknown(),
+  value: z.unknown(),
+  size: z.unknown()
 });
 
-export const zReadSearchAuthorsJsonSearchAuthorsJsonGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        q: z.unknown()
-    })
+export const zReadIsbnIsbnIsbnGetPath = z.object({
+  isbn: z.unknown()
 });
 
-export const zReadSubjectsSubjectsSubjectJsonGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        subject: z.unknown()
-    }),
-    query: z.object({
-        details: z.boolean().optional().default(false)
-    }).optional()
+export const zReadSearchJsonSearchJsonGetQuery = z.object({
+  q: z.unknown(),
+  page: z.int().optional()
 });
 
-export const zReadWorksWorksOlidGetData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        olid: z.unknown()
-    }),
-    query: z.never().optional()
+export const zReadSearchAuthorsJsonSearchAuthorsJsonGetQuery = z.object({
+  q: z.unknown()
+});
+
+export const zReadSubjectsSubjectsSubjectJsonGetPath = z.object({
+  subject: z.unknown()
+});
+
+export const zReadSubjectsSubjectsSubjectJsonGetQuery = z.object({
+  details: z.boolean().optional().default(false)
+});
+
+export const zReadWorksWorksOlidGetPath = z.object({
+  olid: z.unknown()
 });

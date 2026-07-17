@@ -1,10 +1,9 @@
 import { publicPowerPublicPowerGet } from '@project/energy-charts-service/client'
 import { createServerFn } from '@tanstack/react-start'
-import { zodValidator } from '@tanstack/zod-adapter'
 import { query } from './power.querySchema'
 
 export const powerServerFn = createServerFn({ method: 'GET' })
-  .inputValidator(zodValidator(query))
+  .inputValidator(query)
   .handler(async ({ data }) => {
     return await publicPowerPublicPowerGet({
       query: { country: data.country },

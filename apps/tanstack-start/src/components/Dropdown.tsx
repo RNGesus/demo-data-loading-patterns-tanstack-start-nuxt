@@ -1,29 +1,26 @@
-import type { HTMLAttributes, PropsWithChildren } from "react";
-import { useRouter } from "@tanstack/react-router";
-import { createContext, use, useEffect, useId, useMemo, useRef } from "react";
+import type { HTMLAttributes, PropsWithChildren } from 'react'
+import { useRouter } from '@tanstack/react-router'
+import { createContext, use, useEffect, useId, useMemo, useRef } from 'react'
 
 interface DropdownContextType {
-  buttonProps: Pick<
-    HTMLAttributes<HTMLButtonElement>,
-    "popoverTarget" | "style"
-  >;
-  listProps: Pick<HTMLAttributes<HTMLUListElement>, "id" | "style"> & {
-    keepOpenOnRouteChange?: boolean;
-  };
+  buttonProps: Pick<HTMLAttributes<HTMLButtonElement>, 'popoverTarget' | 'style'>
+  listProps: Pick<HTMLAttributes<HTMLUListElement>, 'id' | 'style'> & {
+    keepOpenOnRouteChange?: boolean
+  }
 }
 
 const DropdownContext = createContext<DropdownContextType>({
   buttonProps: {},
   listProps: {},
-});
+})
 
 export function Dropdown({
   children,
   keepOpenOnRouteChange = false,
 }: PropsWithChildren<{ keepOpenOnRouteChange?: boolean }>) {
-  const popoverId = useId();
-  const anchorId = useId();
-  const anchorName = `--${anchorId.replace(/:/g, "")}`;
+  const popoverId = useId()
+  const anchorId = useId()
+  const anchorName = `--${anchorId.replace(/:/g, '')}`
 
   const value = useMemo(
     () =>
@@ -39,33 +36,35 @@ export function Dropdown({
         },
       }) satisfies DropdownContextType,
     [popoverId, anchorName, keepOpenOnRouteChange],
-  );
-  return <DropdownContext value={value}>{children}</DropdownContext>;
+  )
+  return <DropdownContext value={value}>{children}</DropdownContext>
 }
 
 Dropdown.Trigger = function Trigger({ children }: PropsWithChildren) {
-  const { buttonProps } = use(DropdownContext);
+  const { buttonProps } = use(DropdownContext)
   return (
     <button className="btn m-1" type="button" {...buttonProps}>
       {children}
     </button>
-  );
-};
+  )
+}
 
 Dropdown.List = function List({ children }: PropsWithChildren) {
   const {
     listProps: { keepOpenOnRouteChange, ...restListProps },
-  } = use(DropdownContext);
+  } = use(DropdownContext)
 
-  const popoverRef = useRef<HTMLUListElement>(null);
+  const popoverRef = useRef<HTMLUListElement>(null)
 
-  const route = useRouter();
+  const route = useRouter()
   useEffect(() => {
-    const unsubscribe = route.subscribe("onBeforeNavigate", () => {
-      !keepOpenOnRouteChange && popoverRef.current?.hidePopover();
-    });
-    return unsubscribe;
-  }, [keepOpenOnRouteChange, route]);
+    const unsubscribe = route.subscribe('onBeforeNavigate', () => {
+      if (!keepOpenOnRouteChange) {
+        popoverRef.current?.hidePopover()
+      }
+    })
+    return unsubscribe
+  }, [keepOpenOnRouteChange, route])
 
   return (
     <ul
@@ -76,9 +75,9 @@ Dropdown.List = function List({ children }: PropsWithChildren) {
     >
       {children}
     </ul>
-  );
-};
+  )
+}
 
 Dropdown.Item = function Item({ children }: PropsWithChildren) {
-  return <li>{children}</li>;
-};
+  return <li>{children}</li>
+}

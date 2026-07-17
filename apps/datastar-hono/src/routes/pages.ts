@@ -303,6 +303,7 @@ pageRoutes.get('/', (context) => {
       </section>
     </main>
 
+    <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.2/bundles/datastar.js"></script>
     <script type="module" src="${clientScriptPath}"></script>
   </body>
 </html>`)

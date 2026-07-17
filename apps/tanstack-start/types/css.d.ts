@@ -1,10 +1,10 @@
-declare module "csstype" {
+declare module 'csstype' {
   interface Properties {
-    [key: `--${string}`]: string | number | undefined;
+    [key: `--${string}`]: string | number | undefined
   }
 }
 
-declare module "*?url" {
-  const src: string;
-  export default src;
+declare module '*?url' {
+  const src: string
+  export default src
 }

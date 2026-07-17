@@ -6,60 +6,60 @@ import * as z from 'zod';
  * OAuth2 token request
  */
 export const zOAuthTokenRequest = z.object({
-    grant_type: z.enum(['authorization_code', 'refresh_token']),
-    refresh_token: z.string().optional(),
-    code: z.string().optional(),
-    client_id: z.string(),
-    redirect_uri: z.url(),
-    code_verifier: z.string().optional()
+  grant_type: z.enum(['authorization_code', 'refresh_token']),
+  refresh_token: z.string().optional(),
+  code: z.string().optional(),
+  client_id: z.string(),
+  redirect_uri: z.url(),
+  code_verifier: z.string().optional()
 });
 
 /**
  * OAuth2 token response
  */
 export const zOAuthTokenResponse = z.object({
-    access_token: z.string(),
-    refresh_token: z.string().optional(),
-    scope: z.string(),
-    token_type: z.enum(['Bearer']),
-    expires_in: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional()
+  access_token: z.string(),
+  refresh_token: z.string().optional(),
+  scope: z.string(),
+  token_type: z.enum(['Bearer']),
+  expires_in: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional()
 });
 
 /**
  * OAuth2 token revocation request
  */
 export const zOAuthRevokeTokenRequest = z.object({
-    token: z.string(),
-    token_type_hint: z.enum(['access_token', 'refresh_token']).optional()
+  token: z.string(),
+  token_type_hint: z.enum(['access_token', 'refresh_token']).optional()
 });
 
 /**
  * License used by a photo
  */
 export const zPhotoLicense = z.object({
-    id: z.string(),
-    name: z.string(),
-    url: z.url()
+  id: z.string(),
+  name: z.string(),
+  url: z.url()
 });
 
 /**
  * The creator of a photo
  */
 export const zPhotographer = z.object({
-    name: z.string(),
-    url: z.url().optional()
+  name: z.string(),
+  url: z.url().optional()
 });
 
 /**
  * A photo of a station
  */
 export const zPhoto = z.object({
-    id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    photographer: z.string(),
-    path: z.string(),
-    createdAt: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    license: z.string(),
-    outdated: z.boolean().optional().default(false)
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  photographer: z.string(),
+  path: z.string(),
+  createdAt: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  license: z.string(),
+  outdated: z.boolean().optional().default(false)
 });
 
 /**
@@ -73,130 +73,130 @@ export const zPhotographers = z.record(z.string(), z.unknown());
  * Provider App information
  */
 export const zProviderApp = z.object({
-    type: z.enum([
-        'android',
-        'ios',
-        'web'
-    ]),
-    name: z.string(),
-    url: z.string()
+  type: z.enum([
+    'android',
+    'ios',
+    'web'
+  ]),
+  name: z.string(),
+  url: z.string()
 });
 
 /**
  * the only accepted type is "CC0 1.0 Universell (CC0 1.0)", the others are listed for backward compatibility
  */
 export const zLicense = z.enum([
-    'CC0',
-    'CC0 1.0 Universell (CC0 1.0)',
-    'CC4',
-    'CC BY-SA 4.0',
-    'UNKNOWN'
+  'CC0',
+  'CC0 1.0 Universell (CC0 1.0)',
+  'CC4',
+  'CC BY-SA 4.0',
+  'UNKNOWN'
 ]);
 
 /**
  * User profile information
  */
 export const zUpdateProfile = z.object({
-    nickname: z.string().min(3).max(50),
-    email: z.email().min(3).max(100),
-    license: zLicense.optional(),
-    photoOwner: z.boolean().optional(),
-    link: z.url().optional(),
-    anonymous: z.boolean().optional(),
-    sendNotifications: z.boolean().optional()
+  nickname: z.string().min(3).max(50),
+  email: z.email().min(3).max(100),
+  license: zLicense.optional(),
+  photoOwner: z.boolean().optional(),
+  link: z.url().optional(),
+  anonymous: z.boolean().optional(),
+  sendNotifications: z.boolean().optional()
 });
 
 /**
  * User profile information
  */
 export const zProfile = z.object({
-    nickname: z.string(),
-    email: z.email().optional(),
-    license: zLicense,
-    photoOwner: z.boolean(),
-    link: z.url().optional(),
-    anonymous: z.boolean().optional(),
-    admin: z.boolean().optional(),
-    emailVerified: z.boolean().optional(),
-    sendNotifications: z.boolean().optional()
+  nickname: z.string(),
+  email: z.email().optional(),
+  license: zLicense,
+  photoOwner: z.boolean(),
+  link: z.url().optional(),
+  anonymous: z.boolean().optional(),
+  admin: z.boolean().optional(),
+  emailVerified: z.boolean().optional(),
+  sendNotifications: z.boolean().optional()
 });
 
 /**
  * Response status of photo uploads and problem reports
  */
 export const zInboxResponse = z.object({
-    state: z.enum([
-        'REVIEW',
-        'LAT_LON_OUT_OF_RANGE',
-        'NOT_ENOUGH_DATA',
-        'UNSUPPORTED_CONTENT_TYPE',
-        'PHOTO_TOO_LARGE',
-        'PHOTO_UPLOAD_NOT_ALLOWED',
-        'COUNTRY_DISABLED',
-        'CONFLICT',
-        'UNAUTHORIZED',
-        'ERROR'
-    ]),
-    message: z.string().optional(),
-    id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
-    filename: z.string().optional(),
-    inboxUrl: z.string().optional(),
-    crc32: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional()
+  state: z.enum([
+    'REVIEW',
+    'LAT_LON_OUT_OF_RANGE',
+    'NOT_ENOUGH_DATA',
+    'UNSUPPORTED_CONTENT_TYPE',
+    'PHOTO_TOO_LARGE',
+    'PHOTO_UPLOAD_NOT_ALLOWED',
+    'COUNTRY_DISABLED',
+    'CONFLICT',
+    'UNAUTHORIZED',
+    'ERROR'
+  ]),
+  message: z.string().optional(),
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
+  filename: z.string().optional(),
+  inboxUrl: z.string().optional(),
+  crc32: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional()
 });
 
 /**
  * Contains an inbox entry ID to query its state
  */
 export const zInboxStateQueryRequest = z.object({
-    id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' })
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' })
 });
 
 /**
  * counts the pending inbox entries
  */
 export const zInboxCountResponse = z.object({
-    pendingInboxEntries: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' })
+  pendingInboxEntries: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' })
 });
 
 /**
  * Response object for an AdminInbox command
  */
 export const zAdminInboxCommandResponse = z.object({
-    status: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }),
-    message: z.string()
+  status: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }),
+  message: z.string()
 });
 
 /**
  * types of problem reports
  */
 export const zProblemReportType = z.enum([
-    'WRONG_LOCATION',
-    'STATION_INACTIVE',
-    'STATION_ACTIVE',
-    'STATION_NONEXISTENT',
-    'WRONG_NAME',
-    'WRONG_PHOTO',
-    'PHOTO_OUTDATED',
-    'OTHER',
-    'DUPLICATE'
+  'WRONG_LOCATION',
+  'STATION_INACTIVE',
+  'STATION_ACTIVE',
+  'STATION_NONEXISTENT',
+  'WRONG_NAME',
+  'WRONG_PHOTO',
+  'PHOTO_OUTDATED',
+  'OTHER',
+  'DUPLICATE'
 ]);
 
 /**
  * Change password request object
  */
 export const zChangePassword = z.object({
-    newPassword: z.string()
+  newPassword: z.string()
 });
 
 /**
  * General error message
  */
 export const zGeneralErrorMessage = z.object({
-    timestamp: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
-    status: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }),
-    error: z.string().optional(),
-    message: z.string(),
-    path: z.string().optional()
+  timestamp: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
+  status: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }),
+  error: z.string().optional(),
+  message: z.string(),
+  path: z.string().optional()
 });
 
 /**
@@ -208,156 +208,156 @@ export const zCountryCode = z.string().length(2);
  * A station with its photos
  */
 export const zPhotoStation = z.object({
-    country: zCountryCode,
-    id: z.string(),
-    title: z.string(),
-    lat: z.number(),
-    lon: z.number(),
-    shortCode: z.string().nullish(),
-    inactive: z.boolean().optional().default(false),
-    photos: z.array(zPhoto)
+  country: zCountryCode,
+  id: z.string(),
+  title: z.string(),
+  lat: z.number(),
+  lon: z.number(),
+  shortCode: z.string().nullish(),
+  inactive: z.boolean().optional().default(false),
+  photos: z.array(zPhoto)
 });
 
 /**
  * Stations with photos
  */
 export const zPhotoStations = z.object({
-    photoBaseUrl: z.string(),
-    licenses: z.array(zPhotoLicense),
-    photographers: z.array(zPhotographer),
-    stations: z.array(zPhotoStation)
+  photoBaseUrl: z.string(),
+  licenses: z.array(zPhotoLicense),
+  photographers: z.array(zPhotographer),
+  stations: z.array(zPhotoStation)
 });
 
 /**
  * Supported Country with its configuration
  */
 export const zCountry = z.object({
-    code: zCountryCode,
-    name: z.string(),
-    email: z.string().optional(),
-    timetableUrlTemplate: z.string().nullish(),
-    overrideLicense: z.string().nullish(),
-    active: z.boolean(),
-    allowPhotoUploads: z.boolean(),
-    message: z.string().nullish(),
-    providerApps: z.array(zProviderApp).optional()
+  code: zCountryCode,
+  name: z.string(),
+  email: z.string().optional(),
+  timetableUrlTemplate: z.string().nullish(),
+  overrideLicense: z.string().nullish(),
+  active: z.boolean(),
+  allowPhotoUploads: z.boolean(),
+  message: z.string().nullish(),
+  providerApps: z.array(zProviderApp).optional()
 });
 
 /**
  * Inbox state query
  */
 export const zInboxStateQueryResponse = z.object({
-    id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    countryCode: zCountryCode.optional(),
-    stationId: z.string().optional(),
-    title: z.string().optional(),
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-    newTitle: z.string().optional(),
-    newLat: z.number().optional(),
-    newLon: z.number().optional(),
-    comment: z.string().optional(),
-    problemReportType: zProblemReportType.optional(),
-    rejectedReason: z.string().optional(),
-    filename: z.string().optional(),
-    inboxUrl: z.string().optional(),
-    crc32: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
-    state: z.enum([
-        'UNKNOWN',
-        'REVIEW',
-        'CONFLICT',
-        'ACCEPTED',
-        'REJECTED'
-    ]),
-    createdAt: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional()
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  countryCode: zCountryCode.optional(),
+  stationId: z.string().optional(),
+  title: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+  newTitle: z.string().optional(),
+  newLat: z.number().optional(),
+  newLon: z.number().optional(),
+  comment: z.string().optional(),
+  problemReportType: zProblemReportType.optional(),
+  rejectedReason: z.string().optional(),
+  filename: z.string().optional(),
+  inboxUrl: z.string().optional(),
+  crc32: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
+  state: z.enum([
+    'UNKNOWN',
+    'REVIEW',
+    'CONFLICT',
+    'ACCEPTED',
+    'REJECTED'
+  ]),
+  createdAt: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional()
 });
 
 /**
  * Represents an uploaded photo under review
  */
 export const zPublicInboxEntry = z.object({
-    countryCode: zCountryCode.optional(),
-    stationId: z.string().optional(),
-    title: z.string(),
-    lat: z.number(),
-    lon: z.number()
+  countryCode: zCountryCode.optional(),
+  stationId: z.string().optional(),
+  title: z.string(),
+  lat: z.number(),
+  lon: z.number()
 });
 
 /**
  * Represents an uploaded photo with processing state
  */
 export const zInboxEntry = z.object({
-    id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    countryCode: zCountryCode.optional(),
-    stationId: z.string().optional(),
-    title: z.string().optional(),
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-    newTitle: z.string().optional(),
-    newLat: z.number().optional(),
-    newLon: z.number().optional(),
-    photographerNickname: z.string(),
-    photographerEmail: z.string().optional(),
-    photoId: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
-    comment: z.string(),
-    createdAt: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    done: z.boolean(),
-    filename: z.string().optional(),
-    inboxUrl: z.string().optional(),
-    hasPhoto: z.boolean(),
-    hasConflict: z.boolean().optional(),
-    problemReportType: zProblemReportType.optional(),
-    isProcessed: z.boolean().optional(),
-    active: z.boolean().optional()
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  countryCode: zCountryCode.optional(),
+  stationId: z.string().optional(),
+  title: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+  newTitle: z.string().optional(),
+  newLat: z.number().optional(),
+  newLon: z.number().optional(),
+  photographerNickname: z.string(),
+  photographerEmail: z.string().optional(),
+  photoId: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
+  comment: z.string(),
+  createdAt: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  done: z.boolean(),
+  filename: z.string().optional(),
+  inboxUrl: z.string().optional(),
+  hasPhoto: z.boolean(),
+  hasConflict: z.boolean().optional(),
+  problemReportType: zProblemReportType.optional(),
+  isProcessed: z.boolean().optional(),
+  active: z.boolean().optional()
 });
 
 /**
  * command to import or reject an inbox entry
  */
 export const zInboxCommand = z.object({
-    id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    countryCode: zCountryCode.optional(),
-    stationId: z.string().optional(),
-    title: z.string().optional(),
-    lat: z.number().optional(),
-    lon: z.number().optional(),
-    rejectReason: z.string().optional(),
-    DS100: z.string().optional(),
-    active: z.boolean().optional(),
-    conflictResolution: z.enum([
-        'DO_NOTHING',
-        'OVERWRITE_EXISTING_PHOTO',
-        'IMPORT_AS_NEW_PRIMARY_PHOTO',
-        'IMPORT_AS_NEW_SECONDARY_PHOTO',
-        'IGNORE_NEARBY_STATION'
-    ]).optional(),
-    command: z.enum([
-        'IMPORT_PHOTO',
-        'IMPORT_MISSING_STATION',
-        'ACTIVATE_STATION',
-        'DEACTIVATE_STATION',
-        'DELETE_STATION',
-        'DELETE_PHOTO',
-        'MARK_SOLVED',
-        'REJECT',
-        'CHANGE_NAME',
-        'UPDATE_LOCATION',
-        'PHOTO_OUTDATED'
-    ])
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  countryCode: zCountryCode.optional(),
+  stationId: z.string().optional(),
+  title: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
+  rejectReason: z.string().optional(),
+  DS100: z.string().optional(),
+  active: z.boolean().optional(),
+  conflictResolution: z.enum([
+    'DO_NOTHING',
+    'OVERWRITE_EXISTING_PHOTO',
+    'IMPORT_AS_NEW_PRIMARY_PHOTO',
+    'IMPORT_AS_NEW_SECONDARY_PHOTO',
+    'IGNORE_NEARBY_STATION'
+  ]).optional(),
+  command: z.enum([
+    'IMPORT_PHOTO',
+    'IMPORT_MISSING_STATION',
+    'ACTIVATE_STATION',
+    'DEACTIVATE_STATION',
+    'DELETE_STATION',
+    'DELETE_PHOTO',
+    'MARK_SOLVED',
+    'REJECT',
+    'CHANGE_NAME',
+    'UPDATE_LOCATION',
+    'PHOTO_OUTDATED'
+  ])
 });
 
 /**
  * Represents a report of a problem with a station
  */
 export const zProblemReport = z.object({
-    countryCode: zCountryCode,
-    stationId: z.string(),
-    title: z.string().optional(),
-    photoId: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
-    comment: z.string(),
-    type: zProblemReportType,
-    lat: z.number().optional(),
-    lon: z.number().optional()
+  countryCode: zCountryCode,
+  stationId: z.string(),
+  title: z.string().optional(),
+  photoId: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
+  comment: z.string(),
+  type: zProblemReportType,
+  lat: z.number().optional(),
+  lon: z.number().optional()
 });
 
 /**
@@ -369,11 +369,11 @@ export const zCountryCodeOptional = z.string().length(2).nullable();
  * Statistic of number of stations with and without photos
  */
 export const zStatistic = z.object({
-    total: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    withPhoto: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    withoutPhoto: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    photographers: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
-    countryCode: zCountryCodeOptional.optional()
+  total: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  withPhoto: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  withoutPhoto: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  photographers: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  countryCode: zCountryCodeOptional.optional()
 });
 
 /**
@@ -382,18 +382,14 @@ export const zStatistic = z.object({
  */
 export const zAuthorization = z.string();
 
-export const zGetOAuth2AuthorizeData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        client_id: z.string(),
-        scope: z.enum(['all']),
-        response_type: z.enum(['code', 'token']),
-        redirect_uri: z.url(),
-        state: z.string().optional(),
-        code_challenge: z.string().optional(),
-        code_challenge_method: z.enum(['S256']).optional()
-    })
+export const zGetOAuth2AuthorizeQuery = z.object({
+  client_id: z.string(),
+  scope: z.enum(['all']),
+  response_type: z.enum(['code', 'token']),
+  redirect_uri: z.url(),
+  state: z.string().optional(),
+  code_challenge: z.string().optional(),
+  code_challenge_method: z.enum(['S256']).optional()
 });
 
 /**
@@ -401,13 +397,13 @@ export const zGetOAuth2AuthorizeData = z.object({
  */
 export const zGetOAuth2AuthorizeResponse = zGeneralErrorMessage;
 
-export const zPostOAuth2TokenData = z.object({
-    body: zOAuthTokenRequest,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+/**
+ * OAuth token request body
+ */
+export const zPostOAuth2TokenBody = zOAuthTokenRequest;
+
+export const zPostOAuth2TokenHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -415,22 +411,15 @@ export const zPostOAuth2TokenData = z.object({
  */
 export const zPostOAuth2TokenResponse = zOAuthTokenResponse;
 
-export const zPostOAuth2RevokeData = z.object({
-    body: zOAuthRevokeTokenRequest,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zPostOAuth2RevokeBody = zOAuthRevokeTokenRequest;
+
+export const zPostOAuth2RevokeHeaders = z.object({
+  Authorization: z.string()
 });
 
-export const zGetPhotoStationByIdData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        country: zCountryCode,
-        id: z.string()
-    }),
-    query: z.never().optional()
+export const zGetPhotoStationByIdPath = z.object({
+  country: zCountryCode,
+  id: z.string()
 });
 
 /**
@@ -438,15 +427,13 @@ export const zGetPhotoStationByIdData = z.object({
  */
 export const zGetPhotoStationByIdResponse = zPhotoStations;
 
-export const zGetPhotoStationByCountryData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        country: zCountryCode
-    }),
-    query: z.object({
-        hasPhoto: z.boolean().optional(),
-        isActive: z.boolean().optional()
-    }).optional()
+export const zGetPhotoStationByCountryPath = z.object({
+  country: zCountryCode
+});
+
+export const zGetPhotoStationByCountryQuery = z.object({
+  hasPhoto: z.boolean().optional(),
+  isActive: z.boolean().optional()
 });
 
 /**
@@ -454,14 +441,12 @@ export const zGetPhotoStationByCountryData = z.object({
  */
 export const zGetPhotoStationByCountryResponse = zPhotoStations;
 
-export const zGetPhotoStationsByPhotographerData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        photographer: z.string()
-    }),
-    query: z.object({
-        country: zCountryCode.optional()
-    }).optional()
+export const zGetPhotoStationsByPhotographerPath = z.object({
+  photographer: z.string()
+});
+
+export const zGetPhotoStationsByPhotographerQuery = z.object({
+  country: zCountryCode.optional()
 });
 
 /**
@@ -469,12 +454,8 @@ export const zGetPhotoStationsByPhotographerData = z.object({
  */
 export const zGetPhotoStationsByPhotographerResponse = zPhotoStations;
 
-export const zGetPhotoStationsByRecentPhotoImportsData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        sinceHours: z.int().gte(1).lte(800).optional().default(10)
-    }).optional()
+export const zGetPhotoStationsByRecentPhotoImportsQuery = z.object({
+  sinceHours: z.int().gte(1).lte(800).optional().default(10)
 });
 
 /**
@@ -482,12 +463,8 @@ export const zGetPhotoStationsByRecentPhotoImportsData = z.object({
  */
 export const zGetPhotoStationsByRecentPhotoImportsResponse = zPhotoStations;
 
-export const zGetPhotographersData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: zCountryCode.optional()
-    }).optional()
+export const zGetPhotographersQuery = z.object({
+  country: zCountryCode.optional()
 });
 
 /**
@@ -495,12 +472,8 @@ export const zGetPhotographersData = z.object({
  */
 export const zGetPhotographersResponse = zPhotographers;
 
-export const zGetStatsData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        country: zCountryCode.optional()
-    }).optional()
+export const zGetStatsQuery = z.object({
+  country: zCountryCode.optional()
 });
 
 /**
@@ -508,12 +481,8 @@ export const zGetStatsData = z.object({
  */
 export const zGetStatsResponse = zStatistic;
 
-export const zGetCountriesData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        onlyActive: z.boolean().optional()
-    }).optional()
+export const zGetCountriesQuery = z.object({
+  onlyActive: z.boolean().optional()
 });
 
 /**
@@ -521,21 +490,21 @@ export const zGetCountriesData = z.object({
  */
 export const zGetCountriesResponse = z.array(zCountry);
 
-export const zPostPhotoUploadData = z.object({
-    body: z.string().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string(),
-        Country: zCountryCode.optional(),
-        'Station-Id': z.string().optional(),
-        'Content-Type': z.string(),
-        'Station-Title': z.string().optional(),
-        Latitude: z.number().optional(),
-        Longitude: z.number().optional(),
-        Comment: z.string().optional(),
-        Active: z.boolean().optional()
-    })
+/**
+ * image, required for existing station, optional for missing stations
+ */
+export const zPostPhotoUploadBody = z.string();
+
+export const zPostPhotoUploadHeaders = z.object({
+  Authorization: z.string(),
+  Country: zCountryCode.optional(),
+  'Station-Id': z.string().optional(),
+  'Content-Type': z.string(),
+  'Station-Title': z.string().optional(),
+  Latitude: z.number().optional(),
+  Longitude: z.number().optional(),
+  Comment: z.string().optional(),
+  Active: z.boolean().optional()
 });
 
 /**
@@ -543,13 +512,13 @@ export const zPostPhotoUploadData = z.object({
  */
 export const zPostPhotoUploadResponse = zInboxResponse;
 
-export const zPostReportProblemData = z.object({
-    body: zProblemReport,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+/**
+ * The problem report
+ */
+export const zPostReportProblemBody = zProblemReport;
+
+export const zPostReportProblemHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -557,15 +526,12 @@ export const zPostReportProblemData = z.object({
  */
 export const zPostReportProblemResponse = zInboxResponse;
 
-export const zGetUserInboxData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        showCompletedEntries: z.boolean().optional()
-    }).optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zGetUserInboxHeaders = z.object({
+  Authorization: z.string()
+});
+
+export const zGetUserInboxQuery = z.object({
+  showCompletedEntries: z.boolean().optional()
 });
 
 /**
@@ -573,13 +539,13 @@ export const zGetUserInboxData = z.object({
  */
 export const zGetUserInboxResponse = z.array(zInboxStateQueryResponse);
 
-export const zPostUserInboxData = z.object({
-    body: z.array(zInboxStateQueryRequest),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+/**
+ * Inbox state query request
+ */
+export const zPostUserInboxBody = z.array(zInboxStateQueryRequest);
+
+export const zPostUserInboxHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -587,12 +553,8 @@ export const zPostUserInboxData = z.object({
  */
 export const zPostUserInboxResponse = z.array(zInboxStateQueryResponse);
 
-export const zDeleteUserInboxData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' })
-    }),
-    query: z.never().optional()
+export const zDeleteUserInboxPath = z.object({
+  id: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' })
 });
 
 /**
@@ -600,35 +562,18 @@ export const zDeleteUserInboxData = z.object({
  */
 export const zDeleteUserInboxResponse = z.void();
 
-export const zGetPublicInboxData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional()
-});
-
 /**
  * array of public inbox objects
  */
 export const zGetPublicInboxResponse = z.array(zPublicInboxEntry);
-
-export const zGetAdminInboxCountData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional()
-});
 
 /**
  * count of pending inbox items
  */
 export const zGetAdminInboxCountResponse = zInboxCountResponse;
 
-export const zGetAdminInboxData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zGetAdminInboxHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -636,13 +581,10 @@ export const zGetAdminInboxData = z.object({
  */
 export const zGetAdminInboxResponse = z.array(zInboxEntry);
 
-export const zPostAdminInboxData = z.object({
-    body: zInboxCommand,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zPostAdminInboxBody = zInboxCommand;
+
+export const zPostAdminInboxHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -650,12 +592,8 @@ export const zPostAdminInboxData = z.object({
  */
 export const zPostAdminInboxResponse = zAdminInboxCommandResponse;
 
-export const zGetEmailVerificationData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        token: z.string()
-    }),
-    query: z.never().optional()
+export const zGetEmailVerificationPath = z.object({
+  token: z.string()
 });
 
 /**
@@ -663,31 +601,21 @@ export const zGetEmailVerificationData = z.object({
  */
 export const zGetEmailVerificationResponse = z.string();
 
-export const zPostResendEmailVerificationData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zPostResendEmailVerificationHeaders = z.object({
+  Authorization: z.string()
 });
 
-export const zPostChangePasswordData = z.object({
-    body: zChangePassword,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+/**
+ * ChangePassword
+ */
+export const zPostChangePasswordBody = zChangePassword;
+
+export const zPostChangePasswordHeaders = z.object({
+  Authorization: z.string()
 });
 
-export const zDeleteMyProfileData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zDeleteMyProfileHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -695,13 +623,8 @@ export const zDeleteMyProfileData = z.object({
  */
 export const zDeleteMyProfileResponse = z.void();
 
-export const zGetMyProfileData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+export const zGetMyProfileHeaders = z.object({
+  Authorization: z.string()
 });
 
 /**
@@ -709,24 +632,22 @@ export const zGetMyProfileData = z.object({
  */
 export const zGetMyProfileResponse = zProfile;
 
-export const zPostMyProfileData = z.object({
-    body: zUpdateProfile,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        Authorization: z.string()
-    })
+/**
+ * Userprofile
+ */
+export const zPostMyProfileBody = zUpdateProfile;
+
+export const zPostMyProfileHeaders = z.object({
+  Authorization: z.string()
 });
 
-export const zGetPhotosData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        country: zCountryCode,
-        filename: z.string()
-    }),
-    query: z.object({
-        width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
-    }).optional()
+export const zGetPhotosPath = z.object({
+  country: zCountryCode,
+  filename: z.string()
+});
+
+export const zGetPhotosQuery = z.object({
+  width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
 });
 
 /**
@@ -734,14 +655,12 @@ export const zGetPhotosData = z.object({
  */
 export const zGetPhotosResponse = z.string();
 
-export const zGetInboxFileData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        filename: z.string()
-    }),
-    query: z.object({
-        width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
-    }).optional()
+export const zGetInboxFilePath = z.object({
+  filename: z.string()
+});
+
+export const zGetInboxFileQuery = z.object({
+  width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
 });
 
 /**
@@ -749,14 +668,12 @@ export const zGetInboxFileData = z.object({
  */
 export const zGetInboxFileResponse = z.string();
 
-export const zGetInboxProcessedFileData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        filename: z.string()
-    }),
-    query: z.object({
-        width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
-    }).optional()
+export const zGetInboxProcessedFilePath = z.object({
+  filename: z.string()
+});
+
+export const zGetInboxProcessedFileQuery = z.object({
+  width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
 });
 
 /**
@@ -764,14 +681,12 @@ export const zGetInboxProcessedFileData = z.object({
  */
 export const zGetInboxProcessedFileResponse = z.string();
 
-export const zGetInboxDoneFileData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        filename: z.string()
-    }),
-    query: z.object({
-        width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
-    }).optional()
+export const zGetInboxDoneFilePath = z.object({
+  filename: z.string()
+});
+
+export const zGetInboxDoneFileQuery = z.object({
+  width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
 });
 
 /**
@@ -779,14 +694,12 @@ export const zGetInboxDoneFileData = z.object({
  */
 export const zGetInboxDoneFileResponse = z.string();
 
-export const zGetInboxRejectedFileData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        filename: z.string()
-    }),
-    query: z.object({
-        width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
-    }).optional()
+export const zGetInboxRejectedFilePath = z.object({
+  filename: z.string()
+});
+
+export const zGetInboxRejectedFileQuery = z.object({
+  width: z.int().min(-2147483648, { error: 'Invalid value: Expected int32 to be >= -2147483648' }).max(2147483647, { error: 'Invalid value: Expected int32 to be <= 2147483647' }).optional()
 });
 
 /**

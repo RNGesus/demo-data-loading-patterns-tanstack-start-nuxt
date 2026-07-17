@@ -1,6 +1,6 @@
 import nodeBuild from '@hono/vite-build/node'
 import devServer from '@hono/vite-dev-server'
-import nodeAdapter from '@hono/vite-dev-server/node'
+import { nodeAdapter } from '@hono/vite-dev-server/node'
 import ssg from '@hono/vite-ssg'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { data: countries } = await useFetch("/api/stationCountries/countries");
-const route = useRoute("stationCountries-country");
+const { data: countries } = await useFetch('/api/stationCountries/countries')
+const route = useRoute('stationCountries-country')
 </script>
 
 <template>

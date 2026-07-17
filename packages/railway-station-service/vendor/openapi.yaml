@@ -89,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /oauth2/token:
     post:
@@ -99,27 +99,27 @@ paths:
       tags:
         - oauth
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         required: true
         description: OAuth token request body
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/OAuthTokenRequest'
+              $ref: "#/components/schemas/OAuthTokenRequest"
       responses:
         "200":
           description: successful token request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OAuthTokenResponse'
+                $ref: "#/components/schemas/OAuthTokenResponse"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /oauth2/revoke:
     post:
@@ -129,13 +129,13 @@ paths:
       tags:
         - oauth
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         required: true
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/OAuthRevokeTokenRequest'
+              $ref: "#/components/schemas/OAuthRevokeTokenRequest"
       responses:
         "200":
           description: successfully revoked the token
@@ -144,7 +144,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photoStationById/{country}/{id}:
     get:
@@ -158,7 +158,7 @@ paths:
           description: country code
           required: true
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
         - name: id
           in: path
           description: id of the station
@@ -171,16 +171,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoStations'
+                $ref: "#/components/schemas/PhotoStations"
         "404":
           description: Station not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photoStationsByCountry/{country}:
     get:
@@ -197,7 +197,7 @@ paths:
           description: country code
           required: true
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
         - name: hasPhoto
           in: query
           description: filter by photo available/missing
@@ -214,13 +214,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoStations'
+                $ref: "#/components/schemas/PhotoStations"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photoStationsByPhotographer/{photographer}:
     get:
@@ -242,20 +242,20 @@ paths:
           in: query
           description: country code
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoStations'
+                $ref: "#/components/schemas/PhotoStations"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photoStationsByRecentPhotoImports:
     get:
@@ -284,13 +284,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoStations'
+                $ref: "#/components/schemas/PhotoStations"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photographers:
     get:
@@ -304,14 +304,14 @@ paths:
           description: filter by country code
           required: false
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Photographers'
+                $ref: "#/components/schemas/Photographers"
         "400":
           description: Bad Request
           content:
@@ -323,7 +323,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /stats:
     get:
@@ -336,23 +336,23 @@ paths:
           in: query
           description: filter by country code
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Statistic'
+                $ref: "#/components/schemas/Statistic"
         "404":
           description: Country not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /countries:
     get:
@@ -374,13 +374,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Country'
+                  $ref: "#/components/schemas/Country"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photoUpload:
     post:
@@ -389,12 +389,12 @@ paths:
       tags:
         - photoUpload
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
         - name: Country
           in: header
           description: country code
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
         - name: Station-Id
           in: header
           description: id of the railwaystation
@@ -456,40 +456,40 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "401":
           description: authorization failed
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "403":
           description: forbidden
-          content: { }
+          content: {}
         "409":
           description: photo already exists
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "413":
           description: image too large (maximum 20 MB)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
       x-codegen-request-body-name: image
 
   /reportProblem:
@@ -499,13 +499,13 @@ paths:
       tags:
         - inbox
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         description: The problem report
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/ProblemReport'
+              $ref: "#/components/schemas/ProblemReport"
         required: true
       responses:
         "202":
@@ -513,28 +513,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "401":
           description: authorization failed
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxResponse'
+                $ref: "#/components/schemas/InboxResponse"
         "403":
           description: forbidden
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
       x-codegen-request-body-name: problemReport
 
   /userInbox:
@@ -544,7 +544,7 @@ paths:
       tags:
         - inbox
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
         - name: showCompletedEntries
           in: query
           description: show completed entries or only entries in state review
@@ -559,20 +559,20 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/InboxStateQueryResponse'
+                  $ref: "#/components/schemas/InboxStateQueryResponse"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
     post:
       summary: Query the state of photo uploads of the authorized user
       operationId: postUserInbox
       tags:
         - inbox
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         description: Inbox state query request
         content:
@@ -580,7 +580,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/InboxStateQueryRequest'
+                $ref: "#/components/schemas/InboxStateQueryRequest"
         required: true
       responses:
         "200":
@@ -590,13 +590,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/InboxStateQueryResponse'
+                  $ref: "#/components/schemas/InboxStateQueryResponse"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
       x-codegen-request-body-name: UploadStateQueries
 
   /userInbox/{id}:
@@ -618,19 +618,19 @@ paths:
           description: inbox entry got deleted
         "400":
           description: bad request, e.g. if the inbox entry is already done and can't be deleted anymore
-          content: { }
+          content: {}
         "401":
           description: authorization failed
-          content: { }
+          content: {}
         "403":
           description: forbidden
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /publicInbox:
     get:
@@ -646,13 +646,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicInboxEntry'
+                  $ref: "#/components/schemas/PublicInboxEntry"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /adminInboxCount:
     get:
@@ -666,13 +666,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InboxCountResponse'
+                $ref: "#/components/schemas/InboxCountResponse"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /adminInbox:
     get:
@@ -681,7 +681,7 @@ paths:
       tags:
         - inbox
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       responses:
         "200":
           description: array of inbox objects
@@ -690,19 +690,19 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/InboxEntry'
+                  $ref: "#/components/schemas/InboxEntry"
         "401":
           description: not authorized
-          content: { }
+          content: {}
         "403":
           description: forbidden
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
     post:
       summary: |
         Import or reject an uploaded photo or a problem report from the inbox
@@ -710,12 +710,12 @@ paths:
       tags:
         - inbox
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InboxCommand'
+              $ref: "#/components/schemas/InboxCommand"
         required: true
       responses:
         "200":
@@ -723,25 +723,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AdminInboxCommandResponse'
+                $ref: "#/components/schemas/AdminInboxCommandResponse"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AdminInboxCommandResponse'
+                $ref: "#/components/schemas/AdminInboxCommandResponse"
         "401":
           description: not authorized
-          content: { }
+          content: {}
         "403":
           description: forbidden
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
       x-codegen-request-body-name: UploadCommand
 
   /emailVerification/{token}:
@@ -766,13 +766,13 @@ paths:
                 type: string
         "404":
           description: token not found, verification failed
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /resendEmailVerification:
     post:
@@ -781,17 +781,17 @@ paths:
       tags:
         - profile
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       responses:
         "200":
           description: email successfully sent
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /changePassword:
     post:
@@ -800,18 +800,18 @@ paths:
       tags:
         - profile
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         description: ChangePassword
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChangePassword'
+              $ref: "#/components/schemas/ChangePassword"
         required: true
       responses:
         "200":
           description: password changed
-          content: { }
+          content: {}
         "400":
           description: Bad Request
           content:
@@ -820,13 +820,13 @@ paths:
                 type: string
         "404":
           description: User not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /myProfile:
     get:
@@ -835,26 +835,26 @@ paths:
       tags:
         - profile
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Profile'
+                $ref: "#/components/schemas/Profile"
         "401":
           description: authorization failed
-          content: { }
+          content: {}
         "403":
           description: forbidden
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
     post:
       summary: Update the users profile.
       description: |
@@ -863,18 +863,18 @@ paths:
       tags:
         - profile
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       requestBody:
         description: Userprofile
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProfile'
+              $ref: "#/components/schemas/UpdateProfile"
         required: true
       responses:
         "200":
           description: ok
-          content: { }
+          content: {}
         "400":
           description: Bad Request
           content:
@@ -883,10 +883,10 @@ paths:
                 type: string
         "401":
           description: authorization failed
-          content: { }
+          content: {}
         "403":
           description: forbidden
-          content: { }
+          content: {}
         "409":
           description: conflict with existing name or email
           content:
@@ -898,7 +898,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
       x-codegen-request-body-name: profile
     delete:
       summary: Delete the users profile.
@@ -911,22 +911,22 @@ paths:
       tags:
         - profile
       parameters:
-        - $ref: '#/components/parameters/Authorization'
+        - $ref: "#/components/parameters/Authorization"
       responses:
         "204":
           description: delete action has been enacted, no further information
         "401":
           description: authorization failed
-          content: { }
+          content: {}
         "403":
           description: forbidden
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /photos/{country}/{filename}:
     get:
@@ -940,7 +940,7 @@ paths:
           description: country code
           required: true
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: "#/components/schemas/CountryCode"
         - name: filename
           in: path
           description: filename of the photo
@@ -967,13 +967,13 @@ paths:
                 format: binary
         "404":
           description: file not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /inbox/{filename}:
     get:
@@ -1008,13 +1008,13 @@ paths:
                 format: binary
         "404":
           description: file not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /inbox/processed/{filename}:
     get:
@@ -1049,13 +1049,13 @@ paths:
                 format: binary
         "404":
           description: file not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /inbox/done/{filename}:
     get:
@@ -1090,13 +1090,13 @@ paths:
                 format: binary
         "404":
           description: file not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
   /inbox/rejected/{filename}:
     get:
@@ -1131,13 +1131,13 @@ paths:
                 format: binary
         "404":
           description: file not found
-          content: { }
+          content: {}
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeneralErrorMessage'
+                $ref: "#/components/schemas/GeneralErrorMessage"
 
 components:
   parameters:
@@ -1224,17 +1224,17 @@ components:
           type: array
           description: List of used licenses, might be empty if no photos available
           items:
-            $ref: '#/components/schemas/PhotoLicense'
+            $ref: "#/components/schemas/PhotoLicense"
         photographers:
           type: array
           description: List of all photographers, might be empty if no photos available
           items:
-            $ref: '#/components/schemas/Photographer'
+            $ref: "#/components/schemas/Photographer"
         stations:
           type: array
           description: List of the stations
           items:
-            $ref: '#/components/schemas/PhotoStation'
+            $ref: "#/components/schemas/PhotoStation"
       required:
         - "photoBaseUrl"
         - "licenses"
@@ -1282,7 +1282,7 @@ components:
       type: object
       properties:
         country:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         id:
           type: string
           description: Id of the station within the country
@@ -1311,7 +1311,7 @@ components:
           type: array
           description: Photos of the station. If more than one photo is given, the first one is the primary photo. List might be empty or only the primary photo provided.
           items:
-            $ref: '#/components/schemas/Photo'
+            $ref: "#/components/schemas/Photo"
       required:
         - "country"
         - "id"
@@ -1377,7 +1377,7 @@ components:
           type: integer
           format: int64
         countryCode:
-          $ref: '#/components/schemas/CountryCodeOptional'
+          $ref: "#/components/schemas/CountryCodeOptional"
       required:
         - total
         - withPhoto
@@ -1389,7 +1389,7 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         name:
           type: string
           description: Name of the country
@@ -1420,7 +1420,7 @@ components:
           type: array
           description: array with links to provider apps
           items:
-            $ref: '#/components/schemas/ProviderApp'
+            $ref: "#/components/schemas/ProviderApp"
       required:
         - code
         - name
@@ -1470,7 +1470,7 @@ components:
           maxLength: 100
           minLength: 3
         license:
-          $ref: '#/components/schemas/License'
+          $ref: "#/components/schemas/License"
         photoOwner:
           type: boolean
         link:
@@ -1494,7 +1494,7 @@ components:
           type: string
           format: email
         license:
-          $ref: '#/components/schemas/License'
+          $ref: "#/components/schemas/License"
         photoOwner:
           type: boolean
         link:
@@ -1566,7 +1566,7 @@ components:
           type: integer
           format: int64
         countryCode:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         stationId:
           type: string
         title:
@@ -1588,7 +1588,7 @@ components:
         comment:
           type: string
         problemReportType:
-          $ref: '#/components/schemas/ProblemReportType'
+          $ref: "#/components/schemas/ProblemReportType"
         rejectedReason:
           type: string
         filename:
@@ -1621,7 +1621,7 @@ components:
       type: object
       properties:
         countryCode:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         stationId:
           type: string
         title:
@@ -1645,7 +1645,7 @@ components:
           type: integer
           format: int64
         countryCode:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         stationId:
           type: string
         title:
@@ -1693,7 +1693,7 @@ components:
           type: boolean
           description: conflict with another upload or existing photo
         problemReportType:
-          $ref: '#/components/schemas/ProblemReportType'
+          $ref: "#/components/schemas/ProblemReportType"
         isProcessed:
           type: boolean
           description: was this image process (e.g. pixelated)
@@ -1716,7 +1716,7 @@ components:
           type: integer
           format: int64
         countryCode:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         stationId:
           type: string
           description: ID of a new station
@@ -1792,7 +1792,7 @@ components:
       type: object
       properties:
         countryCode:
-          $ref: '#/components/schemas/CountryCode'
+          $ref: "#/components/schemas/CountryCode"
         stationId:
           type: string
         title:
@@ -1805,7 +1805,7 @@ components:
         comment:
           type: string
         type:
-          $ref: '#/components/schemas/ProblemReportType'
+          $ref: "#/components/schemas/ProblemReportType"
         lat:
           type: number
           format: double

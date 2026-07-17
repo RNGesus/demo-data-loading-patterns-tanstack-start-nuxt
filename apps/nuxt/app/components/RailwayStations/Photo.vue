@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Photo } from "@project/railway-station-service/types";
+import type { Photo } from '@project/railway-station-service/types'
 
 defineProps<{
-  photo: Photo;
-  photoBaseUrl: string;
-  country: string;
-}>();
+  photo: Photo
+  photoBaseUrl: string
+  country: string
+}>()
 </script>
 
 <template>
@@ -20,9 +20,7 @@ defineProps<{
       :alt="`Photo of a railway station in ${country.toUpperCase()} by ${photo.photographer}`"
     />
     <figcaption class="bg-base-300 px-2 py-1">
-      {{
-        `by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString("en-GB")}`
-      }}
+      {{ `by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString('en-GB')}` }}
     </figcaption>
   </figure>
 </template>

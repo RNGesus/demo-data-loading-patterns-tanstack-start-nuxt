@@ -14,17 +14,17 @@ pnpm --filter datastar-hono dev
 Or use the workspace shortcut:
 
 ```bash
-pnpm dev:datastar-hono
+vp datastar-hono#dev
 ```
 
 Open `http://localhost:3000`.
 
 ## Scripts
 
-- `pnpm --filter datastar-hono dev` starts the Vite dev server around the Hono app.
-- `pnpm --filter datastar-hono typecheck` runs TypeScript without emitting files.
-- `pnpm --filter datastar-hono build` builds client assets, prerendered pages, and the Node server.
-- `pnpm --filter datastar-hono start` runs the built Node server from `dist/server.js`.
+- `vp run datastar-hono#dev` starts the Vite dev server around the Hono app.
+- `vp run datastar-hono#typecheck` runs TypeScript without emitting files.
+- `vp run datastar-hono#build` builds client assets, prerendered pages, and the Node server.
+- `vp run datastar-hono#start` runs the built Node server from `dist/server.js`.
 
 ## Structure
 
@@ -56,6 +56,6 @@ runtime state after mutations until a persistent backing store replaces the demo
 ## Verification
 
 ```bash
-pnpm --filter datastar-hono typecheck
-pnpm --filter datastar-hono build
+vp run datastar-hono#typecheck
+vp run datastar-hono#build
 ```

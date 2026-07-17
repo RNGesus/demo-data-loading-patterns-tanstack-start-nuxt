@@ -1,0 +1,181 @@
+diff --git a/dist/module.d.ts b/dist/module.d.ts
+index dd3864d8a58916074becc51026b279d82cdb3c98..1f7b6447622cedf7236bed2587ad3821193f7787 100644
+--- a/dist/module.d.ts
++++ b/dist/module.d.ts
+@@ -1,6 +1,6 @@
+ import * as _nuxt_schema from '@nuxt/schema';
+ import { Nuxt, RuntimeConfig } from '@nuxt/schema';
+-import { H3Event } from 'h3';
++import { H3Event } from 'nitro/h3';
+ 
+ type ProviderSetup = (providerOptions: ImageModuleProvider, moduleOptions: ModuleOptions, nuxt: Nuxt) => void | Promise<void>;
+ interface InputProvider<T = any> {
+diff --git a/dist/runtime/components/NuxtImg.vue b/dist/runtime/components/NuxtImg.vue
+index fce22a79062434f7ff300ebad0a308c078e6965f..206aa33259b1de0c119fd142d22f7565594a3437 100644
+--- a/dist/runtime/components/NuxtImg.vue
++++ b/dist/runtime/components/NuxtImg.vue
+@@ -22,7 +22,7 @@ import { useImage } from "../composables";
+ import { prerenderStaticImages } from "../utils/prerender";
+ import { markFeatureUsage } from "../utils/performance";
+ import { useImageProps } from "../utils/props";
+-import { useHead, useNuxtApp, useRequestEvent } from "#imports";
++import { useHead, useNuxtApp, useRequestEvent } from "nuxt/app";
+ const props = defineProps({
+   custom: { type: Boolean, required: false },
+   placeholder: { type: [Boolean, String, Number, Array], required: false },
+diff --git a/dist/runtime/components/NuxtPicture.vue b/dist/runtime/components/NuxtPicture.vue
+index e0f5c1fcda66f73f6ca761f6496f70a3af202567..f867dc2573bd069b3560d2bd4715cac38bc72523 100644
+--- a/dist/runtime/components/NuxtPicture.vue
++++ b/dist/runtime/components/NuxtPicture.vue
+@@ -27,7 +27,7 @@ import { prerenderStaticImages } from "../utils/prerender";
+ import { markFeatureUsage } from "../utils/performance";
+ import { useImage } from "../composables";
+ import { useImageProps } from "../utils/props";
+-import { useHead, useNuxtApp, useRequestEvent } from "#imports";
++import { useHead, useNuxtApp, useRequestEvent } from "nuxt/app";
+ defineOptions({ inheritAttrs: false });
+ defineSlots();
+ const props = defineProps({
+diff --git a/dist/runtime/composables.d.ts b/dist/runtime/composables.d.ts
+index b4ffa7835372fd7b0ce4065e9d1e0fa40620d93d..9bee8a12a38f19553b7a2306ff1f1923e06b1f32 100644
+--- a/dist/runtime/composables.d.ts
++++ b/dist/runtime/composables.d.ts
+@@ -1,3 +1,3 @@
+-import type { H3Event } from 'h3';
++import type { H3Event } from 'nitro/h3';
+ import type { $Img } from '@nuxt/image';
+ export declare const useImage: (event?: H3Event) => $Img;
+diff --git a/dist/runtime/composables.js b/dist/runtime/composables.js
+index 911d983551212975f87214428bddeb4746e06e9c..dbca7c8edc6bdfa27bb1da354d2b8c39c5a6ffd0 100644
+--- a/dist/runtime/composables.js
++++ b/dist/runtime/composables.js
+@@ -1,6 +1,6 @@
+ import { createImage } from "./image.js";
+ import { imageOptions } from "#build/image-options.mjs";
+-import { useNuxtApp, useRuntimeConfig } from "#imports";
++import { useNuxtApp, useRuntimeConfig } from "nuxt/app";
+ export const useImage = (event) => {
+   const config = useRuntimeConfig();
+   const nuxtApp = useNuxtApp();
+diff --git a/dist/runtime/plugins/image.js b/dist/runtime/plugins/image.js
+index 2d1fcb1eb91cd371199f369c5ea5f90d62047f57..7e66bb2ebda5064e9025e9b79d0aa1b5fc5b6d56 100644
+--- a/dist/runtime/plugins/image.js
++++ b/dist/runtime/plugins/image.js
+@@ -1,4 +1,5 @@
+-import { defineNuxtPlugin, useImage } from "#imports";
++import { defineNuxtPlugin } from "nuxt/app";
++import { useImage } from "../composables.js";
+ export default defineNuxtPlugin(() => {
+   return {
+     provide: {
+diff --git a/dist/runtime/providers/aliyun.js b/dist/runtime/providers/aliyun.js
+index 21f142dfc11d22f36abd033c43ba2f79f99db7e4..1fe02dce4cea72b975a715bb389f59c4a32579a1 100644
+--- a/dist/runtime/providers/aliyun.js
++++ b/dist/runtime/providers/aliyun.js
+@@ -1,7 +1,6 @@
+ import { joinURL, encodePath } from "ufo";
+ import { createOperationsGenerator } from "../utils/index.js";
+ import { defineProvider } from "../utils/provider.js";
+-import { useRuntimeConfig } from "#imports";
+ const operationsGenerator = createOperationsGenerator({
+   joinWith: "/",
+   formatter: (key, value) => {
+@@ -21,9 +20,9 @@ function getResizeValue(height, width) {
+   }
+ }
+ export default defineProvider({
+-  getImage: (src, { modifiers, baseURL }) => {
++  getImage: (src, { modifiers, baseURL }, ctx) => {
+     if (!baseURL) {
+-      baseURL = useRuntimeConfig().public.siteUrl || "/";
++      baseURL = ctx.options.runtimeConfig.public.siteUrl || "/";
+     }
+     const _modifiers = { ...modifiers };
+     const { resize, width, height, quality } = _modifiers;
+diff --git a/dist/runtime/providers/weserv.js b/dist/runtime/providers/weserv.js
+index 52857ec05a4a320710ae2fe4e8ad1ba23a3c2e21..4c339067c8babb59d4d8c719c5cf06bf0feb1b53 100644
+--- a/dist/runtime/providers/weserv.js
++++ b/dist/runtime/providers/weserv.js
+@@ -1,7 +1,7 @@
+ import { withBase } from "ufo";
+ import { createOperationsGenerator } from "../utils/index.js";
+ import { defineProvider } from "../utils/provider.js";
+-import { createError } from "#imports";
++import { createError } from "nuxt/app";
+ const operationsGenerator = createOperationsGenerator({
+   keyMap: {
+     format: "output",
+diff --git a/dist/runtime/server/routes/_ipx.d.ts b/dist/runtime/server/routes/_ipx.d.ts
+index 1482d0103fc345c28deefc3eea8e2c08406967cb..49363be9e87ea9b73ee67d39dfbbb62903ca971a 100644
+--- a/dist/runtime/server/routes/_ipx.d.ts
++++ b/dist/runtime/server/routes/_ipx.d.ts
+@@ -1,2 +1,2 @@
+-declare const _default: import("h3").EventHandler<import("h3").EventHandlerRequest, any>;
++declare const _default: import("nitro/h3").EventHandler<import("nitro/h3").EventHandlerRequest, any>;
+ export default _default;
+diff --git a/dist/runtime/server/routes/_ipx.js b/dist/runtime/server/routes/_ipx.js
+index e734868df856bddcb6b1f30bb427a28cce3555d6..500830775481003485f9ae080390a569c906a3e5 100644
+--- a/dist/runtime/server/routes/_ipx.js
++++ b/dist/runtime/server/routes/_ipx.js
+@@ -1,8 +1,8 @@
+ import { fileURLToPath } from "node:url";
+ import { createIPX, createIPXH3Handler, ipxFSStorage, ipxHttpStorage } from "ipx";
+-import { lazyEventHandler, useBase } from "h3";
++import { lazyEventHandler, useBase } from "nitro/h3";
+ import { isAbsolute } from "pathe";
+-import { useRuntimeConfig } from "#imports";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ export default lazyEventHandler(() => {
+   const opts = useRuntimeConfig().ipx || {};
+   const fsDir = opts?.fs?.dir ? (Array.isArray(opts.fs.dir) ? opts.fs.dir : [opts.fs.dir]).map((dir) => isAbsolute(dir) ? dir : fileURLToPath(new URL(dir, import.meta.url))) : void 0;
+diff --git a/dist/runtime/server/utils/image.d.ts b/dist/runtime/server/utils/image.d.ts
+index 8c93c34e68d8da422bef6f7bc547ab044294fdf6..aa9d071837187a293608357553d085fd8701d929 100644
+--- a/dist/runtime/server/utils/image.d.ts
++++ b/dist/runtime/server/utils/image.d.ts
+@@ -1,3 +1,3 @@
+-import type { H3Event } from 'h3';
++import type { H3Event } from 'nitro/h3';
+ import type { Img } from '@nuxt/image';
+ export declare const useImage: (event?: H3Event) => Img;
+diff --git a/dist/runtime/server/utils/image.js b/dist/runtime/server/utils/image.js
+index 8e5abf7c1f57352c93d11d711765807d53d944ff..c5596790128e60567316a90808eda8c10ec56c5c 100644
+--- a/dist/runtime/server/utils/image.js
++++ b/dist/runtime/server/utils/image.js
+@@ -1,6 +1,6 @@
+ import { createImage } from "../../image.js";
+ import { imageOptions } from "#internal/nuxt-image";
+-import { useRuntimeConfig } from "#imports";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ export const useImage = (event) => {
+   const config = useRuntimeConfig();
+   return createImage({
+diff --git a/dist/runtime/utils/prerender.d.ts b/dist/runtime/utils/prerender.d.ts
+index 890388d47a164060806bc445940ddb2d15fb5ded..06f244db308d75554d8af053b6e50f6dd0fb2cd8 100644
+--- a/dist/runtime/utils/prerender.d.ts
++++ b/dist/runtime/utils/prerender.d.ts
+@@ -1,2 +1,2 @@
+-import type { H3Event } from 'h3';
++import type { H3Event } from 'nitro/h3';
+ export declare function prerenderStaticImages(src?: string, srcset?: string, event?: H3Event): void;
+diff --git a/dist/runtime/utils/prerender.js b/dist/runtime/utils/prerender.js
+index 43f1a1c4e6df1270375e2b251845698fd93492cb..69206b6b60801b6f22be7d04fae42e8199d07122 100644
+--- a/dist/runtime/utils/prerender.js
++++ b/dist/runtime/utils/prerender.js
+@@ -1,4 +1,4 @@
+-import { appendHeader } from "h3";
++import { appendHeader } from "nitro/h3";
+ export function prerenderStaticImages(src = "", srcset = "", event) {
+   if (!import.meta.server || !import.meta.prerender || !event) {
+     return;
+diff --git a/dist/runtime/utils/props.js b/dist/runtime/utils/props.js
+index 0223acd7ca96eecccdb3d52524ae55724540b299..45ea885ddc4ec49da4b3f641c7a6fef9eeadc97e 100644
+--- a/dist/runtime/utils/props.js
++++ b/dist/runtime/utils/props.js
+@@ -1,6 +1,6 @@
+ import { computed } from "vue";
+ import { parseSize } from "./index.js";
+-import { useImage } from "#imports";
++import { useImage } from "../composables.js";
+ export const useImageProps = (props) => {
+   const $img = useImage();
+   const providerOptions = computed(() => ({

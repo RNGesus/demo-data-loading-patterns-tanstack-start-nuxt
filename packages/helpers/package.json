@@ -5,13 +5,12 @@
   "exports": {
     "./form": "./form.ts",
     "./formatters": "./formatters.ts",
-    "./chart": "./chart.ts",
-    "./types": "./types.ts"
+    "./chart": "./chart.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   }
 }

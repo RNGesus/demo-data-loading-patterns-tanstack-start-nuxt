@@ -1,11 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute(
-  "/_shell/_energyChartsHeader/energyCharts/",
-)({
+export const Route = createFileRoute('/_shell/_energyChartsHeader/energyCharts/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  return null;
+  return null
 }

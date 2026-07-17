@@ -17,9 +17,7 @@
   "paths": {
     "/public_power": {
       "get": {
-        "tags": [
-          "power"
-        ],
+        "tags": ["power"],
         "summary": "Public Power",
         "description": "Returns the public net electricity production for a given country for each production type. Subtype can be \"solarlog\" for Switzerland (ch).\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
         "operationId": "public_power_public_power_get",
@@ -91,9 +89,7 @@
     },
     "/public_power_forecast": {
       "get": {
-        "tags": [
-          "power"
-        ],
+        "tags": ["power"],
         "summary": "Public Power Forecast",
         "description": "Returns the forecast of the public net electricity production for a given country for each production type.\n    \n\n\n    \n\n<b>production_type:</b> Can be solar, wind_onshore, wind_offshore or load\n    <br><b>forecast_type:</b> Can be current, intraday or day-ahead\n    \n\n\n    \n\nIf no dates are provided, values for today until forecast is available are returned. For load only the forecast type \"day-ahead\" is available.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"forecast_values\": list[float],\n  \"production_type\": str,\n  \"forecast_type\": str,\n  \"deprecated\": bool\n}\n```",
         "operationId": "public_power_forecast_public_power_forecast_get",
@@ -175,9 +171,7 @@
     },
     "/total_power": {
       "get": {
-        "tags": [
-          "power"
-        ],
+        "tags": ["power"],
         "summary": "Total Power",
         "description": "Returns the total net electricity production (including industrial self supply) for a given country for each production type.\n    \n\n\n    \n\nCurrently only available for Germany.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
         "operationId": "total_power_total_power_get",
@@ -239,9 +233,7 @@
     },
     "/installed_power": {
       "get": {
-        "tags": [
-          "power"
-        ],
+        "tags": ["power"],
         "summary": "Installed Power",
         "description": "Returns the installed power for a specified country in GW except for battery storage capacity, which is given in GWh.\n    \n\n\n    \n\n<b>time_step:</b> Time step can be either \"yearly\" or \"monthly\" (only for Germany)\n    <br><b>installation_decommission:</b> If true, the net installation / decommission numbers are returned instead of total installed power\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"time\": list[str],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
         "operationId": "installed_power_installed_power_get",
@@ -303,9 +295,7 @@
     },
     "/price": {
       "get": {
-        "tags": [
-          "prices"
-        ],
+        "tags": ["prices"],
         "summary": "Day Ahead Price",
         "description": "Returns the day-ahead spot market price for a specified bidding zone in EUR/MWh.\n    \n\n\n    \n\nAvailable bidding zones (bzn) are shown above.\n    \n\n\n    \n\n<b>The data for the following bidding zones is licensed as <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC BY 4.0</a> from Bundesnetzagentur | SMARD.de and is published without changes:\n    <ul>\n        <li>AT (Austria)</li>\n        <li>BE (Belgium)</li>\n        <li>CH (Switzerland)</li>\n        <li>CZ (Czech Republic)</li>\n        <li>DE-LU (Germany, Luxembourg)</li>\n        <li>DE-AT-LU (Germany, Austria, Luxembourg)</li>\n        <li>DK1 (Denmark 1)</li>\n        <li>DK2 (Denmark 2)</li>\n        <li>FR (France)</li>\n        <li>HU (Hungary)</li>\n        <li>IT-North (Italy North)</li>\n        <li>NL (Netherlands)</li>\n        <li>NO2 (Norway 2)</li>\n        <li>PL (Poland)</li>\n        <li>SE4 (Sweden 4)</li>\n        <li>SI (Slovenia)\n    </ul></b>\n    \n\n\n    \n\n<b>The data for the other bidding zones is for private and internal use only. The utilization of any data</li>\nwhether in its raw or derived form, for external or commercial purposes is expressly prohibited. Should you require licensing for market-related data, please direct your inquiries to the original data providers, including but not limited to EPEX SPOT SE.</b>\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"license_info\": str,\n    \"unix_seconds\": [int],\n    \"price\": [float],\n    \"unit\": str,\n    \"deprecated\": bool\n}\n```",
         "operationId": "day_ahead_price_price_get",
@@ -367,9 +357,7 @@
     },
     "/cbet": {
       "get": {
-        "tags": [
-          "import_export"
-        ],
+        "tags": ["import_export"],
         "summary": "Cross Border Electricity Trading",
         "description": "Returns the cross-border electricity trading (cbet) in GW between a specified country and its neighbors.\n        \n\nPositive values indicate an import of electricity, whereas negative values show electricity exports.\n        \n\n\n        \n\nResponse schema:\n        \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"countries\": [\n        {\n        \"name\": str,\n        \"data\": [float]\n        }\n    ],\n    \"deprecated\": bool\n}\n```",
         "operationId": "cross_border_electricity_trading_cbet_get",
@@ -431,9 +419,7 @@
     },
     "/cbpf": {
       "get": {
-        "tags": [
-          "import_export"
-        ],
+        "tags": ["import_export"],
         "summary": "Cross Border Physical Flows",
         "description": "Returns the cross-border physical flows (cbpfs) of electricity in GW between a specified country and its neighbors.\n        \n\nPositive values indicate an import of electricity, whereas negative values show electricity exports.\n        \n\n\n        \n\nResponse schema:\n        \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"countries\": [\n        {\n        \"name\": str,\n        \"data\": [float]\n        }\n    ],\n    \"deprecated\": bool\n}\n```",
         "operationId": "cross_border_physical_flows_cbpf_get",
@@ -495,9 +481,7 @@
     },
     "/signal": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Traffic Signal",
         "description": "<b>Electricity traffic signal</b>\n    \n\n\n    \n\nReturns the renewable share of load in percent from today until prediction is currently available and the corresponding traffic light.\n    \n\n\n    \n\nThe traffic light \"signal\" is indicated by the following numbers:\n    \n\n\n    -1: Red (grid congestion),\n    0: Red (low renewable share),\n    1: Yellow (average renewable share),\n    2: Green (high renewable share)\n    \n\n\n    \n\nIf no data is available from the primary data providers, a best guess is made from historic data. This is indicated by \"substitute\" set to True.\n    \n\n\n    \n\n\"postal_code\" is an optional input parameter, which will consider the local grid state (e.g. transmission line overload) in future implementations.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"share\": [float],\n    \"signal\": [int],\n    \"substitute\": bool,\n    \"deprecated\": bool\n}\n```",
         "operationId": "traffic_signal_signal_get",
@@ -549,9 +533,7 @@
     },
     "/ren_share_forecast": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Renewable Share Forecast",
         "description": "<b>Renewable share forecast</b>\n    \n\n\n    \n\nReturns the renewable share of load forecast in percent from today until prediction is currently available. It also includes the forecast for solar, wind on- and offshore share of load.\n    \n\n\n    \n\nIf no data is available from the primary data providers, a best guess is made from historic data. This is indicated by \"substitute\" set to True.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"ren_share\": [float],\n    \"solar_share\": [float],\n    \"wind_onshore_share\": [float],\n    \"wind_offshore_share\": [float],\n    \"substitute\": bool,\n    \"deprecated\": bool\n}\n```",
         "operationId": "renewable_share_forecast_ren_share_forecast_get",
@@ -593,9 +575,7 @@
     },
     "/ren_share_daily_avg": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Ren Share Daily Avg",
         "description": "<b>Average daily renewable share of load</b>\n    \n\n\n    \n\nReturns the average daily renewable share of load of the last 365 days (year = -1) or for a given year if provided.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n\n    {\n        \"days\": [\"dd.mm.yyyy\"],\n        \"data\": [float],\n        \"deprecated\": bool\n    }\n\n    ```",
         "operationId": "ren_share_daily_avg_ren_share_daily_avg_get",
@@ -647,9 +627,7 @@
     },
     "/solar_share": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Solar Share",
         "description": "<b>Solar Share of Load</b>\n    \n\n\n    \n\nReturns the solar share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "solar_share_solar_share_get",
@@ -691,9 +669,7 @@
     },
     "/solar_share_daily_avg": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Solar Share Daily Avg",
         "description": "<b>Average daily solar share of load</b>\n    \n\n\n    \n\nReturns the average daily solar share of load of the last 365 days (year = -1) or for a given year if provided.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "solar_share_daily_avg_solar_share_daily_avg_get",
@@ -745,9 +721,7 @@
     },
     "/wind_onshore_share": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Wind Onshore Share",
         "description": "<b>Wind Onshore Share of Load</b>\n    \n\n\n    \n\nReturns the wind onshore share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "wind_onshore_share_wind_onshore_share_get",
@@ -789,9 +763,7 @@
     },
     "/wind_onshore_share_daily_avg": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Wind Onshore Share Daily Avg",
         "description": "<b>Average daily wind onshore share of load</b>\n    \n\n\n    \n\nReturns the average daily wind onshore share of load of the last 365 days\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "wind_onshore_share_daily_avg_wind_onshore_share_daily_avg_get",
@@ -843,9 +815,7 @@
     },
     "/wind_offshore_share": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Wind Offshore Share",
         "description": "<b>Wind Offshore Share of Load</b>\n    \n\n\n    \n\nReturns the wind offshore share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "wind_offshore_share_wind_offshore_share_get",
@@ -887,9 +857,7 @@
     },
     "/wind_offshore_share_daily_avg": {
       "get": {
-        "tags": [
-          "ren_share"
-        ],
+        "tags": ["ren_share"],
         "summary": "Wind Offshore Share Daily Avg",
         "description": "<b>Average daily wind offshore share of load</b>\n    \n\n\n    \n\nReturns the average daily wind offshore share of load of the last 365 days\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n\n```",
         "operationId": "wind_offshore_share_daily_avg_wind_offshore_share_daily_avg_get",
@@ -941,9 +909,7 @@
     },
     "/frequency": {
       "get": {
-        "tags": [
-          "power"
-        ],
+        "tags": ["power"],
         "summary": "Frequency",
         "description": "Returns the frequency measured at Fraunhofer ISE in Freiburg, Germany. Currently only the frequency in UCTE (Region Continental Europe) is available. The data is available in 1 second timesteps from 1st of May 2022 onwards.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"data\": list[float],\n  \"deprecated\": bool\n}\n```",
         "operationId": "frequency_frequency_get",
@@ -1042,9 +1008,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "deprecated"
-        ],
+        "required": ["deprecated"],
         "title": "CrossBorderModel"
       },
       "DailyAvgDict": {
@@ -1078,11 +1042,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "days",
-          "data",
-          "deprecated"
-        ],
+        "required": ["days", "data", "deprecated"],
         "title": "DailyAvgDict"
       },
       "FrequencyModel": {
@@ -1121,10 +1081,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "data",
-          "deprecated"
-        ],
+        "required": ["data", "deprecated"],
         "title": "FrequencyModel"
       },
       "HTTPValidationError": {
@@ -1169,10 +1126,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "time",
-          "deprecated"
-        ],
+        "required": ["time", "deprecated"],
         "title": "InstalledModel"
       },
       "NamedData": {
@@ -1197,10 +1151,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "name",
-          "data"
-        ],
+        "required": ["name", "data"],
         "title": "NamedData"
       },
       "PriceModel": {
@@ -1254,11 +1205,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "license_info",
-          "unit",
-          "deprecated"
-        ],
+        "required": ["license_info", "unit", "deprecated"],
         "title": "PriceModel"
       },
       "ProductionModel": {
@@ -1297,9 +1244,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "deprecated"
-        ],
+        "required": ["deprecated"],
         "title": "ProductionModel"
       },
       "PublicPowerForecastModel": {
@@ -1423,12 +1368,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "unix_seconds",
-          "ren_share",
-          "substitute",
-          "deprecated"
-        ],
+        "required": ["unix_seconds", "ren_share", "substitute", "deprecated"],
         "title": "RenShareModel"
       },
       "ShareModel": {
@@ -1495,9 +1435,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "deprecated"
-        ],
+        "required": ["deprecated"],
         "title": "ShareModel"
       },
       "TrafficModel": {
@@ -1548,12 +1486,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "unix_seconds",
-          "share",
-          "substitute",
-          "deprecated"
-        ],
+        "required": ["unix_seconds", "share", "substitute", "deprecated"],
         "title": "TrafficModel"
       },
       "ValidationError": {
@@ -1582,11 +1515,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       }
     }

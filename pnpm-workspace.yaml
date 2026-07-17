@@ -1,8 +1,39 @@
 packages:
   - packages/*
   - apps/*
+publicHoistPattern:
+  - nitro
+allowBuilds:
+  '@parcel/watcher': true
+  '@tailwindcss/oxide': true
+  esbuild: true
+  sharp: true
+catalog:
+  '@hey-api/openapi-ts': 0.0.0-next-20260716114603
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite-plus: ^0.2.5
+  # vitest: npm:@voidzero-dev/vite-plus-test@latest
 
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - esbuild
-  - sharp
+minimumReleaseAgeExclude:
+  - '@voidzero-dev/vite-plus-core@0.2.5'
+  - '@voidzero-dev/vite-plus-darwin-arm64@0.2.5'
+  - '@voidzero-dev/vite-plus-darwin-x64@0.2.5'
+  - '@voidzero-dev/vite-plus-linux-arm64-gnu@0.2.5'
+  - '@voidzero-dev/vite-plus-linux-arm64-musl@0.2.5'
+  - '@voidzero-dev/vite-plus-linux-x64-gnu@0.2.5'
+  - '@voidzero-dev/vite-plus-linux-x64-musl@0.2.5'
+  - '@voidzero-dev/vite-plus-win32-arm64-msvc@0.2.5'
+  - '@voidzero-dev/vite-plus-win32-x64-msvc@0.2.5'
+  - vite-plus@0.2.5
+overrides:
+  vite: 'catalog:'
+  # vitest: 'catalog:'
+patchedDependencies:
+  '@nuxt/image@2.0.0': patches/@nuxt__image@2.0.0.patch
+peerDependencyRules:
+  allowAny:
+    - vite
+    # - vitest
+  allowedVersions:
+    vite: '*'
+    # vitest: '*'

@@ -1,17 +1,13 @@
-import type { PhotoStations } from "@project/railway-station-service/types";
-import type { PropsWithChildren } from "react";
+import type { PhotoStations } from '@project/railway-station-service/types'
+import type { PropsWithChildren } from 'react'
 
 interface StationPhotoProps {
-  photo: PhotoStations["stations"][number]["photos"][number];
-  photoBaseUrl: string;
-  country: string;
+  photo: PhotoStations['stations'][number]['photos'][number]
+  photoBaseUrl: string
+  country: string
 }
 
-export function StationPhoto({
-  photo,
-  photoBaseUrl,
-  country,
-}: StationPhotoProps) {
+export function StationPhoto({ photo, photoBaseUrl, country }: StationPhotoProps) {
   return (
     <figure className="rounded-md">
       <img
@@ -23,16 +19,12 @@ export function StationPhoto({
         alt={`A railway station in ${country.toUpperCase()} by ${photo.photographer}`}
       />
       <figcaption className="bg-base-300 px-2 py-1">
-        {`by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString("en-GB")}`}
+        {`by ${photo.photographer} at ${new Date(photo.createdAt).toLocaleDateString('en-GB')}`}
       </figcaption>
     </figure>
-  );
+  )
 }
 
 export function StationPhotos({ children }: PropsWithChildren) {
-  return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(50ch,1fr))] gap-2">
-      {children}
-    </div>
-  );
+  return <div className="grid grid-cols-[repeat(auto-fill,minmax(50ch,1fr))] gap-2">{children}</div>
 }

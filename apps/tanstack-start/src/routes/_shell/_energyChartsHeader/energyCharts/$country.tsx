@@ -1,24 +1,22 @@
-import { powerServerFn } from "@app/integrations/energyCharts/power.serverFn";
-import { calculateEnergyChartHueRotation } from "@project/helpers/chart";
+import { powerServerFn } from '@app/integrations/energyCharts/power.serverFn'
+import { calculateEnergyChartHueRotation } from '@project/helpers/chart'
 import {
   formatEnergyChartDataPoint,
   formatEnergyChartDataPointDate,
-} from "@project/helpers/formatters";
-import { createFileRoute } from "@tanstack/react-router";
-import { Suspense, use } from "react";
+} from '@project/helpers/formatters'
+import { createFileRoute } from '@tanstack/react-router'
+import { Suspense, use } from 'react'
 
-export const Route = createFileRoute(
-  "/_shell/_energyChartsHeader/energyCharts/$country",
-)({
+export const Route = createFileRoute('/_shell/_energyChartsHeader/energyCharts/$country')({
   component: RouteComponent,
   loader: async ({ params }) => ({
     promisedPowerData: powerServerFn({ data: { country: params.country } }),
   }),
-});
+})
 
 function RouteComponent() {
-  const { promisedPowerData } = Route.useLoaderData();
-  const powerData = use(promisedPowerData);
+  const { promisedPowerData } = Route.useLoaderData()
+  const powerData = use(promisedPowerData)
 
   return (
     <Suspense fallback={<div>Loading power data...</div>}>
@@ -40,14 +38,13 @@ function RouteComponent() {
                 <th className="z-1">{productionType.name}</th>
                 {productionType.data.map((data, index) => (
                   <td
-                    // eslint-disable-next-line react/no-array-index-key -- there is nothing else to use as a key
                     key={index}
                     style={{
-                      "--color-grade": `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg`,
+                      '--color-grade': `${data ? calculateEnergyChartHueRotation({ value: data }) : 0}deg`,
                     }}
-                    className={`bg-blue-600 text-right hue-rotate-(--color-grade) ${!data ? "grayscale-60" : ""}`}
+                    className={`bg-blue-600 text-right hue-rotate-(--color-grade) ${!data ? 'grayscale-60' : ''}`}
                   >
-                    {data ? formatEnergyChartDataPoint(data) : "no data"}
+                    {data ? formatEnergyChartDataPoint(data) : 'no data'}
                   </td>
                 ))}
               </tr>
@@ -56,5 +53,5 @@ function RouteComponent() {
         </table>
       </div>
     </Suspense>
-  );
+  )
 }

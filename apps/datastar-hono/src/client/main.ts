@@ -1,5 +1,3 @@
-import '@starfederation/datastar/bundles/datastar'
-
 const counterButtonId = 'counter-increment'
 const datastarSseEvent = 'datastar-sse'
 const datastarMergeSignalsEvent = 'datastar-merge-signals'
