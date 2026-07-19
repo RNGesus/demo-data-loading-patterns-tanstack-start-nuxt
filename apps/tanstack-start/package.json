@@ -13,6 +13,7 @@
     "@project/helpers": "workspace:*",
     "@project/open-library-service": "workspace:*",
     "@project/railway-station-service": "workspace:*",
+    "@rolldown/plugin-babel": "^0.2.3",
     "@tanstack/react-router": "^1.170.18",
     "@tanstack/react-start": "^1.168.30",
     "react": "^19.2.7",
@@ -31,7 +32,6 @@
     "tailwindcss": "^4.3.3",
     "vite": "npm:@voidzero-dev/vite-plus-core@latest",
     "vite-plugin-babel": "^1.7.3",
-    "vite-plus": "catalog:",
-    "vite-tsconfig-paths": "^6.1.1"
+    "vite-plus": "catalog:"
   }
 }

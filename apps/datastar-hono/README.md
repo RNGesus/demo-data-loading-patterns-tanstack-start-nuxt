@@ -1,61 +1,41 @@
-# DataStar Hono Starter
+# Datastar + Hono data-loading demo
 
-Starter app for future demos built around one Hono app, a Vite-powered dev/build flow, prerendered
-public pages, and live API routes.
+Server-rendered Hono version of the repository's railway stations, Open Library, and Energy Charts demos.
 
 ## Run
 
 From the monorepo root:
 
 ```bash
-pnpm --filter datastar-hono dev
+vp run datastar-hono#dev
 ```
 
-Or use the workspace shortcut:
+Open `http://localhost:3004`.
 
-```bash
-vp datastar-hono#dev
-```
-
-Open `http://localhost:3000`.
-
-## Scripts
-
-- `vp run datastar-hono#dev` starts the Vite dev server around the Hono app.
-- `vp run datastar-hono#typecheck` runs TypeScript without emitting files.
-- `vp run datastar-hono#build` builds client assets, prerendered pages, and the Node server.
-- `vp run datastar-hono#start` runs the built Node server from `dist/server.js`.
-
-## Structure
-
-- `src/app.ts` exports the single Hono app used by dev, SSG, and server builds.
-- `src/routes/pages.ts` defines prerenderable public pages.
-- `src/routes/api/counter.ts` handles the counter API.
-- `src/lib/demo-counter.ts` contains the demo-only in-memory store.
-- `src/client/main.ts` loads Datastar and handles request lifecycle edge cases.
-
-## Counter demo
-
-The starter counter demonstrates:
-
-- initial server-rendered state from Hono
-- Datastar `@post(...)` interactions instead of manual `fetch` wiring
-- server-driven signal patches via `@starfederation/datastar-sdk/web`
-- visible mutation failures for invalid or broken requests
-
-The counter store is intentionally in-memory. A prerendered page can therefore diverge from the live
-runtime state after mutations until a persistent backing store replaces the demo module.
-
-## Endpoints
-
-- `GET /` renders the starter page.
-- `GET /api/counter` returns the current counter state as JSON.
-- `POST /api/counter/increment` validates the Datastar signal payload and returns Datastar updates.
-- `GET /health` returns a basic liveness response.
-
-## Verification
+Other commands:
 
 ```bash
 vp run datastar-hono#typecheck
 vp run datastar-hono#build
+vp run datastar-hono#start
 ```
+
+## Routes
+
+Public pages:
+
+- `GET /`
+- `GET /stationCountries`
+- `GET /stationCountries/:country`
+- `GET /openLibrary?q=…&page=…`
+- `GET /energyCharts`
+- `GET /energyCharts/:country`
+
+Datastar endpoints:
+
+- `GET /api/stationCountries/stationPhotos/:country`
+- `GET /api/openLibrary/search?q=…&page=…`
+- `GET /api/energyCharts/power?country=…`
+- `GET /health`
+
+Documents, navigation, and forms are server rendered. Remote detail regions load through Datastar GET actions and are replaced with `datastar-patch-elements` events from the Datastar SDK. The browser bundle remains CDN-hosted.

@@ -4,23 +4,22 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "vp build --mode client && vp build --mode ssg && vp build --mode server",
-    "build:client": "vp build --mode client",
-    "build:ssg": "vp build --mode ssg",
-    "build:server": "vp build --mode server",
+    "build": "vp build",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hono/node-server": "^2.0.10",
-    "@hono/vite-build": "^1.11.1",
-    "@hono/vite-dev-server": "^0.26.1",
-    "@hono/vite-ssg": "^0.3.3",
+    "@project/energy-charts-service": "workspace:*",
+    "@project/helpers": "workspace:*",
+    "@project/open-library-service": "workspace:*",
+    "@project/railway-station-service": "workspace:*",
     "@starfederation/datastar-sdk": "1.0.0",
-    "hono": "^4.12.30",
-    "vite": "npm:@voidzero-dev/vite-plus-core@latest"
+    "hono": "^4.12.30"
   },
   "devDependencies": {
+    "@hono/vite-build": "^1.11.1",
+    "@hono/vite-dev-server": "^0.26.1",
     "vite-plus": "catalog:"
   }
 }

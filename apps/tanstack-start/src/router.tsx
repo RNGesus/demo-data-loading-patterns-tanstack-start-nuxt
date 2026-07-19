@@ -1,7 +1,7 @@
 import { createRouter as createTanStackRouter, ErrorComponent, Link } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
-export function createRouter() {
+export function getRouter() {
   const router = createTanStackRouter({
     routeTree,
     // TODO: find a way to debounce the hover behavior
@@ -27,6 +27,6 @@ export function createRouter() {
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: ReturnType<typeof createRouter>
+    router: ReturnType<typeof getRouter>
   }
 }

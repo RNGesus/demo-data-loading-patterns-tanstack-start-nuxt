@@ -11,13 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell/index'
-import { Route as ShellStationCountrySelectorRouteImport } from './routes/_shell/_stationCountrySelector'
 import { Route as ShellEnergyChartsHeaderRouteImport } from './routes/_shell/_energyChartsHeader'
+import { Route as ShellStationCountrySelectorRouteImport } from './routes/_shell/_stationCountrySelector'
 import { Route as ShellOpenLibraryIndexRouteImport } from './routes/_shell/openLibrary/index'
-import { Route as ShellStationCountrySelectorStationCountriesIndexRouteImport } from './routes/_shell/_stationCountrySelector/stationCountries/index'
 import { Route as ShellEnergyChartsHeaderEnergyChartsIndexRouteImport } from './routes/_shell/_energyChartsHeader/energyCharts/index'
-import { Route as ShellStationCountrySelectorStationCountriesCountryRouteImport } from './routes/_shell/_stationCountrySelector/stationCountries/$country'
 import { Route as ShellEnergyChartsHeaderEnergyChartsCountryRouteImport } from './routes/_shell/_energyChartsHeader/energyCharts/$country'
+import { Route as ShellStationCountrySelectorStationCountriesIndexRouteImport } from './routes/_shell/_stationCountrySelector/stationCountries/index'
+import { Route as ShellStationCountrySelectorStationCountriesCountryRouteImport } from './routes/_shell/_stationCountrySelector/stationCountries/$country'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -28,37 +28,25 @@ const ShellIndexRoute = ShellIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellEnergyChartsHeaderRoute = ShellEnergyChartsHeaderRouteImport.update({
+  id: '/_energyChartsHeader',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellStationCountrySelectorRoute =
   ShellStationCountrySelectorRouteImport.update({
     id: '/_stationCountrySelector',
     getParentRoute: () => ShellRoute,
   } as any)
-const ShellEnergyChartsHeaderRoute = ShellEnergyChartsHeaderRouteImport.update({
-  id: '/_energyChartsHeader',
-  getParentRoute: () => ShellRoute,
-} as any)
 const ShellOpenLibraryIndexRoute = ShellOpenLibraryIndexRouteImport.update({
   id: '/openLibrary/',
   path: '/openLibrary/',
   getParentRoute: () => ShellRoute,
 } as any)
-const ShellStationCountrySelectorStationCountriesIndexRoute =
-  ShellStationCountrySelectorStationCountriesIndexRouteImport.update({
-    id: '/stationCountries/',
-    path: '/stationCountries/',
-    getParentRoute: () => ShellStationCountrySelectorRoute,
-  } as any)
 const ShellEnergyChartsHeaderEnergyChartsIndexRoute =
   ShellEnergyChartsHeaderEnergyChartsIndexRouteImport.update({
     id: '/energyCharts/',
     path: '/energyCharts/',
     getParentRoute: () => ShellEnergyChartsHeaderRoute,
-  } as any)
-const ShellStationCountrySelectorStationCountriesCountryRoute =
-  ShellStationCountrySelectorStationCountriesCountryRouteImport.update({
-    id: '/stationCountries/$country',
-    path: '/stationCountries/$country',
-    getParentRoute: () => ShellStationCountrySelectorRoute,
   } as any)
 const ShellEnergyChartsHeaderEnergyChartsCountryRoute =
   ShellEnergyChartsHeaderEnergyChartsCountryRouteImport.update({
@@ -66,14 +54,26 @@ const ShellEnergyChartsHeaderEnergyChartsCountryRoute =
     path: '/energyCharts/$country',
     getParentRoute: () => ShellEnergyChartsHeaderRoute,
   } as any)
+const ShellStationCountrySelectorStationCountriesIndexRoute =
+  ShellStationCountrySelectorStationCountriesIndexRouteImport.update({
+    id: '/stationCountries/',
+    path: '/stationCountries/',
+    getParentRoute: () => ShellStationCountrySelectorRoute,
+  } as any)
+const ShellStationCountrySelectorStationCountriesCountryRoute =
+  ShellStationCountrySelectorStationCountriesCountryRouteImport.update({
+    id: '/stationCountries/$country',
+    path: '/stationCountries/$country',
+    getParentRoute: () => ShellStationCountrySelectorRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
-  '/openLibrary': typeof ShellOpenLibraryIndexRoute
+  '/openLibrary/': typeof ShellOpenLibraryIndexRoute
   '/energyCharts/$country': typeof ShellEnergyChartsHeaderEnergyChartsCountryRoute
   '/stationCountries/$country': typeof ShellStationCountrySelectorStationCountriesCountryRoute
-  '/energyCharts': typeof ShellEnergyChartsHeaderEnergyChartsIndexRoute
-  '/stationCountries': typeof ShellStationCountrySelectorStationCountriesIndexRoute
+  '/energyCharts/': typeof ShellEnergyChartsHeaderEnergyChartsIndexRoute
+  '/stationCountries/': typeof ShellStationCountrySelectorStationCountriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ShellIndexRoute
@@ -99,11 +99,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/openLibrary'
+    | '/openLibrary/'
     | '/energyCharts/$country'
     | '/stationCountries/$country'
-    | '/energyCharts'
-    | '/stationCountries'
+    | '/energyCharts/'
+    | '/stationCountries/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -134,7 +134,7 @@ declare module '@tanstack/react-router' {
     '/_shell': {
       id: '/_shell'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -145,47 +145,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellIndexRouteImport
       parentRoute: typeof ShellRoute
     }
-    '/_shell/_stationCountrySelector': {
-      id: '/_shell/_stationCountrySelector'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof ShellStationCountrySelectorRouteImport
-      parentRoute: typeof ShellRoute
-    }
     '/_shell/_energyChartsHeader': {
       id: '/_shell/_energyChartsHeader'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof ShellEnergyChartsHeaderRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/_stationCountrySelector': {
+      id: '/_shell/_stationCountrySelector'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellStationCountrySelectorRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/openLibrary/': {
       id: '/_shell/openLibrary/'
       path: '/openLibrary'
-      fullPath: '/openLibrary'
+      fullPath: '/openLibrary/'
       preLoaderRoute: typeof ShellOpenLibraryIndexRouteImport
       parentRoute: typeof ShellRoute
-    }
-    '/_shell/_stationCountrySelector/stationCountries/': {
-      id: '/_shell/_stationCountrySelector/stationCountries/'
-      path: '/stationCountries'
-      fullPath: '/stationCountries'
-      preLoaderRoute: typeof ShellStationCountrySelectorStationCountriesIndexRouteImport
-      parentRoute: typeof ShellStationCountrySelectorRoute
     }
     '/_shell/_energyChartsHeader/energyCharts/': {
       id: '/_shell/_energyChartsHeader/energyCharts/'
       path: '/energyCharts'
-      fullPath: '/energyCharts'
+      fullPath: '/energyCharts/'
       preLoaderRoute: typeof ShellEnergyChartsHeaderEnergyChartsIndexRouteImport
       parentRoute: typeof ShellEnergyChartsHeaderRoute
-    }
-    '/_shell/_stationCountrySelector/stationCountries/$country': {
-      id: '/_shell/_stationCountrySelector/stationCountries/$country'
-      path: '/stationCountries/$country'
-      fullPath: '/stationCountries/$country'
-      preLoaderRoute: typeof ShellStationCountrySelectorStationCountriesCountryRouteImport
-      parentRoute: typeof ShellStationCountrySelectorRoute
     }
     '/_shell/_energyChartsHeader/energyCharts/$country': {
       id: '/_shell/_energyChartsHeader/energyCharts/$country'
@@ -193,6 +179,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/energyCharts/$country'
       preLoaderRoute: typeof ShellEnergyChartsHeaderEnergyChartsCountryRouteImport
       parentRoute: typeof ShellEnergyChartsHeaderRoute
+    }
+    '/_shell/_stationCountrySelector/stationCountries/': {
+      id: '/_shell/_stationCountrySelector/stationCountries/'
+      path: '/stationCountries'
+      fullPath: '/stationCountries/'
+      preLoaderRoute: typeof ShellStationCountrySelectorStationCountriesIndexRouteImport
+      parentRoute: typeof ShellStationCountrySelectorRoute
+    }
+    '/_shell/_stationCountrySelector/stationCountries/$country': {
+      id: '/_shell/_stationCountrySelector/stationCountries/$country'
+      path: '/stationCountries/$country'
+      fullPath: '/stationCountries/$country'
+      preLoaderRoute: typeof ShellStationCountrySelectorStationCountriesCountryRouteImport
+      parentRoute: typeof ShellStationCountrySelectorRoute
     }
   }
 }
@@ -256,3 +256,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

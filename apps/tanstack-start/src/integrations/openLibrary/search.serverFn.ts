@@ -3,7 +3,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { query } from './search.querySchema'
 
 export const searchServerFn = createServerFn({ method: 'GET' })
-  .inputValidator(query.parse)
+  .validator(query.parse)
   .handler(
     async ({ data }) =>
       (await readSearchJsonSearchJsonGet({

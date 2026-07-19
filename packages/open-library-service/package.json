@@ -14,7 +14,6 @@
     "postinstall": "vp run create-api-client"
   },
   "dependencies": {
-    "@hey-api/client-fetch": "0.13.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {

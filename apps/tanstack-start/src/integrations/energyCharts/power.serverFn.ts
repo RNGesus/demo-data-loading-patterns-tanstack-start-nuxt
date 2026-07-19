@@ -3,7 +3,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { query } from './power.querySchema'
 
 export const powerServerFn = createServerFn({ method: 'GET' })
-  .inputValidator(query)
+  .validator(query)
   .handler(async ({ data }) => {
     return await publicPowerPublicPowerGet({
       query: { country: data.country },
