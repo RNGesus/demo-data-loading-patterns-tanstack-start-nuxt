@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Energy-Charts API",
-    "description": "\n       \n\n<h4>Timestamp Format Options</h4>\n        <p>When specifying timestamps, you can choose from the following three formats:</p>\n        <ol>\n            <li><strong>ISO 8601 Format</strong>:\n                <ul>\n                    <li>This format includes the full date and time, with an optional timezone indicator.</li>\n                    <li>Examples:\n                        <ul>\n                            <li><code>2024-01-01T17:00Z</code> (UTC time)</li>\n                            <li><code>2024-01-01T18:00+01:00</code> (Local time offset by +01:00)</li>\n                        </ul>\n                    </li>\n                </ul>\n            </li>\n            <li><strong>Daily Format</strong>:\n                <ul>\n                    <li>This format specifies only the date.</li>\n                    <li>The start time is assumed to be at 00:00 on the specified date in the local timezone of the specified country or bidding zone (bzn).</li>\n                    <li>The end timestamp is interpreted as the last minute of the specified day in the same local timezone.</li>\n                    <li>Example:\n                        <ul>\n                            <li><code>2024-01-01</code> (Starts at 00:00 and ends at 23:59 on January 1, 2024, local time)</li>\n                        </ul>\n                    </li>\n                </ul>\n            </li>\n            <li><strong>UNIX Timestamp</strong>:\n                <ul>\n                    <li>This format specifies the time as the number of seconds since the Unix Epoch (January 1st, 1970, at 00:00 UTC).</li>\n                    <li>Example:\n                        <ul>\n                            <li><code>1704063600</code></li>\n                        </ul>\n                    </li>\n                </ul>\n            </li>\n        </ol>\n        <h4>Default Behavior for Timestamps</h4>\n        <p>If an end timestamp is not explicitly provided, it is assumed to be the same as the start timestamp. For daily formats, this means that one full day will be returned. If also no start timestamp is provided, the current day in the local timezone is used.</p>\n        <h4>Discontinuation of endpoints</h4>\n        <p>Endpoint discontinuations will be preceded by an announcement at least six months in advance, indicated by setting the \"deprecated\" status to true.</p>\n        <h4>Data License</h4>\n        <p>Unless stated otherwise, the data provided by the Energy-Charts API is licensed under the <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC BY 4.0</a> license. Proper attribution to Energy-Charts.info as the source is required.</p>\n       <details>\n       <summary><b>New in release v1.4 (2024-07-08)</b></summary>\n       <ul>\n       <li>Fix bug with wrong timezone for unix timestamps as input</li>\n       </ul>\n       </details>\n       <details>\n          <summary><b>Older releases</b></summary>\n           <details>\n           <summary><b>v1.3 (2024-04-22)</b></summary>\n           <ul>\n           <li>Fix bug which hid most recent data for /cbet and /cbpf</li>\n           <li>Inlcude deprecated tag to all active endpoints</li>\n           </ul>\n           </details>\n           <details>\n           <summary><b>v1.2 (2024-04-16)</b></summary>\n           <ul>\n           <li>Allow also input timestamps in day format and UNIX timestamp</li>\n           <li>Inlcude license info for price data available at /price</li>\n           </ul>\n           </details>\n           <details>\n           <summary><b>v1.1 (2023-10-20)</b></summary>\n           <ul>\n               <li>Deprecated /ren_share</li>\n               <li>Deprecated /ren_share_prognosis and replaced it with /ren_share_forecast</li>\n               <li>Deprecated /power and replaced it with /public_power</li>\n               <li>Deprecated /price_spot_market and replaced it with /price</li>\n               <li>Deprecated /traffic_signal and replaced it with /signal</li>\n               <li>Added endpoint for cross-border electricity trading (/cbet)</li>\n               <li>Added endpoint for cross-border physical flow (/cbpf)</li>\n               <li>Changed response structure of all endpoints to fit with json specification</li>\n               <li>Simplified the response json structure</li>\n               <li>Removed unnecessary information from responses like names, descriptions and units</li>\n               <li>Added typed response schemes to every endpoint</li>\n               <li>Added example values and example requests to every endpoint</li>\n               <li>Added postal code to /signal, to consider grid state in future implementations</li>\n               <li>Responses that return unix timestamps now all return unix seconds</li>\n               <li>Added error handling for false requests and responses</li>\n               <li>Added a list of available bidding zones for /price</li>\n           </ul>\n           </details>\n          <details>\n              <summary><b>v1.0 (2022-11-30)</b></summary>\n              <ul>\n                  <li>Initial release</li>\n              </ul>\n          </details>\n       </details>\n       \n\n<b>Available countries:</b>\n       \n\n<details><summary>de - Germany (click to show all available countries)</summary>\n       ch - Switzerland<br>\n       eu - European Union<br>\n       all - Europe<br>\n       al - Albania<br>\n       am - Armenia<br>\n       at - Austria<br>\n       az - Azerbaijan<br>\n       ba - Bosnia-Herzegovina<br>\n       be - Belgium<br>\n       bg - Bulgaria<br>\n       by - Belarus<br>\n       cy - Cyprus<br>\n       cz - Czech Republic<br>\n       dk - Denmark<br>\n       ee - Estonia<br>\n       es - Spain<br>\n       fi - Finland<br>\n       fr - France<br>\n       ge - Georgia<br>\n       gr - Greece<br>\n       hr - Croatia<br>\n       hu - Hungary<br>\n       ie - Ireland<br>\n       it - Italy<br>\n       lt - Lithuania<br>\n       lu - Luxembourg<br>\n       lv - Latvia<br>\n       md - Moldova<br>\n       me - Montenegro<br>\n       mk - North Macedonia<br>\n       mt - Malta<br>\n       nie - North Ireland<br>\n       nl - Netherlands<br>\n       no - Norway<br>\n       pl - Poland<br>\n       pt - Portugal<br>\n       ro - Romania<br>\n       rs - Serbia<br>\n       ru - Russia<br>\n       se - Sweden<br>\n       si - Slovenia<br>\n       sk - Slovak Republic<br>\n       tr - Turkey<br>\n       ua - Ukraine<br>\n       uk - United Kingdom<br>\n       xk - Kosovo<br>\n       </details>\n       \n\n<b>Available bidding zones:</b>\n       \n\n<details><summary>AT - Austria (click to show all available bidding zones)</summary>\n        BE - Belgium<br>\n        BG - Bulgaria<br>\n        CH - Switzerland<br>\n        CZ - Czech Republic<br>\n        DE-LU - Germany, Luxembourg<br>\n        DE-AT-LU - Germany, Austria, Luxembourg<br>\n        DK1 - Denmark 1<br>\n        DK2 - Denmark 2<br>\n        EE - Estionia<br>\n        ES - Spain<br>\n        FI - Finland<br>\n        FR - France<br>\n        GR - Greece<br>\n        HR - Croatia<br>\n        HU - Hungary<br>\n        IT-Calabria - Italy Calabria<br>\n        IT-Centre-North - Italy Centre North<br>\n        IT-Centre-South - Italy Centre South<br>\n        IT-North - Italy North<br>\n        IT-SACOAC - Italy Sardinia Corsica AC<br>\n        IT-SACODC - Italy Sardinia Corsica DC<br>\n        IT-Sardinia - Italy Sardinia<br>\n        IT-Sicily - Italy Sicily<br>\n        IT-South - Italy South<br>\n        LT - Lithuania<br>\n        LV - Latvia<br>\n        ME - Montenegro<br>\n        NL - Netherlands<br>\n        NO1 - Norway 1<br>\n        NO2 - Norway 2<br>\n        NO2NSL - Norway North Sea Link<br>\n        NO3 - Norway 3<br>\n        NO4 - Norway 4<br>\n        NO5 - Norway 5<br>\n        PL - Poland<br>\n        PT - Portugal<br>\n        RO - Romania<br>\n        RS - Serbia<br>\n        SE1 - Sweden 1<br>\n        SE2 - Sweden 2<br>\n        SE3 - Sweden 3<br>\n        SE4 - Sweden 4<br>\n        SI - Slovenia<br>\n        SK - Slovakia<br>\n       </details>\n       \n\n<b>Hint:</b> Don't use the <b>Try it out</b> button on this documentation page to download large datasets as it might lead to long loading times.\n       ",
+    "description": "\n       \n\n\u003Ch4\u003ETimestamp Format Options\u003C/h4\u003E\n        \u003Cp\u003EWhen specifying timestamps, you can choose from the following three formats:\u003C/p\u003E\n        \u003Col\u003E\n            \u003Cli\u003E\u003Cstrong\u003EISO 8601 Format\u003C/strong\u003E:\n                \u003Cul\u003E\n                    \u003Cli\u003EThis format includes the full date and time, with an optional timezone indicator.\u003C/li\u003E\n                    \u003Cli\u003EExamples:\n                        \u003Cul\u003E\n                            \u003Cli\u003E\u003Ccode\u003E2026-01-01T17:00Z\u003C/code\u003E (UTC time)\u003C/li\u003E\n                            \u003Cli\u003E\u003Ccode\u003E2026-01-01T18:00+01:00\u003C/code\u003E (Local time offset by +01:00)\u003C/li\u003E\n                        \u003C/ul\u003E\n                    \u003C/li\u003E\n                \u003C/ul\u003E\n            \u003C/li\u003E\n            \u003Cli\u003E\u003Cstrong\u003EDaily Format\u003C/strong\u003E:\n                \u003Cul\u003E\n                    \u003Cli\u003EThis format specifies only the date.\u003C/li\u003E\n                    \u003Cli\u003EThe start time is assumed to be at 00:00 on the specified date in the local timezone of the specified country or bidding zone (bzn).\u003C/li\u003E\n                    \u003Cli\u003EThe end timestamp is interpreted as the last minute of the specified day in the same local timezone.\u003C/li\u003E\n                    \u003Cli\u003EExample:\n                        \u003Cul\u003E\n                            \u003Cli\u003E\u003Ccode\u003E2026-01-01\u003C/code\u003E (Starts at 00:00 and ends at 23:59 on January 1, 2026, local time)\u003C/li\u003E\n                        \u003C/ul\u003E\n                    \u003C/li\u003E\n                \u003C/ul\u003E\n            \u003C/li\u003E\n            \u003Cli\u003E\u003Cstrong\u003EUNIX Timestamp\u003C/strong\u003E:\n                \u003Cul\u003E\n                    \u003Cli\u003EThis format specifies the time as the number of seconds since the Unix Epoch (January 1st, 1970, at 00:00 UTC).\u003C/li\u003E\n                    \u003Cli\u003EExample:\n                        \u003Cul\u003E\n                            \u003Cli\u003E\u003Ccode\u003E1767222000\u003C/code\u003E\u003C/li\u003E\n                        \u003C/ul\u003E\n                    \u003C/li\u003E\n                \u003C/ul\u003E\n            \u003C/li\u003E\n        \u003C/ol\u003E\n        \u003Ch4\u003EDefault Behavior for Timestamps\u003C/h4\u003E\n        \u003Cp\u003EIf an end timestamp is not explicitly provided, it is assumed to be the same as the start timestamp. For daily formats, this means that one full day will be returned. If also no start timestamp is provided, the current day in the local timezone is used.\u003C/p\u003E\n        \u003Ch4\u003EDiscontinuation of endpoints\u003C/h4\u003E\n        \u003Cp\u003EEndpoint discontinuations will be preceded by an announcement at least six months in advance, indicated by setting the \"deprecated\" status to true.\u003C/p\u003E\n        \u003Ch4\u003EData License\u003C/h4\u003E\n        \u003Cp\u003EUnless stated otherwise, the data provided by the Energy-Charts API is licensed under the \u003Ca href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"\u003ECC BY 4.0\u003C/a\u003E license. Proper attribution to Energy-Charts.info as the source is required.\u003C/p\u003E\n       \u003Cdetails\u003E\n       \u003Csummary\u003E\u003Cb\u003ENew in release v1.6 (2026-06-26)\u003C/b\u003E\u003C/summary\u003E\n       \u003Cul\u003E\n       \u003Cli\u003EImproved caching for higher bandwith\u003C/li\u003E\n       \u003Cli\u003EExtended api key access for commercial customers\u003C/li\u003E\n       \u003C/ul\u003E\n       \u003C/details\u003E\n       \u003Cdetails\u003E\n          \u003Csummary\u003E\u003Cb\u003E Older Releases \u003C/b\u003E\u003C/summary\u003E\n           \u003Cdetails\u003E\n           \u003Csummary\u003E\u003Cb\u003Ev1.5 (2025-10-21)\u003C/b\u003E\u003C/summary\u003E\n           \u003Cul\u003E\n           \u003Cli\u003E\n              Include stricter rate limitations for public API\n              (please contact \u003Ca href=\"mailto:leonhard.gandhi@ise.fraunhofer.de\"\u003Eleonhard.gandhi@ise.fraunhofer.de\u003C/a\u003E for commercial access)\n           \u003C/li\u003E\n           \u003Cli\u003EImproved load balancing on concurrent requests\u003C/li\u003E\n           \u003C/ul\u003E\n           \u003C/details\u003E\u003Cdetails\u003E\n           \u003Csummary\u003E\u003Cb\u003Ev1.4 (2024-07-08)\u003C/b\u003E\u003C/summary\u003E\n           \u003Cul\u003E\n           \u003Cli\u003EFix bug with wrong timezone for unix timestamps as input\u003C/li\u003E\n           \u003C/ul\u003E\n           \u003C/details\u003E\u003Cdetails\u003E\n           \u003Csummary\u003E\u003Cb\u003Ev1.3 (2024-04-22)\u003C/b\u003E\u003C/summary\u003E\n           \u003Cul\u003E\n           \u003Cli\u003EFix bug which hid most recent data for /cbet and /cbpf\u003C/li\u003E\n           \u003Cli\u003EInlcude deprecated tag to all active endpoints\u003C/li\u003E\n           \u003C/ul\u003E\n           \u003C/details\u003E\n           \u003Cdetails\u003E\n           \u003Csummary\u003E\u003Cb\u003Ev1.2 (2024-04-16)\u003C/b\u003E\u003C/summary\u003E\n           \u003Cul\u003E\n           \u003Cli\u003EAllow also input timestamps in day format and UNIX timestamp\u003C/li\u003E\n           \u003Cli\u003EInlcude license info for price data available at /price\u003C/li\u003E\n           \u003C/ul\u003E\n           \u003C/details\u003E\n           \u003Cdetails\u003E\n           \u003Csummary\u003E\u003Cb\u003Ev1.1 (2023-10-20)\u003C/b\u003E\u003C/summary\u003E\n           \u003Cul\u003E\n               \u003Cli\u003EDeprecated /ren_share\u003C/li\u003E\n               \u003Cli\u003EDeprecated /ren_share_prognosis and replaced it with /ren_share_forecast\u003C/li\u003E\n               \u003Cli\u003EDeprecated /power and replaced it with /public_power\u003C/li\u003E\n               \u003Cli\u003EDeprecated /price_spot_market and replaced it with /price\u003C/li\u003E\n               \u003Cli\u003EDeprecated /traffic_signal and replaced it with /signal\u003C/li\u003E\n               \u003Cli\u003EAdded endpoint for cross-border electricity trading (/cbet)\u003C/li\u003E\n               \u003Cli\u003EAdded endpoint for cross-border physical flow (/cbpf)\u003C/li\u003E\n               \u003Cli\u003EChanged response structure of all endpoints to fit with json specification\u003C/li\u003E\n               \u003Cli\u003ESimplified the response json structure\u003C/li\u003E\n               \u003Cli\u003ERemoved unnecessary information from responses like names, descriptions and units\u003C/li\u003E\n               \u003Cli\u003EAdded typed response schemes to every endpoint\u003C/li\u003E\n               \u003Cli\u003EAdded example values and example requests to every endpoint\u003C/li\u003E\n               \u003Cli\u003EAdded postal code to /signal, to consider grid state in future implementations\u003C/li\u003E\n               \u003Cli\u003EResponses that return unix timestamps now all return unix seconds\u003C/li\u003E\n               \u003Cli\u003EAdded error handling for false requests and responses\u003C/li\u003E\n               \u003Cli\u003EAdded a list of available bidding zones for /price\u003C/li\u003E\n           \u003C/ul\u003E\n           \u003C/details\u003E\n          \u003Cdetails\u003E\n              \u003Csummary\u003E\u003Cb\u003Ev1.0 (2022-11-30)\u003C/b\u003E\u003C/summary\u003E\n              \u003Cul\u003E\n                  \u003Cli\u003EInitial release\u003C/li\u003E\n              \u003C/ul\u003E\n          \u003C/details\u003E\n       \u003C/details\u003E\n       \n\n\u003Cb\u003EAvailable countries:\u003C/b\u003E\n       \n\n\u003Cdetails\u003E\u003Csummary\u003Ede - Germany (click to show all available countries)\u003C/summary\u003E\n       ch - Switzerland\u003Cbr\u003E\n       eu - European Union\u003Cbr\u003E\n       all - Europe\u003Cbr\u003E\n       al - Albania\u003Cbr\u003E\n       am - Armenia\u003Cbr\u003E\n       at - Austria\u003Cbr\u003E\n       az - Azerbaijan\u003Cbr\u003E\n       ba - Bosnia-Herzegovina\u003Cbr\u003E\n       be - Belgium\u003Cbr\u003E\n       bg - Bulgaria\u003Cbr\u003E\n       by - Belarus\u003Cbr\u003E\n       cy - Cyprus\u003Cbr\u003E\n       cz - Czech Republic\u003Cbr\u003E\n       dk - Denmark\u003Cbr\u003E\n       ee - Estonia\u003Cbr\u003E\n       es - Spain\u003Cbr\u003E\n       fi - Finland\u003Cbr\u003E\n       fr - France\u003Cbr\u003E\n       ge - Georgia\u003Cbr\u003E\n       gr - Greece\u003Cbr\u003E\n       hr - Croatia\u003Cbr\u003E\n       hu - Hungary\u003Cbr\u003E\n       ie - Ireland\u003Cbr\u003E\n       it - Italy\u003Cbr\u003E\n       lt - Lithuania\u003Cbr\u003E\n       lu - Luxembourg\u003Cbr\u003E\n       lv - Latvia\u003Cbr\u003E\n       md - Moldova\u003Cbr\u003E\n       me - Montenegro\u003Cbr\u003E\n       mk - North Macedonia\u003Cbr\u003E\n       mt - Malta\u003Cbr\u003E\n       nie - North Ireland\u003Cbr\u003E\n       nl - Netherlands\u003Cbr\u003E\n       no - Norway\u003Cbr\u003E\n       pl - Poland\u003Cbr\u003E\n       pt - Portugal\u003Cbr\u003E\n       ro - Romania\u003Cbr\u003E\n       rs - Serbia\u003Cbr\u003E\n       ru - Russia\u003Cbr\u003E\n       se - Sweden\u003Cbr\u003E\n       si - Slovenia\u003Cbr\u003E\n       sk - Slovak Republic\u003Cbr\u003E\n       tr - Turkey\u003Cbr\u003E\n       ua - Ukraine\u003Cbr\u003E\n       uk - United Kingdom\u003Cbr\u003E\n       xk - Kosovo\u003Cbr\u003E\n       \u003C/details\u003E\n       \n\n\u003Cb\u003EAvailable bidding zones:\u003C/b\u003E\n       \n\n\u003Cdetails\u003E\u003Csummary\u003EAT - Austria (click to show all available bidding zones)\u003C/summary\u003E\n        BE - Belgium\u003Cbr\u003E\n        BG - Bulgaria\u003Cbr\u003E\n        CH - Switzerland\u003Cbr\u003E\n        CZ - Czech Republic\u003Cbr\u003E\n        DE-LU - Germany, Luxembourg\u003Cbr\u003E\n        DE-AT-LU - Germany, Austria, Luxembourg\u003Cbr\u003E\n        DK1 - Denmark 1\u003Cbr\u003E\n        DK2 - Denmark 2\u003Cbr\u003E\n        EE - Estionia\u003Cbr\u003E\n        ES - Spain\u003Cbr\u003E\n        FI - Finland\u003Cbr\u003E\n        FR - France\u003Cbr\u003E\n        GR - Greece\u003Cbr\u003E\n        HR - Croatia\u003Cbr\u003E\n        HU - Hungary\u003Cbr\u003E\n        IT-Calabria - Italy Calabria\u003Cbr\u003E\n        IT-Centre-North - Italy Centre North\u003Cbr\u003E\n        IT-Centre-South - Italy Centre South\u003Cbr\u003E\n        IT-North - Italy North\u003Cbr\u003E\n        IT-SACOAC - Italy Sardinia Corsica AC\u003Cbr\u003E\n        IT-SACODC - Italy Sardinia Corsica DC\u003Cbr\u003E\n        IT-Sardinia - Italy Sardinia\u003Cbr\u003E\n        IT-Sicily - Italy Sicily\u003Cbr\u003E\n        IT-South - Italy South\u003Cbr\u003E\n        LT - Lithuania\u003Cbr\u003E\n        LV - Latvia\u003Cbr\u003E\n        ME - Montenegro\u003Cbr\u003E\n        NL - Netherlands\u003Cbr\u003E\n        NO1 - Norway 1\u003Cbr\u003E\n        NO2 - Norway 2\u003Cbr\u003E\n        NO2NSL - Norway North Sea Link\u003Cbr\u003E\n        NO3 - Norway 3\u003Cbr\u003E\n        NO4 - Norway 4\u003Cbr\u003E\n        NO5 - Norway 5\u003Cbr\u003E\n        PL - Poland\u003Cbr\u003E\n        PT - Portugal\u003Cbr\u003E\n        RO - Romania\u003Cbr\u003E\n        RS - Serbia\u003Cbr\u003E\n        SE1 - Sweden 1\u003Cbr\u003E\n        SE2 - Sweden 2\u003Cbr\u003E\n        SE3 - Sweden 3\u003Cbr\u003E\n        SE4 - Sweden 4\u003Cbr\u003E\n        SI - Slovenia\u003Cbr\u003E\n        SK - Slovakia\u003Cbr\u003E\n       \u003C/details\u003E\n       \n\n\u003Cb\u003EHint:\u003C/b\u003E Don't use the \u003Cb\u003ETry it out\u003C/b\u003E button on this documentation page to download large datasets as it might lead to long loading times.\n       ",
     "termsOfService": "https://energy-charts.info/data-protection.html",
     "contact": {
       "name": "Contact",
@@ -12,14 +12,16 @@
       "name": "Publishing notes",
       "url": "https://energy-charts.info/publishing-notes.html"
     },
-    "version": "1.4"
+    "version": "1.6"
   },
   "paths": {
     "/public_power": {
       "get": {
-        "tags": ["power"],
+        "tags": [
+          "power"
+        ],
         "summary": "Public Power",
-        "description": "Returns the public net electricity production for a given country for each production type. Subtype can be \"solarlog\" for Switzerland (ch).\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
+        "description": "Returns the public net electricity production in Megawatt (MW) for a given country for each production type. Subtype can be \"solarlog\" for Switzerland (ch).\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
         "operationId": "public_power_public_power_get",
         "parameters": [
           {
@@ -89,9 +91,11 @@
     },
     "/public_power_forecast": {
       "get": {
-        "tags": ["power"],
+        "tags": [
+          "power"
+        ],
         "summary": "Public Power Forecast",
-        "description": "Returns the forecast of the public net electricity production for a given country for each production type.\n    \n\n\n    \n\n<b>production_type:</b> Can be solar, wind_onshore, wind_offshore or load\n    <br><b>forecast_type:</b> Can be current, intraday or day-ahead\n    \n\n\n    \n\nIf no dates are provided, values for today until forecast is available are returned. For load only the forecast type \"day-ahead\" is available.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"forecast_values\": list[float],\n  \"production_type\": str,\n  \"forecast_type\": str,\n  \"deprecated\": bool\n}\n```",
+        "description": "Returns the forecast of the public net electricity production in Megawatt (MW) for a given country for each production type.\n    \n\n\n    \n\n\u003Cb\u003Eproduction_type:\u003C/b\u003E Can be solar, wind_onshore, wind_offshore or load\n    \u003Cbr\u003E\u003Cb\u003Eforecast_type:\u003C/b\u003E Can be current, intraday or day-ahead\n    \n\n\n    \n\nIf no dates are provided, values for today until forecast is available are returned. For load only the forecast type \"day-ahead\" is available.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"forecast_values\": list[float],\n  \"production_type\": str,\n  \"forecast_type\": str,\n  \"deprecated\": bool\n}\n```",
         "operationId": "public_power_forecast_public_power_forecast_get",
         "parameters": [
           {
@@ -171,9 +175,11 @@
     },
     "/total_power": {
       "get": {
-        "tags": ["power"],
+        "tags": [
+          "power"
+        ],
         "summary": "Total Power",
-        "description": "Returns the total net electricity production (including industrial self supply) for a given country for each production type.\n    \n\n\n    \n\nCurrently only available for Germany.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
+        "description": "Returns the total net electricity production (including industrial self supply) in Megawatt (MW) for a given country for each production type.\n    \n\n\n    \n\nCurrently only available for Germany.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
         "operationId": "total_power_total_power_get",
         "parameters": [
           {
@@ -233,9 +239,11 @@
     },
     "/installed_power": {
       "get": {
-        "tags": ["power"],
+        "tags": [
+          "power"
+        ],
         "summary": "Installed Power",
-        "description": "Returns the installed power for a specified country in GW except for battery storage capacity, which is given in GWh.\n    \n\n\n    \n\n<b>time_step:</b> Time step can be either \"yearly\" or \"monthly\" (only for Germany)\n    <br><b>installation_decommission:</b> If true, the net installation / decommission numbers are returned instead of total installed power\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"time\": list[str],\n  \"production_types\": [\n    {\n        \"name\": str,\n        \"data\": list[float]\n    }\n  ],\n  \"deprecated\": bool\n}\n```",
+        "description": "Returns the installed power for a specified country in GW except for battery storage capacity, which is given in GWh. Monthly installation / decommission numbers are returned in MW instead of GW. \"last_update\" is the time of the last data update, expressed as seconds since the Unix epoch (UTC).\n    \n\n\n    \n\n\u003Cb\u003Etime_step:\u003C/b\u003E Time step can be either \"yearly\" or \"monthly\" (only for Germany)\n    \u003Cbr\u003E\u003Cb\u003Einstallation_decommission:\u003C/b\u003E If true, the net installation / decommission numbers are returned instead of total installed power\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{ \n  \"time\": list[str],\n  \"production_types\": [\n    {\n        \"name\": str, \n        \"data\": list[float]\n    }\n  ],\n  \"last_update\": int,\n  \"deprecated\": bool\n}\n```",
         "operationId": "installed_power_installed_power_get",
         "parameters": [
           {
@@ -295,9 +303,11 @@
     },
     "/price": {
       "get": {
-        "tags": ["prices"],
+        "tags": [
+          "prices"
+        ],
         "summary": "Day Ahead Price",
-        "description": "Returns the day-ahead spot market price for a specified bidding zone in EUR/MWh.\n    \n\n\n    \n\nAvailable bidding zones (bzn) are shown above.\n    \n\n\n    \n\n<b>The data for the following bidding zones is licensed as <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC BY 4.0</a> from Bundesnetzagentur | SMARD.de and is published without changes:\n    <ul>\n        <li>AT (Austria)</li>\n        <li>BE (Belgium)</li>\n        <li>CH (Switzerland)</li>\n        <li>CZ (Czech Republic)</li>\n        <li>DE-LU (Germany, Luxembourg)</li>\n        <li>DE-AT-LU (Germany, Austria, Luxembourg)</li>\n        <li>DK1 (Denmark 1)</li>\n        <li>DK2 (Denmark 2)</li>\n        <li>FR (France)</li>\n        <li>HU (Hungary)</li>\n        <li>IT-North (Italy North)</li>\n        <li>NL (Netherlands)</li>\n        <li>NO2 (Norway 2)</li>\n        <li>PL (Poland)</li>\n        <li>SE4 (Sweden 4)</li>\n        <li>SI (Slovenia)\n    </ul></b>\n    \n\n\n    \n\n<b>The data for the other bidding zones is for private and internal use only. The utilization of any data</li>\nwhether in its raw or derived form, for external or commercial purposes is expressly prohibited. Should you require licensing for market-related data, please direct your inquiries to the original data providers, including but not limited to EPEX SPOT SE.</b>\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"license_info\": str,\n    \"unix_seconds\": [int],\n    \"price\": [float],\n    \"unit\": str,\n    \"deprecated\": bool\n}\n```",
+        "description": "Returns the day-ahead spot market price for a specified bidding zone in EUR/MWh.\n    \n\n\n    \n\nAvailable bidding zones (bzn) are shown above.\n    \n\n\n    \n\n\u003Cb\u003EThe data for the following bidding zones is licensed as \u003Ca href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"\u003ECC BY 4.0\u003C/a\u003E from Bundesnetzagentur | SMARD.de and is published without changes:\n    \u003Cul\u003E\n        \u003Cli\u003EAT (Austria)\u003C/li\u003E\n        \u003Cli\u003EBE (Belgium)\u003C/li\u003E\n        \u003Cli\u003ECH (Switzerland)\u003C/li\u003E\n        \u003Cli\u003ECZ (Czech Republic)\u003C/li\u003E\n        \u003Cli\u003EDE-LU (Germany, Luxembourg)\u003C/li\u003E\n        \u003Cli\u003EDE-AT-LU (Germany, Austria, Luxembourg)\u003C/li\u003E\n        \u003Cli\u003EDK1 (Denmark 1)\u003C/li\u003E\n        \u003Cli\u003EDK2 (Denmark 2)\u003C/li\u003E\n        \u003Cli\u003EFR (France)\u003C/li\u003E\n        \u003Cli\u003EHU (Hungary)\u003C/li\u003E\n        \u003Cli\u003EIT-North (Italy North)\u003C/li\u003E\n        \u003Cli\u003ENL (Netherlands)\u003C/li\u003E\n        \u003Cli\u003ENO2 (Norway 2)\u003C/li\u003E\n        \u003Cli\u003EPL (Poland)\u003C/li\u003E\n        \u003Cli\u003ESE4 (Sweden 4)\u003C/li\u003E\n        \u003Cli\u003ESI (Slovenia)\n    \u003C/ul\u003E\u003C/b\u003E\n    \n\n\n    \n\n\u003Cb\u003EThe data for the other bidding zones is for private and internal use only. The utilization of any data\u003C/li\u003E\nwhether in its raw or derived form, for external or commercial purposes is expressly prohibited. Should you require licensing for market-related data, please direct your inquiries to the original data providers, including but not limited to EPEX SPOT SE.\u003C/b\u003E\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"license_info\": str,\n    \"unix_seconds\": [int],\n    \"price\": [float],\n    \"unit\": str,\n    \"deprecated\": bool\n}\n```",
         "operationId": "day_ahead_price_price_get",
         "parameters": [
           {
@@ -342,6 +352,9 @@
               }
             }
           },
+          "404": {
+            "description": "No price data available for that bidding zone/time range"
+          },
           "422": {
             "description": "Validation Error",
             "content": {
@@ -357,7 +370,9 @@
     },
     "/cbet": {
       "get": {
-        "tags": ["import_export"],
+        "tags": [
+          "import_export"
+        ],
         "summary": "Cross Border Electricity Trading",
         "description": "Returns the cross-border electricity trading (cbet) in GW between a specified country and its neighbors.\n        \n\nPositive values indicate an import of electricity, whereas negative values show electricity exports.\n        \n\n\n        \n\nResponse schema:\n        \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"countries\": [\n        {\n        \"name\": str,\n        \"data\": [float]\n        }\n    ],\n    \"deprecated\": bool\n}\n```",
         "operationId": "cross_border_electricity_trading_cbet_get",
@@ -419,7 +434,9 @@
     },
     "/cbpf": {
       "get": {
-        "tags": ["import_export"],
+        "tags": [
+          "import_export"
+        ],
         "summary": "Cross Border Physical Flows",
         "description": "Returns the cross-border physical flows (cbpfs) of electricity in GW between a specified country and its neighbors.\n        \n\nPositive values indicate an import of electricity, whereas negative values show electricity exports.\n        \n\n\n        \n\nResponse schema:\n        \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"countries\": [\n        {\n        \"name\": str,\n        \"data\": [float]\n        }\n    ],\n    \"deprecated\": bool\n}\n```",
         "operationId": "cross_border_physical_flows_cbpf_get",
@@ -481,9 +498,11 @@
     },
     "/signal": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Traffic Signal",
-        "description": "<b>Electricity traffic signal</b>\n    \n\n\n    \n\nReturns the renewable share of load in percent from today until prediction is currently available and the corresponding traffic light.\n    \n\n\n    \n\nThe traffic light \"signal\" is indicated by the following numbers:\n    \n\n\n    -1: Red (grid congestion),\n    0: Red (low renewable share),\n    1: Yellow (average renewable share),\n    2: Green (high renewable share)\n    \n\n\n    \n\nIf no data is available from the primary data providers, a best guess is made from historic data. This is indicated by \"substitute\" set to True.\n    \n\n\n    \n\n\"postal_code\" is an optional input parameter, which will consider the local grid state (e.g. transmission line overload) in future implementations.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"share\": [float],\n    \"signal\": [int],\n    \"substitute\": bool,\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003EElectricity traffic signal\u003C/b\u003E\n    \n\n\n    \n\nReturns the renewable share of load in percent from today until prediction is currently available and the corresponding traffic light.\n    \n\n\n    \n\nThe traffic light \"signal\" is indicated by the following numbers:\n    \n\n\n    -1: Red (grid congestion),\n    0: Red (low renewable share),\n    1: Yellow (average renewable share),\n    2: Green (high renewable share)\n    \n\n\n    \n\nIf no data is available from the primary data providers, a best guess is made from historic data. This is indicated by \"substitute\" set to True.\n    \n\n\n    \n\n\"postal_code\" is an optional input parameter, which will consider the local grid state (e.g. transmission line overload) in future implementations.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"share\": [float],\n    \"signal\": [int],\n    \"substitute\": bool,\n    \"deprecated\": bool\n}\n```",
         "operationId": "traffic_signal_signal_get",
         "parameters": [
           {
@@ -533,9 +552,11 @@
     },
     "/ren_share_forecast": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Renewable Share Forecast",
-        "description": "<b>Renewable share forecast</b>\n    \n\n\n    \n\nReturns the renewable share of load forecast in percent from today until prediction is currently available. It also includes the forecast for solar, wind on- and offshore share of load.\n    \n\n\n    \n\nIf no data is available from the primary data providers, a best guess is made from historic data. This is indicated by \"substitute\" set to True.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"ren_share\": [float],\n    \"solar_share\": [float],\n    \"wind_onshore_share\": [float],\n    \"wind_offshore_share\": [float],\n    \"substitute\": bool,\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003ERenewable share forecast\u003C/b\u003E\n    \n\n\n    \n\nReturns the renewable share of load forecast in percent from today until prediction is currently available. It also includes the forecast for solar, wind on- and offshore share of load.\n    \n\n\n    \n\nIf no data is available from the primary data providers, a best guess is made from historic data. This is indicated by \"substitute\" set to True.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": [int],\n    \"ren_share\": [float],\n    \"solar_share\": [float],\n    \"wind_onshore_share\": [float],\n    \"wind_offshore_share\": [float],\n    \"substitute\": bool,\n    \"deprecated\": bool\n}\n```",
         "operationId": "renewable_share_forecast_ren_share_forecast_get",
         "parameters": [
           {
@@ -575,9 +596,11 @@
     },
     "/ren_share_daily_avg": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Ren Share Daily Avg",
-        "description": "<b>Average daily renewable share of load</b>\n    \n\n\n    \n\nReturns the average daily renewable share of load of the last 365 days (year = -1) or for a given year if provided.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n\n    {\n        \"days\": [\"dd.mm.yyyy\"],\n        \"data\": [float],\n        \"deprecated\": bool\n    }\n\n    ```",
+        "description": "\u003Cb\u003EAverage daily renewable share of load\u003C/b\u003E\n    \n\n\n    \n\nReturns the average daily renewable share of load of the last 365 days (year = -1) or for a given year if provided.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n\n    {\n        \"days\": [\"dd.mm.yyyy\"],\n        \"data\": [float],\n        \"deprecated\": bool\n    }\n\n    ```",
         "operationId": "ren_share_daily_avg_ren_share_daily_avg_get",
         "parameters": [
           {
@@ -627,9 +650,11 @@
     },
     "/solar_share": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Solar Share",
-        "description": "<b>Solar Share of Load</b>\n    \n\n\n    \n\nReturns the solar share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003ESolar Share of Load\u003C/b\u003E\n    \n\n\n    \n\nReturns the solar share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "solar_share_solar_share_get",
         "parameters": [
           {
@@ -669,9 +694,11 @@
     },
     "/solar_share_daily_avg": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Solar Share Daily Avg",
-        "description": "<b>Average daily solar share of load</b>\n    \n\n\n    \n\nReturns the average daily solar share of load of the last 365 days (year = -1) or for a given year if provided.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003EAverage daily solar share of load\u003C/b\u003E\n    \n\n\n    \n\nReturns the average daily solar share of load of the last 365 days (year = -1) or for a given year if provided.\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "solar_share_daily_avg_solar_share_daily_avg_get",
         "parameters": [
           {
@@ -721,9 +748,11 @@
     },
     "/wind_onshore_share": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Wind Onshore Share",
-        "description": "<b>Wind Onshore Share of Load</b>\n    \n\n\n    \n\nReturns the wind onshore share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003EWind Onshore Share of Load\u003C/b\u003E\n    \n\n\n    \n\nReturns the wind onshore share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "wind_onshore_share_wind_onshore_share_get",
         "parameters": [
           {
@@ -763,9 +792,11 @@
     },
     "/wind_onshore_share_daily_avg": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Wind Onshore Share Daily Avg",
-        "description": "<b>Average daily wind onshore share of load</b>\n    \n\n\n    \n\nReturns the average daily wind onshore share of load of the last 365 days\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003EAverage daily wind onshore share of load\u003C/b\u003E\n    \n\n\n    \n\nReturns the average daily wind onshore share of load of the last 365 days\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "wind_onshore_share_daily_avg_wind_onshore_share_daily_avg_get",
         "parameters": [
           {
@@ -815,9 +846,11 @@
     },
     "/wind_offshore_share": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Wind Offshore Share",
-        "description": "<b>Wind Offshore Share of Load</b>\n    \n\n\n    \n\nReturns the wind offshore share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
+        "description": "\u003Cb\u003EWind Offshore Share of Load\u003C/b\u003E\n    \n\n\n    \n\nReturns the wind offshore share of load from today until prediction is currently available\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n{\n    \"unix_seconds\": list[int],\n    \"data\": list[float],\n    \"forecast\": list[float],\n    \"deprecated\": bool\n}\n```",
         "operationId": "wind_offshore_share_wind_offshore_share_get",
         "parameters": [
           {
@@ -857,9 +890,11 @@
     },
     "/wind_offshore_share_daily_avg": {
       "get": {
-        "tags": ["ren_share"],
+        "tags": [
+          "ren_share"
+        ],
         "summary": "Wind Offshore Share Daily Avg",
-        "description": "<b>Average daily wind offshore share of load</b>\n    \n\n\n    \n\nReturns the average daily wind offshore share of load of the last 365 days\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n\n```",
+        "description": "\u003Cb\u003EAverage daily wind offshore share of load\u003C/b\u003E\n    \n\n\n    \n\nReturns the average daily wind offshore share of load of the last 365 days\n    \n\n\n    \n\nResponse schema:\n    \n\n```json\n\n{\n    \"days\": [\"dd.mm.yyyy\"],\n    \"data\": [float],\n    \"deprecated\": bool\n}\n\n```",
         "operationId": "wind_offshore_share_daily_avg_wind_offshore_share_daily_avg_get",
         "parameters": [
           {
@@ -909,9 +944,11 @@
     },
     "/frequency": {
       "get": {
-        "tags": ["power"],
+        "tags": [
+          "power"
+        ],
         "summary": "Frequency",
-        "description": "Returns the frequency measured at Fraunhofer ISE in Freiburg, Germany. Currently only the frequency in UCTE (Region Continental Europe) is available. The data is available in 1 second timesteps from 1st of May 2022 onwards.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"data\": list[float],\n  \"deprecated\": bool\n}\n```",
+        "description": "Returns the frequency measured at Fraunhofer ISE in Freiburg, Germany. Currently only the frequency in RG Continental Europe (formerly UCTE) is available. The data is available in 1 second timesteps from 1st of May 2022 onwards.\n    \n\n\n    \n\nResponse schema:\n    \n\n ```json\n{\n  \"unix_seconds\": list[int],\n  \"data\": list[float],\n  \"deprecated\": bool\n}\n```",
         "operationId": "frequency_frequency_get",
         "parameters": [
           {
@@ -920,7 +957,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "UCTE",
+              "default": "DE-Freiburg",
               "title": "Region"
             }
           },
@@ -1008,7 +1045,9 @@
           }
         },
         "type": "object",
-        "required": ["deprecated"],
+        "required": [
+          "deprecated"
+        ],
         "title": "CrossBorderModel"
       },
       "DailyAvgDict": {
@@ -1042,7 +1081,11 @@
           }
         },
         "type": "object",
-        "required": ["days", "data", "deprecated"],
+        "required": [
+          "days",
+          "data",
+          "deprecated"
+        ],
         "title": "DailyAvgDict"
       },
       "FrequencyModel": {
@@ -1081,7 +1124,10 @@
           }
         },
         "type": "object",
-        "required": ["data", "deprecated"],
+        "required": [
+          "data",
+          "deprecated"
+        ],
         "title": "FrequencyModel"
       },
       "HTTPValidationError": {
@@ -1120,13 +1166,28 @@
             ],
             "title": "Production Types"
           },
+          "last_update": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Update"
+          },
           "deprecated": {
             "type": "boolean",
             "title": "Deprecated"
           }
         },
         "type": "object",
-        "required": ["time", "deprecated"],
+        "required": [
+          "time",
+          "last_update",
+          "deprecated"
+        ],
         "title": "InstalledModel"
       },
       "NamedData": {
@@ -1151,7 +1212,10 @@
           }
         },
         "type": "object",
-        "required": ["name", "data"],
+        "required": [
+          "name",
+          "data"
+        ],
         "title": "NamedData"
       },
       "PriceModel": {
@@ -1205,7 +1269,11 @@
           }
         },
         "type": "object",
-        "required": ["license_info", "unit", "deprecated"],
+        "required": [
+          "license_info",
+          "unit",
+          "deprecated"
+        ],
         "title": "PriceModel"
       },
       "ProductionModel": {
@@ -1244,7 +1312,9 @@
           }
         },
         "type": "object",
-        "required": ["deprecated"],
+        "required": [
+          "deprecated"
+        ],
         "title": "ProductionModel"
       },
       "PublicPowerForecastModel": {
@@ -1368,7 +1438,12 @@
           }
         },
         "type": "object",
-        "required": ["unix_seconds", "ren_share", "substitute", "deprecated"],
+        "required": [
+          "unix_seconds",
+          "ren_share",
+          "substitute",
+          "deprecated"
+        ],
         "title": "RenShareModel"
       },
       "ShareModel": {
@@ -1435,7 +1510,9 @@
           }
         },
         "type": "object",
-        "required": ["deprecated"],
+        "required": [
+          "deprecated"
+        ],
         "title": "ShareModel"
       },
       "TrafficModel": {
@@ -1486,7 +1563,12 @@
           }
         },
         "type": "object",
-        "required": ["unix_seconds", "share", "substitute", "deprecated"],
+        "required": [
+          "unix_seconds",
+          "share",
+          "substitute",
+          "deprecated"
+        ],
         "title": "TrafficModel"
       },
       "ValidationError": {
@@ -1515,7 +1597,11 @@
           }
         },
         "type": "object",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "title": "ValidationError"
       }
     }

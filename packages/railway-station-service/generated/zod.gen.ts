@@ -47,7 +47,7 @@ export const zPhotoLicense = z.object({
  */
 export const zPhotographer = z.object({
   name: z.string(),
-  url: z.url().optional()
+  url: z.url().nullish()
 });
 
 /**
@@ -214,7 +214,7 @@ export const zPhotoStation = z.object({
   lat: z.number(),
   lon: z.number(),
   shortCode: z.string().nullish(),
-  inactive: z.boolean().optional().default(false),
+  inactive: z.boolean().nullish().default(false),
   photos: z.array(zPhoto)
 });
 
@@ -235,11 +235,11 @@ export const zCountry = z.object({
   code: zCountryCode,
   name: z.string(),
   email: z.string().optional(),
-  timetableUrlTemplate: z.string().nullish(),
-  overrideLicense: z.string().nullish(),
+  timetableUrlTemplate: z.string().optional(),
+  overrideLicense: z.string().optional(),
   active: z.boolean(),
   allowPhotoUploads: z.boolean(),
-  message: z.string().nullish(),
+  message: z.string().optional(),
   providerApps: z.array(zProviderApp).optional()
 });
 
@@ -354,7 +354,7 @@ export const zProblemReport = z.object({
   stationId: z.string(),
   title: z.string().optional(),
   photoId: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }).optional(),
-  comment: z.string(),
+  comment: z.string().optional(),
   type: zProblemReportType,
   lat: z.number().optional(),
   lon: z.number().optional()
@@ -511,6 +511,35 @@ export const zPostPhotoUploadHeaders = z.object({
  * upload successful
  */
 export const zPostPhotoUploadResponse = zInboxResponse;
+
+export const zPostPhotoUploadMultipartFormdataBody = z.object({
+  stationId: z.string().optional(),
+  countryCode: zCountryCode,
+  stationTitle: z.string().optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+  comment: z.string().optional(),
+  active: z.boolean().optional(),
+  file: z.string().optional()
+});
+
+export const zPostPhotoUploadMultipartFormdataHeaders = z.object({
+  Authorization: z.string()
+});
+
+/**
+ * upload result (jQuery.ajax compatible, always 2xx)
+ */
+export const zPostPhotoUploadMultipartFormdataResponse = zInboxResponse;
+
+export const zPostProcessedPhotoUploadMultipartFormdataBody = z.object({
+  inboxId: z.coerce.bigint().min(BigInt('-9223372036854775808'), { error: 'Invalid value: Expected int64 to be >= -9223372036854775808' }).max(BigInt('9223372036854775807'), { error: 'Invalid value: Expected int64 to be <= 9223372036854775807' }),
+  file: z.string()
+});
+
+export const zPostProcessedPhotoUploadMultipartFormdataHeaders = z.object({
+  Authorization: z.string()
+});
 
 /**
  * The problem report

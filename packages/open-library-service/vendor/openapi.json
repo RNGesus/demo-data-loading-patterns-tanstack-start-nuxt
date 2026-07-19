@@ -52,7 +52,9 @@
       "get": {
         "summary": "Read Api Books",
         "operationId": "read_api_books_api_books_get",
-        "tags": ["books"],
+        "tags": [
+          "books"
+        ],
         "parameters": [
           {
             "required": true,
@@ -132,7 +134,9 @@
       "get": {
         "summary": "Read Api Volumes Brief",
         "operationId": "read_api_volumes_brief_api_volumes_brief__key_type___value__json_get",
-        "tags": ["books"],
+        "tags": [
+          "books"
+        ],
         "parameters": [
           {
             "required": true,
@@ -185,7 +189,9 @@
       "get": {
         "summary": "Read Authors",
         "operationId": "read_authors_authors__olid__json_get",
-        "tags": ["authors"],
+        "tags": [
+          "authors"
+        ],
         "parameters": [
           {
             "required": true,
@@ -222,7 +228,9 @@
       "get": {
         "summary": "Read Authors Works",
         "operationId": "read_authors_works_authors__olid__works_json_get",
-        "tags": ["authors"],
+        "tags": [
+          "authors"
+        ],
         "parameters": [
           {
             "required": true,
@@ -268,7 +276,9 @@
       "get": {
         "summary": "Read Books",
         "operationId": "read_books_books__olid__get",
-        "tags": ["books"],
+        "tags": [
+          "books"
+        ],
         "parameters": [
           {
             "required": true,
@@ -306,7 +316,9 @@
       "get": {
         "summary": "Read Covers Key Type Value Size Jpeg",
         "operationId": "read_covers_key_type_value_size_jpeg_covers__key_type___value___size__jpg_get",
-        "tags": ["covers"],
+        "tags": [
+          "covers"
+        ],
         "parameters": [
           {
             "required": true,
@@ -359,7 +371,9 @@
       "get": {
         "summary": "Read Isbn",
         "operationId": "read_isbn_isbn__isbn__get",
-        "tags": ["books"],
+        "tags": [
+          "books"
+        ],
         "parameters": [
           {
             "required": true,
@@ -396,7 +410,9 @@
       "get": {
         "summary": "Read Search Json",
         "operationId": "read_search_json_search_json_get",
-        "tags": ["search"],
+        "tags": [
+          "search"
+        ],
         "parameters": [
           {
             "required": true,
@@ -442,7 +458,9 @@
       "get": {
         "summary": "Read Search Authors Json",
         "operationId": "read_search_authors_json_search_authors_json_get",
-        "tags": ["search"],
+        "tags": [
+          "search"
+        ],
         "parameters": [
           {
             "required": true,
@@ -479,7 +497,9 @@
       "get": {
         "summary": "Read Subjects",
         "operationId": "read_subjects_subjects__subject__json_get",
-        "tags": ["subjects"],
+        "tags": [
+          "subjects"
+        ],
         "parameters": [
           {
             "required": true,
@@ -526,7 +546,9 @@
       "get": {
         "summary": "Read Works",
         "operationId": "read_works_works__olid__get",
-        "tags": ["books"],
+        "tags": [
+          "books"
+        ],
         "parameters": [
           {
             "required": true,
@@ -577,7 +599,11 @@
       },
       "ValidationError": {
         "title": "ValidationError",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "loc": {

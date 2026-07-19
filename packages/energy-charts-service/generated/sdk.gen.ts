@@ -24,7 +24,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Public Power
  *
- * Returns the public net electricity production for a given country for each production type. Subtype can be "solarlog" for Switzerland (ch).
+ * Returns the public net electricity production in Megawatt (MW) for a given country for each production type. Subtype can be "solarlog" for Switzerland (ch).
  *
  *
  *
@@ -61,7 +61,7 @@ export const publicPowerPublicPowerGet = <ThrowOnError extends boolean = false>(
 /**
  * Public Power Forecast
  *
- * Returns the forecast of the public net electricity production for a given country for each production type.
+ * Returns the forecast of the public net electricity production in Megawatt (MW) for a given country for each production type.
  *
  *
  *
@@ -108,7 +108,7 @@ export const publicPowerForecastPublicPowerForecastGet = <ThrowOnError extends b
 /**
  * Total Power
  *
- * Returns the total net electricity production (including industrial self supply) for a given country for each production type.
+ * Returns the total net electricity production (including industrial self supply) in Megawatt (MW) for a given country for each production type.
  *
  *
  *
@@ -151,7 +151,7 @@ export const totalPowerTotalPowerGet = <ThrowOnError extends boolean = false>(op
 /**
  * Installed Power
  *
- * Returns the installed power for a specified country in GW except for battery storage capacity, which is given in GWh.
+ * Returns the installed power for a specified country in GW except for battery storage capacity, which is given in GWh. Monthly installation / decommission numbers are returned in MW instead of GW. "last_update" is the time of the last data update, expressed as seconds since the Unix epoch (UTC).
  *
  *
  *
@@ -176,6 +176,7 @@ export const totalPowerTotalPowerGet = <ThrowOnError extends boolean = false>(op
  * "data": list[float]
  * }
  * ],
+ * "last_update": int,
  * "deprecated": bool
  * }
  * ```
@@ -729,7 +730,7 @@ export const windOffshoreShareDailyAvgWindOffshoreShareDailyAvgGet = <ThrowOnErr
 /**
  * Frequency
  *
- * Returns the frequency measured at Fraunhofer ISE in Freiburg, Germany. Currently only the frequency in UCTE (Region Continental Europe) is available. The data is available in 1 second timesteps from 1st of May 2022 onwards.
+ * Returns the frequency measured at Fraunhofer ISE in Freiburg, Germany. Currently only the frequency in RG Continental Europe (formerly UCTE) is available. The data is available in 1 second timesteps from 1st of May 2022 onwards.
  *
  *
  *

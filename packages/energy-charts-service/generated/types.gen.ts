@@ -85,6 +85,10 @@ export type InstalledModel = {
    */
   production_types?: Array<NamedData> | null;
   /**
+   * Last Update
+   */
+  last_update: number | null;
+  /**
    * Deprecated
    */
   deprecated: boolean;
@@ -465,6 +469,10 @@ export type DayAheadPricePriceGetData = {
 };
 
 export type DayAheadPricePriceGetErrors = {
+  /**
+   * No price data available for that bidding zone/time range
+   */
+  404: unknown;
   /**
    * Validation Error
    */

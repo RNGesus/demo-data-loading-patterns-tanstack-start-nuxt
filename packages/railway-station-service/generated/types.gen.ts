@@ -86,7 +86,7 @@ export type Photographer = {
   /**
    * Link to the photographers social media account or homepage
    */
-  url?: string;
+  url?: string | null;
 };
 
 /**
@@ -117,7 +117,7 @@ export type PhotoStation = {
   /**
    * Indicates if this station is inactive
    */
-  inactive?: boolean;
+  inactive?: boolean | null;
   /**
    * Photos of the station. If more than one photo is given, the first one is the primary photo. List might be empty or only the primary photo provided.
    */
@@ -194,11 +194,11 @@ export type Country = {
    * {DS100} placeholders which need to be replaced
    *
    */
-  timetableUrlTemplate?: string | null;
+  timetableUrlTemplate?: string;
   /**
    * if a country needs a special license
    */
-  overrideLicense?: string | null;
+  overrideLicense?: string;
   /**
    * Is this an active country where we collect photos?
    */
@@ -210,7 +210,7 @@ export type Country = {
   /**
    * Informational message about this country
    */
-  message?: string | null;
+  message?: string;
   /**
    * array with links to provider apps
    */
@@ -389,7 +389,7 @@ export type InboxCommand = {
   id: number;
   countryCode?: CountryCode;
   /**
-   * ID of a new station
+   * ID of a new station, use 'Z' to autogenerate a new ID
    */
   stationId?: string;
   title?: string;
@@ -443,7 +443,7 @@ export type ProblemReport = {
    * Unique id of a photo, can be used for WRONG_PHOTO and PHOTO_OUTDATED type.
    */
   photoId?: number;
-  comment: string;
+  comment?: string;
   type: ProblemReportType;
   /**
    * new latitude value for the station
@@ -943,6 +943,129 @@ export type PostPhotoUploadResponses = {
 };
 
 export type PostPhotoUploadResponse = PostPhotoUploadResponses[keyof PostPhotoUploadResponses];
+
+export type PostPhotoUploadMultipartFormdataData = {
+  body: {
+    /**
+     * id of the railwaystation
+     */
+    stationId?: string;
+    countryCode: CountryCode;
+    /**
+     * name of the station, for upload of missing stations
+     */
+    stationTitle?: string;
+    /**
+     * latitude, for upload of missing stations
+     */
+    latitude?: number;
+    /**
+     * longitude, for upload of missing stations
+     */
+    longitude?: number;
+    /**
+     * comment of the photographer to the reviewer
+     */
+    comment?: string;
+    /**
+     * is this station active?
+     */
+    active?: boolean;
+    /**
+     * image file (image/jpeg or image/png)
+     */
+    file?: Blob | File;
+  };
+  headers: {
+    /**
+     * JWT authorization
+     *
+     */
+    Authorization: string;
+  };
+  path?: never;
+  query?: never;
+  url: '/photoUploadMultipartFormdata';
+};
+
+export type PostPhotoUploadMultipartFormdataErrors = {
+  /**
+   * authorization failed
+   */
+  401: InboxResponse;
+  /**
+   * forbidden
+   */
+  403: unknown;
+  /**
+   * Unexpected error
+   */
+  default: GeneralErrorMessage;
+};
+
+export type PostPhotoUploadMultipartFormdataError = PostPhotoUploadMultipartFormdataErrors[keyof PostPhotoUploadMultipartFormdataErrors];
+
+export type PostPhotoUploadMultipartFormdataResponses = {
+  /**
+   * upload result (jQuery.ajax compatible, always 2xx)
+   */
+  200: InboxResponse;
+  /**
+   * upload successful
+   */
+  202: InboxResponse;
+};
+
+export type PostPhotoUploadMultipartFormdataResponse = PostPhotoUploadMultipartFormdataResponses[keyof PostPhotoUploadMultipartFormdataResponses];
+
+export type PostProcessedPhotoUploadMultipartFormdataData = {
+  body: {
+    /**
+     * id of the inbox entry to process
+     */
+    inboxId: number;
+    /**
+     * processed image file
+     */
+    file: Blob | File;
+  };
+  headers: {
+    /**
+     * JWT authorization
+     *
+     */
+    Authorization: string;
+  };
+  path?: never;
+  query?: never;
+  url: '/processedPhotoUploadMultipartFormdata';
+};
+
+export type PostProcessedPhotoUploadMultipartFormdataErrors = {
+  /**
+   * Bad Request
+   */
+  400: unknown;
+  /**
+   * authorization failed
+   */
+  401: unknown;
+  /**
+   * forbidden
+   */
+  403: unknown;
+  /**
+   * Internal Server Error
+   */
+  500: unknown;
+};
+
+export type PostProcessedPhotoUploadMultipartFormdataResponses = {
+  /**
+   * upload successful
+   */
+  200: unknown;
+};
 
 export type PostReportProblemData = {
   /**

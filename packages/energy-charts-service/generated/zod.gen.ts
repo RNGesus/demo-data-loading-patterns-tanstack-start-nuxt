@@ -43,6 +43,7 @@ export const zCrossBorderModel = z.object({
 export const zInstalledModel = z.object({
   time: z.array(z.string()),
   production_types: z.array(zNamedData).nullish(),
+  last_update: z.int().nullable(),
   deprecated: z.boolean()
 });
 
@@ -294,7 +295,7 @@ export const zWindOffshoreShareDailyAvgWindOffshoreShareDailyAvgGetQuery = z.obj
 export const zWindOffshoreShareDailyAvgWindOffshoreShareDailyAvgGetResponse = zDailyAvgDict;
 
 export const zFrequencyFrequencyGetQuery = z.object({
-  region: z.string().optional().default('UCTE'),
+  region: z.string().optional().default('DE-Freiburg'),
   start: z.string().optional().default(''),
   end: z.string().optional().default('')
 });

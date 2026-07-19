@@ -2,10 +2,10 @@
 
 import * as z from 'zod';
 
-import { type Client, type ClientMeta, type Options as Options2, type RequestResult, type TDataShape, urlSearchParamsBodySerializer } from './client';
+import { type Client, type ClientMeta, formDataBodySerializer, type Options as Options2, type RequestResult, type TDataShape, urlSearchParamsBodySerializer } from './client';
 import { client } from './client.gen';
-import type { DeleteMyProfileData, DeleteMyProfileErrors, DeleteMyProfileResponses, DeleteUserInboxData, DeleteUserInboxErrors, DeleteUserInboxResponses, GetAdminInboxCountData, GetAdminInboxCountErrors, GetAdminInboxCountResponses, GetAdminInboxData, GetAdminInboxErrors, GetAdminInboxResponses, GetCountriesData, GetCountriesErrors, GetCountriesResponses, GetEmailVerificationData, GetEmailVerificationErrors, GetEmailVerificationResponses, GetInboxDoneFileData, GetInboxDoneFileErrors, GetInboxDoneFileResponses, GetInboxFileData, GetInboxFileErrors, GetInboxFileResponses, GetInboxProcessedFileData, GetInboxProcessedFileErrors, GetInboxProcessedFileResponses, GetInboxRejectedFileData, GetInboxRejectedFileErrors, GetInboxRejectedFileResponses, GetMyProfileData, GetMyProfileErrors, GetMyProfileResponses, GetOAuth2AuthorizeData, GetOAuth2AuthorizeErrors, GetOAuth2AuthorizeResponses, GetPhotographersData, GetPhotographersErrors, GetPhotographersResponses, GetPhotosData, GetPhotosErrors, GetPhotosResponses, GetPhotoStationByCountryData, GetPhotoStationByCountryErrors, GetPhotoStationByCountryResponses, GetPhotoStationByIdData, GetPhotoStationByIdErrors, GetPhotoStationByIdResponses, GetPhotoStationsByPhotographerData, GetPhotoStationsByPhotographerErrors, GetPhotoStationsByPhotographerResponses, GetPhotoStationsByRecentPhotoImportsData, GetPhotoStationsByRecentPhotoImportsErrors, GetPhotoStationsByRecentPhotoImportsResponses, GetPublicInboxData, GetPublicInboxErrors, GetPublicInboxResponses, GetStatsData, GetStatsErrors, GetStatsResponses, GetUserInboxData, GetUserInboxErrors, GetUserInboxResponses, PostAdminInboxData, PostAdminInboxErrors, PostAdminInboxResponses, PostChangePasswordData, PostChangePasswordErrors, PostChangePasswordResponses, PostMyProfileData, PostMyProfileErrors, PostMyProfileResponses, PostOAuth2RevokeData, PostOAuth2RevokeErrors, PostOAuth2RevokeResponses, PostOAuth2TokenData, PostOAuth2TokenErrors, PostOAuth2TokenResponses, PostPhotoUploadData, PostPhotoUploadErrors, PostPhotoUploadResponses, PostReportProblemData, PostReportProblemErrors, PostReportProblemResponses, PostResendEmailVerificationData, PostResendEmailVerificationErrors, PostResendEmailVerificationResponses, PostUserInboxData, PostUserInboxErrors, PostUserInboxResponses } from './types.gen';
-import { zDeleteMyProfileHeaders, zDeleteMyProfileResponse, zDeleteUserInboxPath, zDeleteUserInboxResponse, zGetAdminInboxCountResponse, zGetAdminInboxHeaders, zGetAdminInboxResponse, zGetCountriesQuery, zGetCountriesResponse, zGetEmailVerificationPath, zGetEmailVerificationResponse, zGetInboxDoneFilePath, zGetInboxDoneFileQuery, zGetInboxDoneFileResponse, zGetInboxFilePath, zGetInboxFileQuery, zGetInboxFileResponse, zGetInboxProcessedFilePath, zGetInboxProcessedFileQuery, zGetInboxProcessedFileResponse, zGetInboxRejectedFilePath, zGetInboxRejectedFileQuery, zGetInboxRejectedFileResponse, zGetMyProfileHeaders, zGetMyProfileResponse, zGetOAuth2AuthorizeQuery, zGetOAuth2AuthorizeResponse, zGetPhotographersQuery, zGetPhotographersResponse, zGetPhotosPath, zGetPhotosQuery, zGetPhotosResponse, zGetPhotoStationByCountryPath, zGetPhotoStationByCountryQuery, zGetPhotoStationByCountryResponse, zGetPhotoStationByIdPath, zGetPhotoStationByIdResponse, zGetPhotoStationsByPhotographerPath, zGetPhotoStationsByPhotographerQuery, zGetPhotoStationsByPhotographerResponse, zGetPhotoStationsByRecentPhotoImportsQuery, zGetPhotoStationsByRecentPhotoImportsResponse, zGetPublicInboxResponse, zGetStatsQuery, zGetStatsResponse, zGetUserInboxHeaders, zGetUserInboxQuery, zGetUserInboxResponse, zPostAdminInboxBody, zPostAdminInboxHeaders, zPostAdminInboxResponse, zPostChangePasswordBody, zPostChangePasswordHeaders, zPostMyProfileBody, zPostMyProfileHeaders, zPostOAuth2RevokeBody, zPostOAuth2RevokeHeaders, zPostOAuth2TokenBody, zPostOAuth2TokenHeaders, zPostOAuth2TokenResponse, zPostPhotoUploadBody, zPostPhotoUploadHeaders, zPostPhotoUploadResponse, zPostReportProblemBody, zPostReportProblemHeaders, zPostReportProblemResponse, zPostResendEmailVerificationHeaders, zPostUserInboxBody, zPostUserInboxHeaders, zPostUserInboxResponse } from './zod.gen';
+import type { DeleteMyProfileData, DeleteMyProfileErrors, DeleteMyProfileResponses, DeleteUserInboxData, DeleteUserInboxErrors, DeleteUserInboxResponses, GetAdminInboxCountData, GetAdminInboxCountErrors, GetAdminInboxCountResponses, GetAdminInboxData, GetAdminInboxErrors, GetAdminInboxResponses, GetCountriesData, GetCountriesErrors, GetCountriesResponses, GetEmailVerificationData, GetEmailVerificationErrors, GetEmailVerificationResponses, GetInboxDoneFileData, GetInboxDoneFileErrors, GetInboxDoneFileResponses, GetInboxFileData, GetInboxFileErrors, GetInboxFileResponses, GetInboxProcessedFileData, GetInboxProcessedFileErrors, GetInboxProcessedFileResponses, GetInboxRejectedFileData, GetInboxRejectedFileErrors, GetInboxRejectedFileResponses, GetMyProfileData, GetMyProfileErrors, GetMyProfileResponses, GetOAuth2AuthorizeData, GetOAuth2AuthorizeErrors, GetOAuth2AuthorizeResponses, GetPhotographersData, GetPhotographersErrors, GetPhotographersResponses, GetPhotosData, GetPhotosErrors, GetPhotosResponses, GetPhotoStationByCountryData, GetPhotoStationByCountryErrors, GetPhotoStationByCountryResponses, GetPhotoStationByIdData, GetPhotoStationByIdErrors, GetPhotoStationByIdResponses, GetPhotoStationsByPhotographerData, GetPhotoStationsByPhotographerErrors, GetPhotoStationsByPhotographerResponses, GetPhotoStationsByRecentPhotoImportsData, GetPhotoStationsByRecentPhotoImportsErrors, GetPhotoStationsByRecentPhotoImportsResponses, GetPublicInboxData, GetPublicInboxErrors, GetPublicInboxResponses, GetStatsData, GetStatsErrors, GetStatsResponses, GetUserInboxData, GetUserInboxErrors, GetUserInboxResponses, PostAdminInboxData, PostAdminInboxErrors, PostAdminInboxResponses, PostChangePasswordData, PostChangePasswordErrors, PostChangePasswordResponses, PostMyProfileData, PostMyProfileErrors, PostMyProfileResponses, PostOAuth2RevokeData, PostOAuth2RevokeErrors, PostOAuth2RevokeResponses, PostOAuth2TokenData, PostOAuth2TokenErrors, PostOAuth2TokenResponses, PostPhotoUploadData, PostPhotoUploadErrors, PostPhotoUploadMultipartFormdataData, PostPhotoUploadMultipartFormdataErrors, PostPhotoUploadMultipartFormdataResponses, PostPhotoUploadResponses, PostProcessedPhotoUploadMultipartFormdataData, PostProcessedPhotoUploadMultipartFormdataErrors, PostProcessedPhotoUploadMultipartFormdataResponses, PostReportProblemData, PostReportProblemErrors, PostReportProblemResponses, PostResendEmailVerificationData, PostResendEmailVerificationErrors, PostResendEmailVerificationResponses, PostUserInboxData, PostUserInboxErrors, PostUserInboxResponses } from './types.gen';
+import { zDeleteMyProfileHeaders, zDeleteMyProfileResponse, zDeleteUserInboxPath, zDeleteUserInboxResponse, zGetAdminInboxCountResponse, zGetAdminInboxHeaders, zGetAdminInboxResponse, zGetCountriesQuery, zGetCountriesResponse, zGetEmailVerificationPath, zGetEmailVerificationResponse, zGetInboxDoneFilePath, zGetInboxDoneFileQuery, zGetInboxDoneFileResponse, zGetInboxFilePath, zGetInboxFileQuery, zGetInboxFileResponse, zGetInboxProcessedFilePath, zGetInboxProcessedFileQuery, zGetInboxProcessedFileResponse, zGetInboxRejectedFilePath, zGetInboxRejectedFileQuery, zGetInboxRejectedFileResponse, zGetMyProfileHeaders, zGetMyProfileResponse, zGetOAuth2AuthorizeQuery, zGetOAuth2AuthorizeResponse, zGetPhotographersQuery, zGetPhotographersResponse, zGetPhotosPath, zGetPhotosQuery, zGetPhotosResponse, zGetPhotoStationByCountryPath, zGetPhotoStationByCountryQuery, zGetPhotoStationByCountryResponse, zGetPhotoStationByIdPath, zGetPhotoStationByIdResponse, zGetPhotoStationsByPhotographerPath, zGetPhotoStationsByPhotographerQuery, zGetPhotoStationsByPhotographerResponse, zGetPhotoStationsByRecentPhotoImportsQuery, zGetPhotoStationsByRecentPhotoImportsResponse, zGetPublicInboxResponse, zGetStatsQuery, zGetStatsResponse, zGetUserInboxHeaders, zGetUserInboxQuery, zGetUserInboxResponse, zPostAdminInboxBody, zPostAdminInboxHeaders, zPostAdminInboxResponse, zPostChangePasswordBody, zPostChangePasswordHeaders, zPostMyProfileBody, zPostMyProfileHeaders, zPostOAuth2RevokeBody, zPostOAuth2RevokeHeaders, zPostOAuth2TokenBody, zPostOAuth2TokenHeaders, zPostOAuth2TokenResponse, zPostPhotoUploadBody, zPostPhotoUploadHeaders, zPostPhotoUploadMultipartFormdataBody, zPostPhotoUploadMultipartFormdataHeaders, zPostPhotoUploadMultipartFormdataResponse, zPostPhotoUploadResponse, zPostProcessedPhotoUploadMultipartFormdataBody, zPostProcessedPhotoUploadMultipartFormdataHeaders, zPostReportProblemBody, zPostReportProblemHeaders, zPostReportProblemResponse, zPostResendEmailVerificationHeaders, zPostUserInboxBody, zPostUserInboxHeaders, zPostUserInboxResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
   /**
@@ -220,6 +220,47 @@ export const postPhotoUpload = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
+ * Upload a new Photo via multipart form data
+ */
+export const postPhotoUploadMultipartFormdata = <ThrowOnError extends boolean = false>(options: Options<PostPhotoUploadMultipartFormdataData, ThrowOnError>): RequestResult<PostPhotoUploadMultipartFormdataResponses, PostPhotoUploadMultipartFormdataErrors, ThrowOnError, 'data'> => (options.client ?? client).post<PostPhotoUploadMultipartFormdataResponses, PostPhotoUploadMultipartFormdataErrors, ThrowOnError, 'data'>({
+  ...formDataBodySerializer,
+  requestValidator: async (data) => await z.object({
+    body: zPostPhotoUploadMultipartFormdataBody,
+    headers: zPostPhotoUploadMultipartFormdataHeaders,
+    path: z.never().optional(),
+    query: z.never().optional()
+  }).parseAsync(data),
+  responseValidator: async (data) => await zPostPhotoUploadMultipartFormdataResponse.parseAsync(data),
+  responseStyle: 'data',
+  url: '/photoUploadMultipartFormdata',
+  ...options,
+  headers: {
+    'Content-Type': null,
+    ...options.headers
+  }
+});
+
+/**
+ * Upload a processed photo via multipart form data (admin only)
+ */
+export const postProcessedPhotoUploadMultipartFormdata = <ThrowOnError extends boolean = false>(options: Options<PostProcessedPhotoUploadMultipartFormdataData, ThrowOnError>): RequestResult<PostProcessedPhotoUploadMultipartFormdataResponses, PostProcessedPhotoUploadMultipartFormdataErrors, ThrowOnError, 'data'> => (options.client ?? client).post<PostProcessedPhotoUploadMultipartFormdataResponses, PostProcessedPhotoUploadMultipartFormdataErrors, ThrowOnError, 'data'>({
+  ...formDataBodySerializer,
+  requestValidator: async (data) => await z.object({
+    body: zPostProcessedPhotoUploadMultipartFormdataBody,
+    headers: zPostProcessedPhotoUploadMultipartFormdataHeaders,
+    path: z.never().optional(),
+    query: z.never().optional()
+  }).parseAsync(data),
+  responseStyle: 'data',
+  url: '/processedPhotoUploadMultipartFormdata',
+  ...options,
+  headers: {
+    'Content-Type': null,
+    ...options.headers
+  }
+});
+
+/**
  * Report a problem for a Railway-Station
  */
 export const postReportProblem = <ThrowOnError extends boolean = false>(options: Options<PostReportProblemData, ThrowOnError>): RequestResult<PostReportProblemResponses, PostReportProblemErrors, ThrowOnError, 'data'> => (options.client ?? client).post<PostReportProblemResponses, PostReportProblemErrors, ThrowOnError, 'data'>({
@@ -234,7 +275,7 @@ export const postReportProblem = <ThrowOnError extends boolean = false>(options:
   url: '/reportProblem',
   ...options,
   headers: {
-    'Content-Type': '*/*',
+    'Content-Type': 'application/json',
     ...options.headers
   }
 });
