@@ -4,6 +4,12 @@ import tailwindcss from '@tailwindcss/vite'
 // @ts-expect-error -- Golar/TypeScript-Go currently exceeds its comparison depth on NuxtConfig.
 export default defineNuxtConfig({
   modules: ['@nuxt/image'],
+  components: [
+    {
+      path: '~/components',
+      extensions: ['.vue'],
+    },
+  ],
   devtools: {
     enabled: true,
     timeline: {
